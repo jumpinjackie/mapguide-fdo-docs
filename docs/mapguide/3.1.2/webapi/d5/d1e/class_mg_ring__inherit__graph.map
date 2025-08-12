@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$d2/ddb/class_mg_curve_ring.htm" title="MgCurveRing is a geometry component used in the construction of MgCurvePolygon objects." alt="" coords="5,304,104,331"/>
+<area shape="rect" id="node6" href="$d8/db2/class_mg_linear_ring.htm" title="An MgLinearRing is a geometry component." alt="" coords="128,304,229,331"/>
+<area shape="rect" id="node2" href="$de/d77/class_mg_geometry_component.htm" title="MgGeometryComponent is the base class for all of the geometry component types, namely, MgArcSegment, MgCurveRing, MgLinearRing, and MgLinearSegment." alt="" coords="35,155,197,181"/>
+<area shape="rect" id="node3" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="49,80,183,107"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="63,5,169,32"/>
+</map>

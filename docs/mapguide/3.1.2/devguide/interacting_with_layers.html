@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Interacting With Layers &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Working With Feature Data" href="working_with_feature_data.html" />
+    <link rel="prev" title="The MapGuide AJAX Viewer" href="mapguide_ajax_viewer.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="working_with_feature_data.html" title="Working With Feature Data"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mapguide_ajax_viewer.html" title="The MapGuide AJAX Viewer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Interacting With Layers</a><ul>
+<li><a class="reference internal" href="#overview-of-layers">Overview of Layers</a><ul>
+<li><a class="reference internal" href="#basic-layer-properties">Basic Layer Properties</a></li>
+<li><a class="reference internal" href="#layer-groups">Layer Groups</a><ul>
+<li><a class="reference internal" href="#base-layer-groups">Base Layer Groups</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#layer-style">Layer Style</a></li>
+<li><a class="reference internal" href="#layer-visibility">Layer Visibility</a><ul>
+<li><a class="reference internal" href="#example-actual-visibility">Example: Actual Visibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enumerating-map-layers">Enumerating Map Layers</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manipulating-layers">Manipulating Layers</a><ul>
+<li><a class="reference internal" href="#changing-basic-properties">Changing Basic Properties</a><ul>
+<li><a class="reference internal" href="#id1">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changing-visibility">Changing Visibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mapguide_ajax_viewer.html"
+                        title="previous chapter">The MapGuide AJAX Viewer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="working_with_feature_data.html"
+                        title="next chapter">Working With Feature Data</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/interacting_with_layers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="interacting-with-layers">
+<h1>Interacting With Layers<a class="headerlink" href="#interacting-with-layers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-of-layers">
+<h2>Overview of Layers<a class="headerlink" href="#overview-of-layers" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The Interacting With Layers sample, in the Developer&#8217;s Guide samples, demonstrates concepts from this chapter.</p>
+</div>
+<p>Layers represent vector data, raster data, and drawing data in a map. Each type
+of layer has unique characteristics.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The word layer has different meanings in different contexts. A layer can refer
+to the layer definition in the resource repository, and it can also refer to the map
+layer. For the purposes of the Web Tier, a layer refers to a map layer, and a layer
+definition refers to the layer definition in the resource repository.</p>
+</div>
+<div class="section" id="basic-layer-properties">
+<span id="index-0"></span><h3>Basic Layer Properties<a class="headerlink" href="#basic-layer-properties" title="Permalink to this headline">¶</a></h3>
+<p>A map contains one or more layers (<code class="docutils literal"><span class="pre">MgLayer</span></code> objects) that are rendered to create
+a composite image. Each layer has properties that determine how it displays in
+the map and map legend. Some of the properties are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Layer name: A unique identifier</li>
+<li>Legend label: The label for the layer as it appears in the map legend.</li>
+<li>Visibility: whether the layer should be displayed in the map. Note that actual visibility is dependent on more than just the visibility setting for a layer. See Layer Visibility on page 31 for further details.</li>
+<li>Selectable: Whether features in the layer are selectable. This only applies to layers containing feature data.</li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">MgMap::GetLayers()</span></code> method returns an <code class="docutils literal"><span class="pre">MgLayerCollection</span></code> object that
+contains all the layers in the map. The <code class="docutils literal"><span class="pre">MgLayerCollection::GetItem()</span></code> method
+returns an individual <code class="docutils literal"><span class="pre">MgLayer</span></code> object, by either index number in the collection
+or layer name.</p>
+<p>Layers in the collection are sorted by drawing order, with the top layers at the
+beginning of the collection. For example, using PHP syntax, if <code class="docutils literal"><span class="pre">$layers</span></code> is a
+collection containing the layers in a map, then <code class="docutils literal"><span class="pre">$layers-&gt;GetItem(0)</span></code> returns
+the top-most layer.</p>
+</div>
+<div class="section" id="layer-groups">
+<span id="index-2"></span><h3>Layer Groups<a class="headerlink" href="#layer-groups" title="Permalink to this headline">¶</a></h3>
+<p>Layers can be optionally grouped into layer groups. Layers in the same group
+are displayed together in the legend.</p>
+<p>The visibility for all layers in a group can be set at the group level. If the group
+visibility is turned off then none of the layers in the group will be visible,
+regardless of their individual visibility settings. If the group visibility is turned
+on, then individual layers within the group can be made visible or not visible
+separately.</p>
+<p>Layer groups can be nested so a group can contain other groups. This provides
+a finer level of control for handling layer visibility or legend groups.</p>
+<p>The <code class="docutils literal"><span class="pre">MgMap::GetLayerGroups()</span></code> method returns an <code class="docutils literal"><span class="pre">MgLayerGroupCollection</span></code>
+object that contains all the layer groups in the map.</p>
+<p>Each layer group in a map must have a unique name, even if it is nested within
+another group.</p>
+<div class="section" id="base-layer-groups">
+<span id="index-3"></span><h4>Base Layer Groups<a class="headerlink" href="#base-layer-groups" title="Permalink to this headline">¶</a></h4>
+<p>The AJAX viewer can use <em>base layer groups</em> to optimize image rendering times.
+Layers in a base layer group are rendered together to generate a single raster
+image that can be sent to the viewer. The image is divided into tiles so only
+the required tiles need to be rendered and sent, instead of the entire image.
+Tiles are cached on the server; if a tile already exists in the cache it does not
+need to be rendered before being sent.</p>
+<p>Each base layer group has a series of pre-defined scales that are used for
+rendering. When a request is made to view a portion of the map at a given
+scale, the AJAX viewer renders the tiles at the pre-defined scale that is closest
+to the requested map view scale.</p>
+<p>Layers within a base layer group are rendered together. Visibility settings for
+individual layers are ignored and the visibility setting for the group is used
+instead.</p>
+<p>Layers above the base layers will generally be vector layers with transparent
+backgrounds. This makes the images small and relatively quick to load in the
+viewer.</p>
+<p>You may have more than one base layer group. Lower layers will be hidden
+by higher layers unless the higher layers have transparent areas or have their
+visibility turned off.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A layer can only belong to one group at a time. It cannot be part of both a base layer group and a regular group.</p>
+</div>
+</div>
+</div>
+<div class="section" id="layer-style">
+<span id="index-4"></span><h3>Layer Style<a class="headerlink" href="#layer-style" title="Permalink to this headline">¶</a></h3>
+<p>The data source information and style information for a layer control how
+the layer looks when it displayed on a map. This is stored in the layer definition
+in the repository. To change any of the data source or style information,
+modify the layer definition.</p>
+<p>Layer definitions can be modified using . They can also be created and modified
+dynamically using the Web Extensions API. See Modifying Maps and Layers
+on page 57 for details.</p>
+</div>
+<div class="section" id="layer-visibility">
+<span id="index-6"></span><h3>Layer Visibility<a class="headerlink" href="#layer-visibility" title="Permalink to this headline">¶</a></h3>
+<p>Whether a layer is visible in a given map depends on three criteria:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The visibility setting for the layer</li>
+<li>The visibility settings for any groups that contain the layer</li>
+<li>The map view scale and the layer definition for that view scale</li>
+</ul>
+</div></blockquote>
+<p>In order for a layer to be visible, its layer visibility must be on, the visibility
+for any group containing the layer must be on, and the layer must have a style
+setting defined for the current map view scale.</p>
+<div class="section" id="example-actual-visibility">
+<span id="index-7"></span><h4>Example: Actual Visibility<a class="headerlink" href="#example-actual-visibility" title="Permalink to this headline">¶</a></h4>
+<p>For example, assume that there is a layer named Roads that is part of the layer
+group Transportation. The layer has view style defined for the scale ranges
+<code class="docutils literal"><span class="pre">0</span> <span class="pre">to</span> <span class="pre">10000</span></code> and <code class="docutils literal"><span class="pre">10000</span> <span class="pre">to</span> <span class="pre">24000</span></code>.</p>
+<p>The following table shows some possible settings of the various visibility and
+view scale settings, and their effect on the actual layer visibility.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+<col width="18%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Layer Visibility</th>
+<th class="head">Group Visibility</th>
+<th class="head">View Scale</th>
+<th class="head">Actual Visbility</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>On</td>
+<td>On</td>
+<td>10000</td>
+<td>On</td>
+</tr>
+<tr class="row-odd"><td>On</td>
+<td>On</td>
+<td>25000</td>
+<td>Off</td>
+</tr>
+<tr class="row-even"><td>On</td>
+<td>Off</td>
+<td>10000</td>
+<td>Off</td>
+</tr>
+<tr class="row-odd"><td>Off</td>
+<td>On</td>
+<td>10000</td>
+<td>Off</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="enumerating-map-layers">
+<span id="index-8"></span><h2>Enumerating Map Layers<a class="headerlink" href="#enumerating-map-layers" title="Permalink to this headline">¶</a></h2>
+<p>Map layers are contained within an <code class="docutils literal"><span class="pre">MgMap</span></code> object. To list the layers in a map,
+use the <code class="docutils literal"><span class="pre">MgMap::GetLayers()</span></code> method. This returns an <code class="docutils literal"><span class="pre">MgLayerCollection</span></code>
+object.</p>
+<p>To retrieve a single layer, use the <code class="docutils literal"><span class="pre">MgLayerCollection::GetItem</span></code> method with
+either an integer index or a layer name. The layer name is the name as defined
+in the map, not the name of the layer definition in the repository.</p>
+<p>For example:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$layer</span> <span class="o">=</span> <span class="nv">$layers</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="s1">&#39;Roads&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes the OSGeo.MapGuide namespace has been imported</span>
+<span class="n">MgLayer</span> <span class="n">layer</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgLayer</span><span class="p">)</span><span class="n">layers</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="s">&quot;Roads&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes the org.osgeo.mapguide package has been imported</span>
+<span class="n">MgLayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="n">MgLayer</span><span class="o">)</span><span class="n">layers</span><span class="o">.</span><span class="na">GetItem</span><span class="o">(</span><span class="s">&quot;Roads&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The following example lists the layers in a map, along with an indicator of
+the layer visibility setting.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$layers</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">();</span> <span class="c1">// Get layer collection</span>
+<span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;Layers:&lt;br /&gt;&quot;</span><span class="p">;</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="nv">$layers</span><span class="o">-&gt;</span><span class="na">GetCount</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$layer</span> <span class="o">=</span> <span class="nv">$layers</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="nv">$i</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">GetName</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39; (&#39;</span> <span class="o">.</span>
+    <span class="p">(</span><span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">GetVisible</span><span class="p">()</span> <span class="o">?</span> <span class="s1">&#39;on&#39;</span> <span class="o">:</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;)&lt;br /&gt;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">echo</span> <span class="s1">&#39;&lt;/p&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes the OSGeo.MapGuide namespace has been imported</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">();</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Layers:&lt;br /&gt;&quot;</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">count</span> <span class="p">=</span> <span class="n">layers</span><span class="p">.</span><span class="n">GetCount</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">MgLayer</span> <span class="n">layer</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgLayer</span><span class="p">)</span><span class="n">layers</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">layer</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot; (&quot;</span> <span class="p">+</span> <span class="p">(</span><span class="n">layer</span><span class="p">.</span><span class="n">GetVisible</span><span class="p">()</span> <span class="p">?</span> <span class="s">&quot;on&quot;</span> <span class="p">:</span> <span class="s">&quot;off&quot;</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;)&lt;br/&gt;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Repsonse</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes the org.osgeo.mapguide package has been imported</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">GetLayers</span><span class="o">();</span>
+<span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">write</span><span class="o">(</span><span class="s">&quot;&lt;p&gt;Layers:&lt;br /&gt;&quot;</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="na">GetCount</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+<span class="o">{</span>
+    <span class="n">MgLayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="n">MgLayer</span><span class="o">)</span><span class="n">layers</span><span class="o">.</span><span class="na">GetItem</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">write</span><span class="o">(</span><span class="n">layer</span><span class="o">.</span><span class="na">GetName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">layer</span><span class="o">.</span><span class="na">GetVisible</span><span class="o">()</span> <span class="o">?</span> <span class="s">&quot;on&quot;</span> <span class="o">:</span> <span class="s">&quot;off&quot;</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;)&lt;br/&gt;&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">write</span><span class="o">(</span><span class="s">&quot;&lt;/p&gt;&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="manipulating-layers">
+<span id="index-9"></span><h2>Manipulating Layers<a class="headerlink" href="#manipulating-layers" title="Permalink to this headline">¶</a></h2>
+<p>Modifying basic layer properties and changing layer visibility settings can be
+done directly using API calls. More complex manipulation requires modifying
+layer resources in the repository. For details, see Modifying Maps and Layers
+on page 57.</p>
+<div class="section" id="changing-basic-properties">
+<span id="index-11"></span><h3>Changing Basic Properties<a class="headerlink" href="#changing-basic-properties" title="Permalink to this headline">¶</a></h3>
+<p>To query or change any of the basic layer properties like name, label, or group,
+use the <code class="docutils literal"><span class="pre">MgLayer::GetProperty()</span></code> and <code class="docutils literal"><span class="pre">MgLayer::SetProperty()</span></code> methods,
+where Property is one of the layer properties. You must save and refresh the
+map for the changes to take effect.</p>
+<div class="section" id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The following example toggles the label of the Roads layer between Roads and
+Streets.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nx">MgInitializeWebTier</span> <span class="p">(</span><span class="nv">$webconfigFilePath</span><span class="p">);</span>
+
+<span class="nv">$userInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgUserInformation</span><span class="p">(</span><span class="nv">$mgSessionId</span><span class="p">);</span>
+<span class="nv">$siteConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgSiteConnection</span><span class="p">();</span>
+<span class="nv">$siteConnection</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="nv">$userInfo</span><span class="p">);</span>
+<span class="nv">$map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMap</span><span class="p">(</span><span class="nv">$siteConnection</span><span class="p">);</span>
+<span class="nv">$map</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="nv">$mgMapName</span><span class="p">);</span>
+<span class="nv">$layers</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">();</span>
+<span class="nv">$roadLayer</span> <span class="o">=</span> <span class="nv">$layers</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="s1">&#39;Roads&#39;</span><span class="p">);</span>
+<span class="nv">$roadLabel</span> <span class="o">=</span> <span class="nv">$roadLayer</span><span class="o">-&gt;</span><span class="na">GetLegendLabel</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$roadLabel</span> <span class="o">==</span> <span class="s1">&#39;Roads&#39;</span><span class="p">)</span>
+    <span class="nv">$newLabel</span> <span class="o">=</span> <span class="s1">&#39;Streets&#39;</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="nv">$newLabel</span> <span class="o">=</span> <span class="s1">&#39;Roads&#39;</span><span class="p">;</span>
+<span class="nv">$roadLayer</span><span class="o">-&gt;</span><span class="na">SetLegendLabel</span><span class="p">(</span><span class="nv">$newLabel</span><span class="p">);</span>
+<span class="c1">// You must save the updated map or the</span>
+<span class="c1">// changes will not be applied</span>
+<span class="c1">// Also be sure to refresh the map on page load.</span>
+<span class="nv">$map</span><span class="o">-&gt;</span><span class="na">Save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes the OSGeo.MapGuide namespace has been imported</span>
+<span class="n">MapGuideApi</span><span class="p">.</span><span class="n">MgInitializeWebTier</span><span class="p">(</span><span class="n">webConfigFilePath</span><span class="p">);</span>
+<span class="n">MgUserInformation</span> <span class="n">userInfo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgUserInformation</span><span class="p">(</span><span class="n">mgSessionId</span><span class="p">);</span>
+<span class="n">MgSiteConnection</span> <span class="n">siteConnection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgSiteConnection</span><span class="p">();</span>
+<span class="n">siteConnection</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">userInfo</span><span class="p">);</span>
+<span class="n">MgMap</span> <span class="n">map</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMap</span><span class="p">(</span><span class="n">siteConnection</span><span class="p">);</span>
+<span class="n">map</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">mgMapName</span><span class="p">);</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">();</span>
+<span class="n">MgLayer</span> <span class="n">roadLayer</span> <span class="p">=</span> <span class="n">layers</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="s">&quot;Roads&quot;</span><span class="p">);</span>
+<span class="n">String</span> <span class="n">roadLabel</span> <span class="p">=</span> <span class="n">roadLayer</span><span class="p">.</span><span class="n">GetLegendLabel</span><span class="p">();</span>
+<span class="n">String</span> <span class="n">newLabel</span> <span class="p">=</span> <span class="s">&quot;Roads&quot;</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">roadLabel</span> <span class="p">==</span> <span class="s">&quot;Roads&quot;</span><span class="p">)</span>
+    <span class="n">newLabel</span> <span class="p">=</span> <span class="s">&quot;Streets&quot;</span><span class="p">;</span>
+<span class="n">roadLayer</span><span class="p">.</span><span class="n">SetLegendLabel</span><span class="p">(</span><span class="n">newLabel</span><span class="p">);</span>
+<span class="c1">// You must save the updated map or the</span>
+<span class="c1">// changes will not be applied</span>
+<span class="c1">// Also be sure to refresh the map on page load.</span>
+<span class="n">map</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes the org.osgeo.mapguide has been imported</span>
+<span class="n">MapGuideApi</span><span class="o">.</span><span class="na">MgInitializeWebTier</span><span class="o">(</span><span class="n">webConfigFilePath</span><span class="o">);</span>
+<span class="n">MgUserInformation</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgUserInformation</span><span class="o">(</span><span class="n">mgSessionId</span><span class="o">);</span>
+<span class="n">MgSiteConnection</span> <span class="n">siteConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgSiteConnection</span><span class="o">();</span>
+<span class="n">siteConnection</span><span class="o">.</span><span class="na">Open</span><span class="o">(</span><span class="n">userInfo</span><span class="o">);</span>
+<span class="n">MgMap</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgMap</span><span class="o">(</span><span class="n">siteConnection</span><span class="o">);</span>
+<span class="n">map</span><span class="o">.</span><span class="na">Open</span><span class="o">(</span><span class="n">mgMapName</span><span class="o">);</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">GetLayers</span><span class="o">();</span>
+<span class="n">MgLayer</span> <span class="n">roadLayer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="na">GetItem</span><span class="o">(</span><span class="s">&quot;Roads&quot;</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">roadLabel</span> <span class="o">=</span> <span class="n">roadLayer</span><span class="o">.</span><span class="na">GetLegendLabel</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">newLabel</span> <span class="o">=</span> <span class="s">&quot;Roads&quot;</span><span class="o">;</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">roadLabel</span> <span class="o">==</span> <span class="s">&quot;Roads&quot;</span><span class="o">)</span>
+    <span class="n">newLabel</span> <span class="o">=</span> <span class="s">&quot;Streets&quot;</span><span class="o">;</span>
+<span class="n">roadLayer</span><span class="o">.</span><span class="na">SetLegendLabel</span><span class="o">(</span><span class="n">newLabel</span><span class="o">);</span>
+<span class="c1">// You must save the updated map or the</span>
+<span class="c1">// changes will not be applied</span>
+<span class="c1">// Also be sure to refresh the map on page load.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="changing-visibility">
+<span id="index-12"></span><h3>Changing Visibility<a class="headerlink" href="#changing-visibility" title="Permalink to this headline">¶</a></h3>
+<p>To query the actual layer visibility, use the <code class="docutils literal"><span class="pre">MgLayer::IsVisible()</span></code> method.
+There is no method to set actual visibility because it depends on other visibility
+settings.</p>
+<p>To query the visibility setting for a layer, use the <code class="docutils literal"><span class="pre">MgLayer::GetVisible()</span></code>
+method. To change the visibility setting for a layer, use the
+<code class="docutils literal"><span class="pre">MgLayer::SetVisible()</span></code> method.</p>
+<p>To query the visibility setting for a layer group, use the <code class="docutils literal"><span class="pre">MgLayerGroup::GetVisible()</span></code>
+method. To change the visibility setting for a layer group, use the
+<code class="docutils literal"><span class="pre">MgLayerGroup::SetVisible()</span></code> method.</p>
+<p>To change the layer visibility for a given view scale, modify the layer resource
+and save it back to the repository. See Modifying Maps and Layers on page
+57 for details.</p>
+<p>The following example turns on the visibility for the Roads layer.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$layers</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">();</span>
+<span class="nv">$roadsLayer</span> <span class="o">=</span> <span class="nv">$layers</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="s1">&#39;Roads&#39;</span><span class="p">);</span>
+<span class="nv">$roadsLayer</span><span class="o">-&gt;</span><span class="na">SetVisible</span><span class="p">(</span><span class="k">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes the OSGeo.MapGuide namespace has been imported</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">();</span>
+<span class="n">MgLayer</span> <span class="n">roadsLayer</span> <span class="p">=</span> <span class="n">layers</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="s">&quot;Roads&quot;</span><span class="p">);</span>
+<span class="n">roadsLayer</span><span class="p">.</span><span class="n">SetVisible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes the org.osgeo.mapguide package has been imported</span>
+<span class="n">MgLayerCollection</span> <span class="n">layers</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">GetLayers</span><span class="o">();</span>
+<span class="n">MgLayer</span> <span class="n">roadsLayer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="na">GetItem</span><span class="o">(</span><span class="s">&quot;Roads&quot;</span><span class="o">);</span>
+<span class="n">roadsLayer</span><span class="o">.</span><span class="na">SetVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Changing the visibility (or any other layer changes) will have no effect until the map is saved and refreshed.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="working_with_feature_data.html" title="Working With Feature Data"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mapguide_ajax_viewer.html" title="The MapGuide AJAX Viewer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

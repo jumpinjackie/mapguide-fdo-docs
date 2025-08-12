@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$d2/d17/class_mg_web_command_widget.htm" title="MgWebCommandWidget" alt="" coords="5,229,172,256"/>
+<area shape="rect" id="node5" href="$d0/d6a/class_mg_web_flyout_widget.htm" title="MgWebFlyoutWidget" alt="" coords="197,229,341,256"/>
+<area shape="rect" id="node6" href="$dd/dcd/class_mg_web_separator_widget.htm" title="MgWebSeparatorWidget" alt="" coords="365,229,529,256"/>
+<area shape="rect" id="node7" href="$d1/d5d/class_mg_web_task_bar_widget.htm" title="MgWebTaskBarWidget" alt="" coords="553,229,709,256"/>
+<area shape="rect" id="node2" href="$de/de2/class_mg_guard_disposable.htm" title="MgGuardDisposable" alt="" coords="289,80,427,107"/>
+<area shape="rect" id="node3" href="$d1/df5/class_mg_disposable.htm" title="MgDisposable" alt="" coords="306,5,410,32"/>
+</map>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MapGuide Developer’s Guide &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="#" />
+    <link rel="next" title="Revision History" href="revision_history.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="revision_history.html" title="Revision History"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MapGuide Developer&#8217;s Guide</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="revision_history.html"
+                        title="next chapter">Revision History</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mapguide-developer-s-guide">
+<h1>MapGuide Developer&#8217;s Guide<a class="headerlink" href="#mapguide-developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<p><em>Version 2.0</em></p>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="revision_history.html">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-this-guide-covers">What This Guide Covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#essential-concepts">Essential Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#preparing-to-run-the-examples">Preparing to Run the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#application-development">Application Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#resources-and-repositories">Resources and Repositories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#library-and-session">Library and Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#maps">Maps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#hello-map-displaying-a-web-layout">Hello, Map - Displaying a Web Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#hello-map-2-adding-a-custom-command">Hello, Map 2 - Adding a Custom Command</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#web-layouts-and-mapguide-server-pages">Web Layouts and MapGuide Server Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#mapguide-page-flow">MapGuide Page Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#example-code">Example Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#how-this-page-works">How This Page Works</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#understanding-services">Understanding Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mapguide_ajax_viewer.html">The MapGuide AJAX Viewer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_ajax_viewer.html#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#custom-commands">Custom Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_ajax_viewer.html#understanding-viewer-frames">Understanding Viewer Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_ajax_viewer.html#mapguide-viewer-api">MapGuide Viewer API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#calling-the-viewer-api-with-an-invoke-script-command">Calling the Viewer API with an Invoke Script Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#calling-the-viewer-api-from-the-script-frame">Calling the Viewer API from the Script Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#calling-the-viewer-api-from-the-task-pane">Calling the Viewer API from the Task Pane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#extending-map-initialization-functionality">Extending Map Initialization Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_ajax_viewer.html#the-hello-viewer-sample">The Hello Viewer Sample</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_ajax_viewer.html#embedding-a-viewer-in-your-own-page">Embedding a Viewer in Your Own Page</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interacting_with_layers.html">Interacting With Layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interacting_with_layers.html#overview-of-layers">Overview of Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#basic-layer-properties">Basic Layer Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#layer-groups">Layer Groups</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interacting_with_layers.html#base-layer-groups">Base Layer Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#layer-style">Layer Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#layer-visibility">Layer Visibility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interacting_with_layers.html#example-actual-visibility">Example: Actual Visibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interacting_with_layers.html#enumerating-map-layers">Enumerating Map Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interacting_with_layers.html#manipulating-layers">Manipulating Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#changing-basic-properties">Changing Basic Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interacting_with_layers.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interacting_with_layers.html#changing-visibility">Changing Visibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_feature_data.html">Working With Feature Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="working_with_feature_data.html#overview-of-features">Overview of Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_feature_data.html#querying-feature-data">Querying Feature Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#feature-readers">Feature Readers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#selecting-with-the-web-api">Selecting with the Web API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#basic-filters">Basic Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#spatial-filters">Spatial Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#example-selection">Example: Selection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_feature_data.html#active-selections">Active Selections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#selecting-with-the-viewer">Selecting with the Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#passing-viewer-information-to-the-web-server">Passing Viewer Information to the Web Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#additional-parameters-to-an-invoke-url-command">Additional Parameters to an Invoke URL Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#passing-parameters-from-an-invoke-script-command">Passing Parameters from an Invoke Script Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#passing-parameters-from-the-task-pane-frame">Passing Parameters from the Task Pane frame</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#working-with-the-active-selection">Working with the Active Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="working_with_feature_data.html#example-listing-selected-parcels">Example: Listing Selected Parcels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#setting-the-active-selection-with-the-web-api">Setting the Active Selection with the Web API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_feature_data.html#example-setting-the-active-selection">Example: Setting the Active Selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modifying_maps_and_layers.html">Modifying Maps and Layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#adding-an-existing-layer-to-a-map">Adding An Existing Layer To A Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#creating-layers-by-modifying-xml">Creating Layers by Modifying XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#another-way-to-create-layers">Another Way to Create Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modifying_maps_and_layers.html#example-creating-a-layer-that-users-area-rules">Example: Creating a layer that users Area Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modifying_maps_and_layers.html#example-using-line-rules">Example: Using Line Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modifying_maps_and_layers.html#example-using-point-rules">Example: Using Point Rules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#adding-layers-to-a-map">Adding Layers to a Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifying_maps_and_layers.html#making-changes-permanent">Making Changes Permanent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analyzing_features.html">Analyzing Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#representations-of-geometry">Representations of Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analyzing_features.html#geometry-objects">Geometry Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analyzing_features.html#comparing-geometry-objects">Comparing Geometry Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#measuring-distance">Measuring Distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#temporary-feature-sources">Temporary Feature Sources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analyzing_features.html#inserting-deleting-and-updating-features">Inserting, Deleting and Updating Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#creating-a-buffer">Creating a Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzing_features.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="digitizing_and_redlining.html">Digitizing and Redlining</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="digitizing_and_redlining.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digitizing_and_redlining.html#digitizing">Digitizing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digitizing_and_redlining.html#redlining">Redlining</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="digitizing_and_redlining.html#passing-coordinates">Passing Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="digitizing_and_redlining.html#creating-a-feature-source">Creating a Feature Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="digitizing_and_redlining.html#create-a-layer">Create a Layer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_output.html">Custom Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_output.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_output.html#rendering-service">Rendering Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_output.html#mapping-service">Mapping Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fusion.html">Fusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#essential-concepts">Essential Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#hello-sheboygan-an-example-template">Hello Sheboygan - An example template</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fusion.html#under-the-hood">Under the hood</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#how-fusion-is-integrated-with-mapguide">How Fusion is integrated with MapGuide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#application-definitions-html-and-widgets">Application Definitions, HTML and Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#widget-basics">Widget Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fusion.html#invoke-script">Invoke Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fusion.html#invoke-url">Invoke URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fusion.html#mapguideviewerapi-js">MapGuideViewerApi.js</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fusion.html#working-with-maps">Working With Maps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mapagent.html">The Map Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapguide_advanced.html">Advanced MapGuide Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_advanced.html#using-transactions">Using Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_advanced.html#describing-a-feature-source">Describing a Feature Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_advanced.html#creating-and-modifying-schemas">Creating and Modifying Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_advanced.html#the-geospatial-platform-and-mapguide-s-role-in-it">The Geospatial Platform and MapGuide&#8217;s role in it</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supplemental_development.html">Supplemental Development Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="supplemental_development.html#openlayers">OpenLayers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supplemental_development.html#maestro-api">Maestro API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supplemental_development.html#mapguide-rest">mapguide-rest</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mapguide_cookbook.html">MapGuide Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_cookbook.html#javascript-hooking-to-events-in-the-ajax-viewer">JavaScript: Hooking to events in the AJAX viewer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_cookbook.html#checking-when-the-map-has-been-loaded">Checking when the map has been loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_cookbook.html#handling-viewer-selection">Handling viewer selection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_cookbook.html#javascript-invoke-viewer-command-on-startup">JavaScript: Invoke Viewer Command on startup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapguide_cookbook.html#php-dynamically-setting-initial-map-view-and-scale">PHP: Dynamically setting initial map view and scale</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_cookbook.html#things-to-note">Things to note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mapguide_cookbook.html#the-code">The code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="revision_history.html" title="Revision History"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

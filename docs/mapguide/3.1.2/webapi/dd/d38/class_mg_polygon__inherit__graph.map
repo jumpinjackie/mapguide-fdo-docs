@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$d5/d64/class_mg_region.htm" title="MgRegion is an abstract base class The concrete classes are MgPolygon and MgCurvePolygon." alt="" coords="33,229,113,256"/>
+<area shape="rect" id="node3" href="$d1/d85/class_mg_geometry.htm" title="MgGeometry is an abstract base class for all of the geometry types." alt="" coords="24,155,121,181"/>
+<area shape="rect" id="node4" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="5,80,140,107"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="19,5,126,32"/>
+</map>

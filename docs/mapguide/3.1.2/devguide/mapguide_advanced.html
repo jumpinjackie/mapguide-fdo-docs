@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced MapGuide Topics &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Supplemental Development Options" href="supplemental_development.html" />
+    <link rel="prev" title="The Map Agent" href="mapagent.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="supplemental_development.html" title="Supplemental Development Options"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mapagent.html" title="The Map Agent"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Advanced MapGuide Topics</a><ul>
+<li><a class="reference internal" href="#using-transactions">Using Transactions</a></li>
+<li><a class="reference internal" href="#describing-a-feature-source">Describing a Feature Source</a></li>
+<li><a class="reference internal" href="#creating-and-modifying-schemas">Creating and Modifying Schemas</a></li>
+<li><a class="reference internal" href="#the-geospatial-platform-and-mapguide-s-role-in-it">The Geospatial Platform and MapGuide&#8217;s role in it</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mapagent.html"
+                        title="previous chapter">The Map Agent</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="supplemental_development.html"
+                        title="next chapter">Supplemental Development Options</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mapguide_advanced.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="advanced-mapguide-topics">
+<h1>Advanced MapGuide Topics<a class="headerlink" href="#advanced-mapguide-topics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-transactions">
+<h2>Using Transactions<a class="headerlink" href="#using-transactions" title="Permalink to this headline">¶</a></h2>
+<p>A transaction encapsulates a unit of work performed on a Feature Source that will either wholly succeed or wholly fail. Transactions ensure the Feature Source is kept in a consistent state whether the operation succeeded or the operation failed.</p>
+<p>In the MapGuide API, the <strong>MgTransaction</strong> class represents the transaction to be performed in a Feature Source. The following example shows how to use a transaction over a series of feature operations:</p>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgTransaction</span> <span class="n">trans</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="n">MgFeatureService</span> <span class="n">featSvc</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgFeatureService</span><span class="p">)</span><span class="n">siteConnection</span><span class="p">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">MgServiceType</span><span class="p">.</span><span class="n">FeatureService</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSourceId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Data/Test.FeatureSource&quot;</span><span class="p">);</span>
+<span class="k">try</span>
+<span class="p">{</span>
+    <span class="c1">//Start the transaction, all changes below will not take effect until the transaction is committed</span>
+    <span class="n">trans</span> <span class="p">=</span> <span class="n">featSvc</span><span class="p">.</span><span class="n">StartTransaction</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">);</span>
+    <span class="c1">//This does a SQL insert on the feature source</span>
+    <span class="n">featSvc</span><span class="p">.</span><span class="n">ExecuteSql</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="s">&quot;INSERT INTO TABLE1(ID, NAME) VALUES(123, &#39;Test&#39;), trans);</span>
+    <span class="c1">//This does a SQL update on the feature source</span>
+    <span class="n">featSvc</span><span class="p">.</span><span class="n">ExecuteSql</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="s">&quot;UPDATE TABLE1 SET NAME = &#39;Joe Bloggs&#39; WHERE ID = 32&quot;</span><span class="p">,</span> <span class="n">trans</span><span class="p">);</span>
+    <span class="c1">//This does a SQL delete on the feature source</span>
+    <span class="n">featSvc</span><span class="p">.</span><span class="n">ExecuteSql</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="s">&quot;DELETE FROM TABLE1 WHERE ID = 456, trans);</span>
+    <span class="c1">//Committing the transaction. The above changes will take effect</span>
+    <span class="n">trans</span><span class="p">.</span><span class="n">Commit</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">MgException</span> <span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//Rollback the transaction. Any changes that the above SQL commands would&#39;ve</span>
+    <span class="c1">//made are discarded</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">trans</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="n">trans</span><span class="p">.</span><span class="n">Rollback</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Transactions are only supported by certain FDO providers. Check the provider capabilities of the Feature Source to determine if Transactions are available.</p>
+</div>
+</div>
+<div class="section" id="describing-a-feature-source">
+<h2>Describing a Feature Source<a class="headerlink" href="#describing-a-feature-source" title="Permalink to this headline">¶</a></h2>
+<p>A Feature Source represents a connection to a FDO data store. FDO data stores are modeled in the following fashion:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A data store contains 1 or more Feature Schemas</li>
+<li>A Feature Schema contains 1 or more Class Definitions</li>
+<li>A Class Definition contains 1 or more Property Definitions</li>
+</ul>
+</div></blockquote>
+<p>The <strong>MgFeatureService</strong> class provides various methods for describing such aspects of a Feature Source</p>
+<p>The following example lists the schema names of a Feature Source</p>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureService</span> <span class="n">featSvc</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgFeatureService</span><span class="p">)</span><span class="n">siteConnection</span><span class="p">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">MgServiceType</span><span class="p">.</span><span class="n">FeatureService</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSourceId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Data/Test.FeatureSource&quot;</span><span class="p">);</span>
+<span class="n">MgStringCollection</span> <span class="n">schemaNames</span> <span class="p">=</span> <span class="n">featSvc</span><span class="p">.</span><span class="n">GetSchemas</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Schema Names:&lt;/p&gt;&lt;ul&gt;&quot;</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">schemaNames</span><span class="p">.</span><span class="n">GetCount</span><span class="p">();</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;li&gt;&quot;</span> <span class="p">+</span> <span class="n">schemaNames</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;&lt;/li&gt;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/ul&gt;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following example lists the class names for a given schema</p>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureService</span> <span class="n">featSvc</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgFeatureService</span><span class="p">)</span><span class="n">siteConnection</span><span class="p">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">MgServiceType</span><span class="p">.</span><span class="n">FeatureService</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSourceId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Data/Test.FeatureSource&quot;</span><span class="p">);</span>
+<span class="n">MgStringCollection</span> <span class="n">classNames</span> <span class="p">=</span> <span class="n">featSvc</span><span class="p">.</span><span class="n">GetClasses</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="n">schemaName</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Class Names for &quot;</span> <span class="p">+</span> <span class="n">schemaName</span> <span class="p">+</span> <span class="s">&quot;:&lt;/p&gt;&lt;ul&gt;&quot;</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">classNames</span><span class="p">.</span><span class="n">GetCount</span><span class="p">();</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;li&gt;&quot;</span> <span class="p">+</span> <span class="n">classNames</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;&lt;/li&gt;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/ul&gt;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Given a schema name and class name, the following example gets the matching class definition and writes out information about the class definition</p>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureService</span> <span class="n">featSvc</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgFeatureService</span><span class="p">)</span><span class="n">siteConnection</span><span class="p">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">MgServiceType</span><span class="p">.</span><span class="n">FeatureService</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSourceId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Data/Test.FeatureSource&quot;</span><span class="p">);</span>
+<span class="n">MgClassDefinition</span> <span class="n">classDef</span> <span class="p">=</span> <span class="n">featSvc</span><span class="p">.</span><span class="n">GetClassDefinition</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="n">schemaName</span><span class="p">,</span> <span class="n">className</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Name: &quot;</span> <span class="p">+</span> <span class="n">classDef</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Description: &quot;</span> <span class="p">+</span> <span class="n">classDef</span><span class="p">.</span><span class="n">GetDescription</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Default Geometry Property: &quot;</span> <span class="p">+</span> <span class="n">classDef</span><span class="p">.</span><span class="n">GetDefaultGeometryPropertyName</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">);</span>
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">identityProps</span> <span class="p">=</span> <span class="n">classDef</span><span class="p">.</span><span class="n">GetIdentityProperties</span><span class="p">();</span>
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">clsProps</span> <span class="p">=</span> <span class="n">classDef</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">();</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Class Properties (* are identity):&lt;/p&gt;&quot;</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;ul&gt;&quot;</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">clsProps</span><span class="p">.</span><span class="n">GetCount</span><span class="p">();</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">MgPropertyDefinition</span> <span class="n">propDef</span> <span class="p">=</span> <span class="n">clsProps</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;li&gt;&quot;</span> <span class="p">+</span> <span class="n">propDef</span><span class="p">.</span><span class="n">GetName</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">propDef</span><span class="p">.</span><span class="n">GetPropertyType</span><span class="p">()</span> <span class="p">==</span> <span class="n">MgFeaturePropertyType</span><span class="p">.</span><span class="n">AssociationProperty</span><span class="p">)</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; (Association)&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">propDef</span><span class="p">.</span><span class="n">GetPropertyType</span><span class="p">()</span> <span class="p">==</span> <span class="n">MgFeaturePropertyType</span><span class="p">.</span><span class="n">DataProperty</span><span class="p">)</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; (Data)&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">propDef</span><span class="p">.</span><span class="n">GetPropertyType</span><span class="p">()</span> <span class="p">==</span> <span class="n">MgFeaturePropertyType</span><span class="p">.</span><span class="n">GeometricProperty</span><span class="p">)</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; (Geometry)&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">propDef</span><span class="p">.</span><span class="n">GetPropertyType</span><span class="p">()</span> <span class="p">==</span> <span class="n">MgFeaturePropertyType</span><span class="p">.</span><span class="n">ObjectProperty</span><span class="p">)</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; (Object)&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">propDef</span><span class="p">.</span><span class="n">GetPropertyType</span><span class="p">()</span> <span class="p">==</span> <span class="n">MgFeaturePropertyType</span><span class="p">.</span><span class="n">RasterProperty</span><span class="p">)</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; (Raster)&quot;</span><span class="p">);</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">identityProps</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">propDef</span><span class="p">))</span>
+        <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot; *&quot;</span><span class="p">);</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/li&gt;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/li&gt;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-and-modifying-schemas">
+<h2>Creating and Modifying Schemas<a class="headerlink" href="#creating-and-modifying-schemas" title="Permalink to this headline">¶</a></h2>
+<p>The MapGuide API, not only allows you to manipulate data in a data store, it also allows you to create and modify the structure of a data store. <a class="reference internal" href="digitizing_and_redlining.html#create-feature-source"><span class="std std-ref">Creating a Feature Source</span></a> showed how to create a data store with a defined schema, the <cite>ApplySchema</cite> API allows you to modify such schemas.</p>
+<p>The following example, modifies the <cite>Default</cite> schema by deleting the <cite>Test</cite> class definition inside</p>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureService</span> <span class="n">featSvc</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgFeatureService</span><span class="p">)</span><span class="n">siteConnection</span><span class="p">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">MgServiceType</span><span class="p">.</span><span class="n">FeatureService</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSourceId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Data/Test.FeatureSource&quot;</span><span class="p">);</span>
+
+<span class="c1">//Get the original &quot;Test&quot; schema</span>
+<span class="n">MgFeatureSchemaCollection</span> <span class="n">schemas</span> <span class="p">=</span> <span class="n">featSvc</span><span class="p">.</span><span class="n">DescribeSchema</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="s">&quot;Default&quot;</span><span class="p">);</span>
+<span class="n">MgFeatureSchema</span> <span class="n">schema</span> <span class="p">=</span> <span class="n">schemas</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+
+<span class="c1">//Find the &quot;Test&quot; class definition and set the deletion flag</span>
+<span class="n">MgClassDefinitionCollection</span> <span class="n">classes</span> <span class="p">=</span> <span class="n">schema</span><span class="p">.</span><span class="n">GetClasses</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">classes</span><span class="p">.</span><span class="n">GetCount</span><span class="p">();</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">MgClassDefinition</span> <span class="n">cls</span> <span class="p">=</span> <span class="n">classes</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span> <span class="p">==</span> <span class="s">&quot;Test&quot;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cls</span><span class="p">.</span><span class="n">Delete</span><span class="p">();</span> <span class="c1">//Mark this class definition for deletion</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Apply the schema. This will delete the &quot;Test&quot; class definition</span>
+<span class="n">featSvc</span><span class="p">.</span><span class="n">ApplySchema</span><span class="p">(</span><span class="n">featureSourceId</span><span class="p">,</span> <span class="n">schema</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all data stores support the <cite>ApplySchema</cite> API. Check the FDO provider capabilities of the feature source to determine if such an operation is possible.</p>
+</div>
+</div>
+<div class="section" id="the-geospatial-platform-and-mapguide-s-role-in-it">
+<h2>The Geospatial Platform and MapGuide&#8217;s role in it<a class="headerlink" href="#the-geospatial-platform-and-mapguide-s-role-in-it" title="Permalink to this headline">¶</a></h2>
+<p>The MapGuide API shares common code with products like AutoCAD Map3D. The common code that is shared between MapGuide and AutoCAD Map3D is known as the Geospatial Platform API</p>
+<img alt="_images/platformapi.png" src="_images/platformapi.png" />
+<p>The classes for the Geospatial Platform API resides in the MgPlatformBase.dll library and is accessible in .net via the OSGeo.MapGuide.PlatformBase.dll assembly.</p>
+<p>By writing code that targets against the Geospatial Platform API (for example, using the <cite>MgMapBase</cite> class instead of <cite>MgMap</cite>) your code is easily portable between other products that are also built on top of it (like AutoCAD Map3D)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="supplemental_development.html" title="Supplemental Development Options"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mapagent.html" title="The Map Agent"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

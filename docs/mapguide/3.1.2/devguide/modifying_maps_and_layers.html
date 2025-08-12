@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Modifying Maps and Layers &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Analyzing Features" href="analyzing_features.html" />
+    <link rel="prev" title="Working With Feature Data" href="working_with_feature_data.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="analyzing_features.html" title="Analyzing Features"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="working_with_feature_data.html" title="Working With Feature Data"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Modifying Maps and Layers</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#adding-an-existing-layer-to-a-map">Adding An Existing Layer To A Map</a></li>
+<li><a class="reference internal" href="#creating-layers-by-modifying-xml">Creating Layers by Modifying XML</a></li>
+<li><a class="reference internal" href="#another-way-to-create-layers">Another Way to Create Layers</a><ul>
+<li><a class="reference internal" href="#example-creating-a-layer-that-users-area-rules">Example: Creating a layer that users Area Rules</a></li>
+<li><a class="reference internal" href="#example-using-line-rules">Example: Using Line Rules</a></li>
+<li><a class="reference internal" href="#example-using-point-rules">Example: Using Point Rules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-layers-to-a-map">Adding Layers to a Map</a></li>
+<li><a class="reference internal" href="#making-changes-permanent">Making Changes Permanent</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="working_with_feature_data.html"
+                        title="previous chapter">Working With Feature Data</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="analyzing_features.html"
+                        title="next chapter">Analyzing Features</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modifying_maps_and_layers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="modifying-maps-and-layers">
+<span id="id1"></span><h1>Modifying Maps and Layers<a class="headerlink" href="#modifying-maps-and-layers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The Modifying Maps and Layers sample, in the Developer&#8217;s Guide samples, demonstrates concepts from this chapter.</p>
+</div>
+<p>This chapter describes how to modify maps and layers.</p>
+</div>
+<div class="section" id="adding-an-existing-layer-to-a-map">
+<span id="index-0"></span><h2>Adding An Existing Layer To A Map<a class="headerlink" href="#adding-an-existing-layer-to-a-map" title="Permalink to this headline">¶</a></h2>
+<p>If the layer already exists in the resource repository, add it to the map by getting
+the map&#8217;s layer collection and then adding the layer to that collection.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$layerCollection</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">();</span>
+<span class="nv">$layerCollection</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$layer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgLayerCollection</span> <span class="n">layerCollection</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">();</span>
+<span class="n">layerCollection</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgLayerCollection</span> <span class="n">layerCollection</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">GetLayers</span><span class="o">();</span>
+<span class="n">layerCollection</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">layer</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>By default, newly added layers are added to the bottom of the drawing order,
+so they may be obscured by other layers. If you want to specify where the layer
+appears in the drawing order, use the <code class="docutils literal"><span class="pre">$layerCollection-&gt;Insert()</span></code> method.
+For an example, see <a class="reference internal" href="#adding-layers-to-a-map"><span class="std std-ref">Adding Layers to a Map</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the MapGuide API, getting a collection returns a reference to the collection. So adding the layer to the layer collection immediately updates the map.</p>
+</div>
+</div>
+<div class="section" id="creating-layers-by-modifying-xml">
+<span id="index-1"></span><h2>Creating Layers by Modifying XML<a class="headerlink" href="#creating-layers-by-modifying-xml" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to programmatically create new layers is to</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Build a prototype layer through the UI. To make the scripting simpler, this layer should have as many of the correct settings as can be determined in advance.</li>
+<li>Use MapGuide Studio <strong>Save as Xml</strong> command or similar function in Maestro to save the layer as an XML file.</li>
+<li>Have the script load the XML file and then use the DOM (Document Object Model) to change the necessary XML elements.</li>
+<li>Add the modified layer to the map.</li>
+</ol>
+</div></blockquote>
+<p>The XML schema for layer definitions is defined by the
+<code class="docutils literal"><span class="pre">LayerDefinition-version.xsd</span></code> schema, which is documented in the MapGuide Web API Reference. This
+schema closely parallels the UI in the Layer Editor of MapGuide Studio and as described in the
+<em>MapGuide Studio Help</em>, and the Layer Editor of MapGuide Maestro.</p>
+<p>This example</p>
+<blockquote>
+<div><ul class="simple">
+<li>loads a layer that has been created through</li>
+<li>uses the DOM to change the filter and its associated legend label</li>
+</ul>
+</div></blockquote>
+<p>You can use the DOM to modify any layers, including ones that already exist
+in the map, not just new layers that you are adding to the map. You can also
+use the DOM to modify other resources; the XML schemas are described in
+the <em>MapGuide Web API Reference</em>.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// (initialization etc. not shown here)</span>
+<span class="c1">// Open the map</span>
+<span class="nv">$map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMap</span><span class="p">(</span><span class="nv">$siteConnection</span><span class="p">);</span>
+<span class="nv">$map</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="nv">$mapName</span><span class="p">);</span>
+<span class="c1">// --------------------------------------------------//</span>
+<span class="c1">// Load a layer from XML, and use the DOM to change it</span>
+<span class="c1">// Load the prototype layer definition into</span>
+<span class="c1">// a PHP DOM object.</span>
+<span class="nv">$domDocument</span> <span class="o">=</span>
+<span class="nx">DOMDocument</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;RecentlyBuilt.LayerDefinition&#39;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$domDocument</span> <span class="o">==</span> <span class="k">NULL</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;The layer definition RecentlyBuilt.LayerDefinition&#39; could not be found.&lt;BR&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Change the filter</span>
+<span class="nv">$xpath</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DOMXPath</span><span class="p">(</span><span class="nv">$domDocument</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s1">&#39;//AreaRule/Filter&#39;</span><span class="p">;</span>
+<span class="c1">// Get a list of all the &lt;AreaRule&gt;&lt;Filter&gt; elements in</span>
+<span class="c1">// the XML.</span>
+<span class="nv">$nodes</span> <span class="o">=</span> <span class="nv">$xpath</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+<span class="c1">// Find the correct node and change it</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$nodes</span> <span class="k">as</span> <span class="nv">$node</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">==</span> <span class="s1">&#39;YRBUILT &gt; 1950&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="s1">&#39;YRBUILT &gt; 1980&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Change the legend label</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s1">&#39;//LegendLabel&#39;</span><span class="p">;</span>
+<span class="c1">// Get a list of all the &lt;LegendLabel&gt; elements in the</span>
+<span class="c1">// XML.</span>
+<span class="nv">$nodes</span> <span class="o">=</span> <span class="nv">$xpath</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+<span class="c1">// Find the correct node and change it</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$nodes</span> <span class="k">as</span> <span class="nv">$node</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">==</span> <span class="s1">&#39;Built after 1950&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="s1">&#39;Built after 1980&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="c1">// --------------------------------------------------//</span>
+<span class="c1">// Open the map</span>
+<span class="n">MgMap</span> <span class="n">map</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMap</span><span class="p">(</span><span class="n">siteConnection</span><span class="p">);</span>
+<span class="n">map</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">mapName</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+<span class="c1">// --------------------------------------------------//</span>
+<span class="c1">// Load a layer from XML, and use the DOM to change it</span>
+
+<span class="c1">// Load the prototype layer definition into</span>
+<span class="c1">// a PHP DOM object.</span>
+<span class="n">XmlDocument</span> <span class="n">domDocument</span> <span class="p">=</span> <span class="k">new</span> <span class="n">XmlDocument</span><span class="p">();</span>
+<span class="n">String</span> <span class="n">layerDefPath</span> <span class="p">=</span> <span class="n">Server</span><span class="p">.</span><span class="n">MapPath</span><span class="p">(</span><span class="s">&quot;RecentlyBuilt.LayerDefinition&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(!</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">layerDefPath</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;The layer definition &#39;RecentlyBuilt.LayerDefinition&#39; could not be found.&lt;BR&gt;\n&quot;</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">domDocument</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">layerDefPath</span><span class="p">);</span>
+
+<span class="c1">// Get a list of all the &lt;AreaRule&gt;&lt;Filter&gt; elements in</span>
+<span class="c1">// the XML.</span>
+<span class="n">XmlNodeList</span> <span class="n">nodes</span> <span class="p">=</span> <span class="n">domDocument</span><span class="p">.</span><span class="n">SelectNodes</span><span class="p">(</span><span class="s">&quot;//AreaRule/Filter&quot;</span><span class="p">);</span>
+<span class="c1">// Find the correct node and change it</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">XmlNode</span> <span class="n">node</span> <span class="k">in</span> <span class="n">nodes</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">InnerText</span> <span class="p">==</span> <span class="s">&quot;YRBUILT &gt; 1950&quot;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">InnerText</span> <span class="p">=</span> <span class="s">&quot;YRBUILT &gt; 1980&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Get a list of all the &lt;LegendLabel&gt; elements in the</span>
+<span class="c1">// XML.</span>
+<span class="n">nodes</span> <span class="p">=</span> <span class="n">domDocument</span><span class="p">.</span><span class="n">SelectNodes</span><span class="p">(</span><span class="s">&quot;//LegendLabel&quot;</span><span class="p">);</span>
+<span class="c1">// Find the correct node and change it</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">XmlNode</span> <span class="n">node</span> <span class="k">in</span> <span class="n">nodes</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">InnerText</span> <span class="p">==</span> <span class="s">&quot;Built after 1950&quot;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">InnerText</span> <span class="p">=</span> <span class="s">&quot;Built after 1980&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">//Code sample not yet available</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Due to the abundance of various XML libraries available for .net and Java, the above examples should
+be considered as one way for modifying XML. By no means is this the <strong>definitive</strong> way.</p>
+</div>
+<p>The page then goes on to save the XML to a resource and loads that resource
+into the map, as described in <a class="reference internal" href="#adding-layers-to-a-map"><span class="std std-ref">Adding Layers to a Map</span></a>.</p>
+<p>If you wish to modify an existing layer that is visible in other users&#8217; maps,
+without affecting those maps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Copy the layer to the user&#8217;s session repository.</li>
+<li>Modify the layer and save it back to the session repository.</li>
+<li>Change the user&#8217;s map to refer to the modified layer.</li>
+</ol>
+</div></blockquote>
+<p>See <a class="reference internal" href="#adding-layers-to-a-map"><span class="std std-ref">Adding Layers to a Map</span></a></p>
+</div>
+<div class="section" id="another-way-to-create-layers">
+<span id="index-2"></span><h2>Another Way to Create Layers<a class="headerlink" href="#another-way-to-create-layers" title="Permalink to this headline">¶</a></h2>
+<p>The method described in the previous section is easy to use, but requires a
+layer definition be created first through the UI. An alternative approach is to
+use the methods defined in</p>
+<p><code class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\OSGeo\MapGuide\Web\www\mapviewerphp\layerdefinitionfactory.php</span></code></p>
+<p>This file contains several functions, which can be used to build up a layer
+definition. The parameters of these functions enable you to set the most
+commonly used settings. (If you need to change other settings, you will have
+to either use the UI, or modify the XML of the layer definition.)</p>
+<p>The <code class="docutils literal"><span class="pre">layerdefinitionfactory</span></code> is only available for PHP. For development using
+ASP.NET, a good alternative is to use the Visual Studio tool <code class="docutils literal"><span class="pre">xsd.exe</span></code> to generate
+.NET classes for the LayerDefinition schema, or to use the strongly-typed resource classes
+in the <a class="reference internal" href="supplemental_development.html#maestroapi"><span class="std std-ref">Maestro API</span></a></p>
+<p><code class="docutils literal"><span class="pre">CreateLayerDefinition($resourceId,</span> <span class="pre">$featureClass,</span> <span class="pre">$geometry,</span> <span class="pre">$featureClassRange)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$resourceId</span></code> - The repository path of the feature source for the layer. For example: <code class="docutils literal"><span class="pre">Library://Samples/Sheboygan/Data/Parcels.FeatureSource</span></code></li>
+<li><code class="docutils literal"><span class="pre">$featureClass</span></code> - The feature class to use. For example, <code class="docutils literal"><span class="pre">SHP_Schema:Parcels</span></code></li>
+<li><code class="docutils literal"><span class="pre">$geometry</span></code> - The geometry to use from the feature class. For example, <code class="docutils literal"><span class="pre">SHPGEOM</span></code></li>
+<li><code class="docutils literal"><span class="pre">$featureClassRange</span></code> - A scale range created by filling in a scale range template (<code class="docutils literal"><span class="pre">ScaleRange.templ</span></code>)</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateScaleRange($minScale,</span> <span class="pre">$maxScale,</span> <span class="pre">$typeStyle)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$minScale</span></code> - The minimum scale range to which this rule applies.</li>
+<li><code class="docutils literal"><span class="pre">$maxScale</span></code> - The maximum scale range to which this rule applies.</li>
+<li><code class="docutils literal"><span class="pre">$typeStyle</span></code> - A type style created by using <code class="docutils literal"><span class="pre">CreateAreaTypeStyle()</span></code>, <code class="docutils literal"><span class="pre">CreateLineTypeStyle()</span></code> or <code class="docutils literal"><span class="pre">CreatePointTypeStyle()</span></code></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateAreaTypeStyle($areaRules)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$areaRules</span></code> - One or more area rules, created by <code class="docutils literal"><span class="pre">CreateAreaRule()</span></code></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateAreaRule($legendLabel,</span> <span class="pre">$filterText,</span> <span class="pre">$foregroundColor)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$legendLabel</span></code> - The text for the label shown beside this rule in the legend.</li>
+<li><code class="docutils literal"><span class="pre">$filterText</span></code> - The filter expression that determines which features match this rule. For example <code class="docutils literal"><span class="pre">SQFT</span> <span class="pre">&gt;=</span> <span class="pre">1</span> <span class="pre">AND</span> <span class="pre">SQFT</span> <span class="pre">&lt;</span> <span class="pre">800</span></code></li>
+<li><code class="docutils literal"><span class="pre">$foregroundColor</span></code> - The color to be applied to areas that match this rule.</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateTextSymbol($text,</span> <span class="pre">$fontHeight,</span> <span class="pre">$foregroundColor)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$text</span></code> - The string for the text</li>
+<li><code class="docutils literal"><span class="pre">$fontHeight</span></code> - The height for the font</li>
+<li><code class="docutils literal"><span class="pre">$foregroundColor</span></code> - The foreground color</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreatePointTypeStyle($pointRule)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$pointRule</span></code> - One or more point rules, created by <code class="docutils literal"><span class="pre">CreatePointRule()</span></code></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreatePointRule($legendLabel,</span> <span class="pre">$filter,</span> <span class="pre">$label,</span> <span class="pre">$pointSym)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$legendLabel</span></code> - The label shown beside this rule in the legend.</li>
+<li><code class="docutils literal"><span class="pre">$filter</span></code> - The filter expression that determines which features match this rule.</li>
+<li><code class="docutils literal"><span class="pre">$label</span></code> - The text symbol, created by <code class="docutils literal"><span class="pre">CreateTextSymbol()</span></code></li>
+<li><code class="docutils literal"><span class="pre">$pointSym</span></code> - A mark symbol created by <code class="docutils literal"><span class="pre">CreateMarkSymbol()</span></code></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateMarkSymbol($resourceId,</span> <span class="pre">$symbolName,</span> <span class="pre">$width,</span> <span class="pre">$height,</span> <span class="pre">$color)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$resourceId</span></code> - The resource ID of the symbol used to mark each point. For example <code class="docutils literal"><span class="pre">Library://Samples/Sheboygan/Symbols/BasicSymbols.SymbolLibrary</span></code></li>
+<li><code class="docutils literal"><span class="pre">$symbolName</span></code> - The name of the desired symbol in the symbol library/</li>
+<li><code class="docutils literal"><span class="pre">$width</span></code> - The width of the symbol (in points)</li>
+<li><code class="docutils literal"><span class="pre">$height</span></code> - The height of the symbol (in points)</li>
+<li><code class="docutils literal"><span class="pre">$color</span></code> - The color of the symbol.</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateLineTypeStyle($lineRules)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$lineRules</span></code> - One or more rules, created by <code class="docutils literal"><span class="pre">CreateLineRule()</span></code></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">CreateLineRule($color,</span> <span class="pre">$legendLabel,</span> <span class="pre">$filter)</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">$color</span></code> - The color to be applied to lines that match this rule.</li>
+<li><code class="docutils literal"><span class="pre">$legendLabel</span></code> - The label shown beside this rule in the legend.</li>
+<li><code class="docutils literal"><span class="pre">$filter</span></code> - The filter expression that determines which features match this rule.</li>
+</ul>
+</div></blockquote>
+<p>For more information on these settings, see the MapGuide Studio Help.</p>
+<div class="section" id="example-creating-a-layer-that-users-area-rules">
+<span id="index-4"></span><h3>Example: Creating a layer that users Area Rules<a class="headerlink" href="#example-creating-a-layer-that-users-area-rules" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This example specifically uses the <code class="docutils literal"><span class="pre">LayerDefinitionFactory</span></code> class which is not available for .net and Java</p>
+</div>
+<p>This example shows how to create a new layer using the factory. This layer
+uses three area rules to theme parcels by their square footage.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// ...</span>
+<span class="o">/---------------------------------------------------//</span>
+ <span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LayerDefinitionFactory</span><span class="p">();</span>
+<span class="c1">/// Create three area rules for three different</span>
+<span class="c1">// scale ranges.</span>
+<span class="nv">$areaRule1</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateAreaRule</span><span class="p">(</span> <span class="s1">&#39;1 to 800&#39;</span><span class="p">,</span> <span class="s1">&#39;SQFT &amp;gt;= 1 AND SQFT &amp;lt; 800&#39;</span><span class="p">,</span> <span class="s1">&#39;FFFFFF00&#39;</span><span class="p">);</span>
+<span class="nv">$areaRule2</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateAreaRule</span><span class="p">(</span> <span class="s1">&#39;800 to 1600&#39;</span><span class="p">,</span><span class="s1">&#39;SQFT &amp;gt;= 800 AND SQFT &amp;lt; 1600&#39;</span><span class="p">,</span> <span class="s1">&#39;FFFFBF20&#39;</span><span class="p">);</span>
+<span class="nv">$areaRule3</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateAreaRule</span><span class="p">(</span><span class="s1">&#39;1600 to 2400&#39;</span><span class="p">,</span> <span class="s1">&#39;SQFT &amp;gt;= 1600 AND SQFT &amp;lt; 2400&#39;</span><span class="p">,</span> <span class="s1">&#39;FFFF8040&#39;</span><span class="p">);</span>
+<span class="c1">// Create an area type style.</span>
+<span class="nv">$areaTypeStyle</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateAreaTypeStyle</span><span class="p">(</span><span class="nv">$areaRule1</span> <span class="o">.</span> <span class="nv">$areaRule2</span> <span class="o">.</span> <span class="nv">$areaRule3</span><span class="p">);</span>
+<span class="c1">// Create a scale range.</span>
+<span class="nv">$minScale</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+<span class="nv">$maxScale</span> <span class="o">=</span> <span class="s1">&#39;1000000000000&#39;</span><span class="p">;</span>
+<span class="nv">$areaScaleRange</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateScaleRange</span><span class="p">(</span><span class="nv">$minScale</span><span class="p">,</span> <span class="nv">$maxScale</span><span class="p">,</span> <span class="nv">$areaTypeStyle</span><span class="p">);</span>
+<span class="c1">// Create the layer definiton.</span>
+<span class="nv">$featureClass</span> <span class="o">=</span> <span class="s1">&#39;Library://Samples/Sheboygan/Data/&#39;</span> <span class="o">.</span> <span class="s1">&#39;Parcels.FeatureSource&#39;</span><span class="p">;</span>
+<span class="nv">$featureName</span> <span class="o">=</span> <span class="s1">&#39;SHP_Schema:Parcels&#39;</span><span class="p">;</span>
+<span class="nv">$geometry</span> <span class="o">=</span> <span class="s1">&#39;SHPGEOM&#39;</span><span class="p">;</span>
+<span class="nv">$layerDefinition</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateLayerDefinition</span><span class="p">(</span><span class="nv">$featureClass</span><span class="p">,</span> <span class="nv">$featureName</span><span class="p">,</span> <span class="nv">$geometry</span><span class="p">,</span> <span class="nv">$areaScaleRange</span><span class="p">);</span>
+<span class="c1">//---------------------------------------------------//</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<p>The script then saves the XML to a resource and loads that resource into the
+map. See <a class="reference internal" href="#adding-layers-to-a-map"><span class="std std-ref">Adding Layers to a Map</span></a>.</p>
+</div>
+<div class="section" id="example-using-line-rules">
+<span id="index-5"></span><h3>Example: Using Line Rules<a class="headerlink" href="#example-using-line-rules" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This example specifically uses the <code class="docutils literal"><span class="pre">LayerDefinitionFactory</span></code> class which is not available for .net and Java</p>
+</div>
+<p>Creating line-based rules is very similar.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// ...</span>
+<span class="c1">//---------------------------------------------------//</span>
+<span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LayerDefinitionFactory</span><span class="p">();</span>
+<span class="c1">// Create a line rule.</span>
+<span class="nv">$legendLabel</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="nv">$filter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="nv">$color</span> <span class="o">=</span> <span class="s1">&#39;FF0000FF&#39;</span><span class="p">;</span>
+<span class="nv">$lineRule</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateLineRule</span><span class="p">(</span><span class="nv">$legendLabel</span><span class="p">,</span> <span class="nv">$filter</span><span class="p">,</span> <span class="nv">$color</span><span class="p">);</span>
+<span class="c1">// Create a line type style.</span>
+<span class="nv">$lineTypeStyle</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateLineTypeStyle</span><span class="p">(</span><span class="nv">$lineRule</span><span class="p">);</span>
+<span class="c1">// Create a scale range.</span>
+<span class="nv">$minScale</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+<span class="nv">$maxScale</span> <span class="o">=</span> <span class="s1">&#39;1000000000000&#39;</span><span class="p">;</span>
+<span class="nv">$lineScaleRange</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateScaleRange</span><span class="p">(</span><span class="nv">$minScale</span><span class="p">,</span> <span class="nv">$maxScale</span><span class="p">,</span> <span class="nv">$lineTypeStyle</span><span class="p">);</span>
+<span class="c1">// Create the layer definiton.</span>
+<span class="nv">$featureClass</span> <span class="o">=</span> <span class="s1">&#39;Library://Samples/Sheboygan/Data/&#39;</span> <span class="o">.</span> <span class="s1">&#39;HydrographicLines.FeatureSource&#39;</span><span class="p">;</span>
+<span class="nv">$featureName</span> <span class="o">=</span> <span class="s1">&#39;SHP_Schema:HydrographicLines&#39;</span><span class="p">;</span>
+<span class="nv">$geometry</span> <span class="o">=</span> <span class="s1">&#39;SHPGEOM&#39;</span><span class="p">;</span>
+<span class="nv">$layerDefinition</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateLayerDefinition</span><span class="p">(</span><span class="nv">$featureClass</span><span class="p">,</span> <span class="nv">$featureName</span><span class="p">,</span> <span class="nv">$geometry</span><span class="p">,</span> <span class="nv">$lineScaleRange</span><span class="p">);</span>
+<span class="c1">//---------------------------------------------------//</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-using-point-rules">
+<span id="index-6"></span><h3>Example: Using Point Rules<a class="headerlink" href="#example-using-point-rules" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This example specifically uses the <code class="docutils literal"><span class="pre">LayerDefinitionFactory</span></code> class which is not available for .net and Java</p>
+</div>
+<p>To create point-based rules, three methods are used.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// ...</span>
+<span class="c1">//---------------------------------------------------//</span>
+<span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LayerDefinitionFactory</span><span class="p">();</span>
+<span class="c1">// Create a mark symbol</span>
+<span class="nv">$resourceId</span> <span class="o">=</span> <span class="s1">&#39;Library://Samples/Sheboygan/Symbols/BasicSymbols.SymbolLibrary&#39;</span><span class="p">;</span>
+<span class="nv">$symbolName</span> <span class="o">=</span> <span class="s1">&#39;PushPin&#39;</span><span class="p">;</span>
+<span class="nv">$width</span> <span class="o">=</span> <span class="s1">&#39;24&#39;</span><span class="p">;</span> <span class="c1">// points</span>
+<span class="nv">$height</span> <span class="o">=</span> <span class="s1">&#39;24&#39;</span><span class="p">;</span> <span class="c1">// points</span>
+<span class="nv">$color</span> <span class="o">=</span> <span class="s1">&#39;FFFF0000&#39;</span><span class="p">;</span>
+<span class="nv">$markSymbol</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateMarkSymbol</span><span class="p">(</span><span class="nv">$resourceId</span><span class="p">,</span> <span class="nv">$symbolName</span><span class="p">,</span> <span class="nv">$width</span><span class="p">,</span> <span class="nv">$height</span><span class="p">,</span> <span class="nv">$color</span><span class="p">);</span>
+
+<span class="c1">// Create a text symbol</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="s2">&quot;ID&quot;</span><span class="p">;</span>
+<span class="nv">$fontHeight</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">;</span>
+<span class="nv">$foregroundColor</span> <span class="o">=</span> <span class="s1">&#39;FF000000&#39;</span><span class="p">;</span>
+<span class="nv">$textSymbol</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateTextSymbol</span><span class="p">(</span><span class="nv">$text</span><span class="p">,</span> <span class="nv">$fontHeight</span><span class="p">,</span> <span class="nv">$foregroundColor</span><span class="p">);</span>
+<span class="c1">// Create a point rule.</span>
+<span class="nv">$legendLabel</span> <span class="o">=</span> <span class="s1">&#39;trees&#39;</span><span class="p">;</span>
+<span class="nv">$filter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="nv">$pointRule</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreatePointRule</span><span class="p">(</span><span class="nv">$legendLabel</span><span class="p">,</span> <span class="nv">$filter</span><span class="p">,</span> <span class="nv">$textSymbol</span><span class="p">,</span> <span class="nv">$markSymbol</span><span class="p">);</span>
+
+<span class="c1">// Create a point type style.</span>
+<span class="nv">$pointTypeStyle</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreatepointTypeStyle</span><span class="p">(</span><span class="nv">$pointRule</span><span class="p">);</span>
+
+<span class="c1">// Create a scale range.</span>
+<span class="nv">$minScale</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+<span class="nv">$maxScale</span> <span class="o">=</span> <span class="s1">&#39;1000000000000&#39;</span><span class="p">;</span>
+<span class="nv">$pointScaleRange</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateScaleRange</span><span class="p">(</span><span class="nv">$minScale</span><span class="p">,</span> <span class="nv">$maxScale</span><span class="p">,</span> <span class="nv">$pointTypeStyle</span><span class="p">);</span>
+<span class="c1">// Create the layer definiton.</span>
+<span class="nv">$featureClass</span> <span class="o">=</span> <span class="s1">&#39;Library://Tests/Trees.FeatureSource&#39;</span><span class="p">;</span>
+<span class="nv">$featureName</span> <span class="o">=</span> <span class="s1">&#39;Default:Trees&#39;</span><span class="p">;</span>
+<span class="nv">$geometry</span> <span class="o">=</span> <span class="s1">&#39;Geometry&#39;</span><span class="p">;</span>
+<span class="nv">$layerDefinition</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">CreateLayerDefinition</span><span class="p">(</span><span class="nv">$featureClass</span><span class="p">,</span> <span class="nv">$featureName</span><span class="p">,</span> <span class="nv">$geometry</span><span class="p">,</span> <span class="nv">$pointScaleRange</span><span class="p">);</span>
+<span class="c1">//---------------------------------------------------//</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adding-layers-to-a-map">
+<span id="index-7"></span><span id="id2"></span><h2>Adding Layers to a Map<a class="headerlink" href="#adding-layers-to-a-map" title="Permalink to this headline">¶</a></h2>
+<p>The preceding examples have created or modified the XML for layer definitions
+in memory. To add those layers to a map:</p>
+<ol class="arabic simple">
+<li>Save the layer definition to a resource stored in the session repository.</li>
+<li>Add that resource to the map.</li>
+</ol>
+<p>This function adds takes a layer&#8217;s XML, creates a resource in the session
+repository from it, and adds that layer resource to a map.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">require_once</span><span class="p">(</span><span class="s1">&#39;../common/common.php&#39;</span><span class="p">);</span>
+
+<span class="k">function</span> <span class="nf">add_layer_definition_to_map</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">,</span> <span class="nv">$layerName</span><span class="p">,</span> <span class="nv">$layerLegendLabel</span><span class="p">,</span> <span class="nv">$sessionId</span><span class="p">,</span> <span class="nv">$resourceService</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$map</span><span class="p">)</span>
+<span class="c1">// Adds the layer definition (XML) to the map.</span>
+<span class="c1">// Returns the layer.</span>
+<span class="p">{</span>
+    <span class="k">global</span> <span class="nv">$schemaDirectory</span><span class="p">;</span>
+
+    <span class="c1">// Validate the XML.</span>
+    <span class="nv">$domDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DOMDocument</span><span class="p">;</span>
+    <span class="nv">$domDocument</span><span class="o">-&gt;</span><span class="na">loadXML</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$domDocument</span><span class="o">-&gt;</span><span class="na">schemaValidate</span><span class="p">(</span><span class="nv">$schemaDirectory</span> <span class="o">.</span> <span class="s2">&quot;LayerDefinition-1.3.0.xsd&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="c1">// $schemaDirectory is defined in common.php</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;ERROR: The new XML document is invalid.&lt;BR&gt;</span><span class="se">\n</span><span class="s2">.&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="k">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Save the new layer definition to the session repository</span>
+    <span class="nv">$byteSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgByteSource</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">));</span>
+    <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">SetMimeType</span><span class="p">(</span><span class="nx">MgMimeType</span><span class="o">::</span><span class="na">Xml</span><span class="p">);</span>
+    <span class="nv">$resourceID</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="s2">&quot;Session:</span><span class="si">$sessionId</span><span class="s2">//</span><span class="si">$layerName</span><span class="s2">.LayerDefinition&quot;</span><span class="p">);</span>
+    <span class="nv">$resourceService</span><span class="o">-&gt;</span><span class="na">SetResource</span><span class="p">(</span><span class="nv">$resourceID</span><span class="p">,</span> <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">GetReader</span><span class="p">(),</span> <span class="k">null</span><span class="p">);</span>
+
+    <span class="nv">$newLayer</span> <span class="o">=</span> <span class="nx">add_layer_resource_to_map</span><span class="p">(</span><span class="nv">$resourceID</span><span class="p">,</span> <span class="nv">$resourceService</span><span class="p">,</span> <span class="nv">$layerName</span><span class="p">,</span> <span class="nv">$layerLegendLabel</span><span class="p">,</span> <span class="nv">$map</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$newLayer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function adds a layer resource to a map.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">function</span> <span class="nf">add_layer_resource_to_map</span><span class="p">(</span><span class="nv">$layerResourceID</span><span class="p">,</span> <span class="nv">$resourceService</span><span class="p">,</span> <span class="nv">$layerName</span><span class="p">,</span> <span class="nv">$layerLegendLabel</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$map</span><span class="p">)</span>
+<span class="c1">// Adds a layer defition (which can be stored either in the Library or a session</span>
+<span class="c1">// repository) to the map.</span>
+<span class="c1">// Returns the layer.</span>
+<span class="p">{</span>
+    <span class="nv">$newLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgLayer</span><span class="p">(</span><span class="nv">$layerResourceID</span><span class="p">,</span> <span class="nv">$resourceService</span><span class="p">);</span>
+
+    <span class="c1">// Add the new layer to the map&#39;s layer collection</span>
+    <span class="nv">$newLayer</span><span class="o">-&gt;</span><span class="na">SetName</span><span class="p">(</span><span class="nv">$layerName</span><span class="p">);</span>
+    <span class="nv">$newLayer</span><span class="o">-&gt;</span><span class="na">SetVisible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="nv">$newLayer</span><span class="o">-&gt;</span><span class="na">SetLegendLabel</span><span class="p">(</span><span class="nv">$layerLegendLabel</span><span class="p">);</span>
+    <span class="nv">$newLayer</span><span class="o">-&gt;</span><span class="na">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="nv">$layerCollection</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$layerCollection</span><span class="o">-&gt;</span><span class="na">Contains</span><span class="p">(</span><span class="nv">$layerName</span><span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Insert the new layer at position 0 so it is at the top</span>
+        <span class="c1">// of the drawing order</span>
+        <span class="nv">$layerCollection</span><span class="o">-&gt;</span><span class="na">Insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$newLayer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$newLayer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function adds a layer to a legend&#8217;s layer group.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">function</span> <span class="nf">add_layer_to_group</span><span class="p">(</span><span class="nv">$layer</span><span class="p">,</span> <span class="nv">$layerGroupName</span><span class="p">,</span> <span class="nv">$layerGroupLegendLabel</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$map</span><span class="p">)</span>
+<span class="c1">// Adds a layer to a layer group. If necessary, it creates the layer group.</span>
+<span class="p">{</span>
+
+    <span class="c1">// Get the layer group</span>
+    <span class="nv">$layerGroupCollection</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayerGroups</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$layerGroupCollection</span><span class="o">-&gt;</span><span class="na">Contains</span><span class="p">(</span><span class="nv">$layerGroupName</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="nv">$layerGroup</span> <span class="o">=</span> <span class="nv">$layerGroupCollection</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="nv">$layerGroupName</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// It does not exist, so create it</span>
+        <span class="nv">$layerGroup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgLayerGroup</span><span class="p">(</span><span class="nv">$layerGroupName</span><span class="p">);</span>
+        <span class="nv">$layerGroup</span><span class="o">-&gt;</span><span class="na">SetVisible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="nv">$layerGroup</span><span class="o">-&gt;</span><span class="na">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="nv">$layerGroup</span><span class="o">-&gt;</span><span class="na">SetLegendLabel</span><span class="p">(</span><span class="nv">$layerGroupLegendLabel</span><span class="p">);</span>
+        <span class="nv">$layerGroupCollection</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$layerGroup</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Add the layer to the group</span>
+    <span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">SetGroup</span><span class="p">(</span><span class="nv">$layerGroup</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-changes-permanent">
+<span id="index-8"></span><h2>Making Changes Permanent<a class="headerlink" href="#making-changes-permanent" title="Permalink to this headline">¶</a></h2>
+<p>So far, all the examples in this chapter have only affected the user&#8217;s runtime
+version of the map. No other users see those changes, and when the current
+user logs out those changes will be lost.</p>
+<p>To make changes permanent, the script can save the modified layer back into
+the Library.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$byteSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgByteSource</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">));</span>
+<span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">SetMimeType</span><span class="p">(</span><span class="nx">MgMimeType</span><span class="o">::</span><span class="na">Xml</span><span class="p">);</span>
+<span class="nv">$resourceId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="s2">&quot;Library://LayerName.LayerDefinition&quot;</span><span class="p">);</span>
+<span class="nv">$resourceService</span><span class="o">-&gt;</span><span class="na">SetResource</span><span class="p">(</span><span class="nv">$resourceId</span><span class="p">,</span> <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">GetReader</span><span class="p">(),</span> <span class="k">null</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Due to security restrictions imposed on the Library repository. Make sure the
+resource service object was created from a site connection that was initialized by
+a login or session id that has the appropriate permissions to write to the Library
+repository.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">Anonymous</span></code> user does not have write access to the Library repository</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="analyzing_features.html" title="Analyzing Features"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="working_with_feature_data.html" title="Working With Feature Data"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+var class_mg_coordinate_system_geodetic_transformation =
+[
+    [ "GetBursaWolfeTransformBwScale", "db/dee/class_mg_coordinate_system_geodetic_transformation_a275c77ca37375d62598eea29c781c1d7.htm#a275c77ca37375d62598eea29c781c1d7", null ],
+    [ "GetBursaWolfeTransformRotationX", "db/dee/class_mg_coordinate_system_geodetic_transformation_aa58e681a8d2e9e8f9fbff54de8e16103.htm#aa58e681a8d2e9e8f9fbff54de8e16103", null ],
+    [ "GetBursaWolfeTransformRotationY", "db/dee/class_mg_coordinate_system_geodetic_transformation_a2ff89f8b0cdf71574a53696c57174c19.htm#a2ff89f8b0cdf71574a53696c57174c19", null ],
+    [ "GetBursaWolfeTransformRotationZ", "db/dee/class_mg_coordinate_system_geodetic_transformation_a033f4dc5b3014f66dbbe4cc37ffac5a4.htm#a033f4dc5b3014f66dbbe4cc37ffac5a4", null ],
+    [ "GetBwScaleMax", "db/dee/class_mg_coordinate_system_geodetic_transformation_a5a6d5093d6c634a79b38e307f8d3f4fd.htm#a5a6d5093d6c634a79b38e307f8d3f4fd", null ],
+    [ "GetBwScaleMin", "db/dee/class_mg_coordinate_system_geodetic_transformation_a5e2830c6fb80b502a733360cfc952e96.htm#a5e2830c6fb80b502a733360cfc952e96", null ],
+    [ "GetGeodeticTransformationMethod", "db/dee/class_mg_coordinate_system_geodetic_transformation_ad9e39cd52f69097fe2fa4d0ad77408a0.htm#ad9e39cd52f69097fe2fa4d0ad77408a0", null ],
+    [ "GetMaxOffset", "db/dee/class_mg_coordinate_system_geodetic_transformation_af5051cd87734ed08863a101e8acea50c.htm#af5051cd87734ed08863a101e8acea50c", null ],
+    [ "GetMaxRotation", "db/dee/class_mg_coordinate_system_geodetic_transformation_aa2d996423571c19c266cd6cf41a51f02.htm#aa2d996423571c19c266cd6cf41a51f02", null ],
+    [ "GetOffsetX", "db/dee/class_mg_coordinate_system_geodetic_transformation_abf8f8eb8ccdc3c96a4403c778e0c2d8f.htm#abf8f8eb8ccdc3c96a4403c778e0c2d8f", null ],
+    [ "GetOffsetY", "db/dee/class_mg_coordinate_system_geodetic_transformation_a4f0fe078718f9e90749b95eb39a9de5b.htm#a4f0fe078718f9e90749b95eb39a9de5b", null ],
+    [ "GetOffsetZ", "db/dee/class_mg_coordinate_system_geodetic_transformation_ad3cefb5101564ecf43494337caba35a1.htm#ad3cefb5101564ecf43494337caba35a1", null ],
+    [ "GetSource", "db/dee/class_mg_coordinate_system_geodetic_transformation_a7d0db08386a9a5c47bcf3fd1e661dd6a.htm#a7d0db08386a9a5c47bcf3fd1e661dd6a", null ],
+    [ "GetTarget", "db/dee/class_mg_coordinate_system_geodetic_transformation_a2279fd51587a0a37def7137330877ded.htm#a2279fd51587a0a37def7137330877ded", null ],
+    [ "IsLegalBwScale", "db/dee/class_mg_coordinate_system_geodetic_transformation_a112eb4bb03ca5b91b88d8ad090b2b9b3.htm#a112eb4bb03ca5b91b88d8ad090b2b9b3", null ],
+    [ "IsLegalOffset", "db/dee/class_mg_coordinate_system_geodetic_transformation_a195273550cb67caad9a9132ead6d2dc4.htm#a195273550cb67caad9a9132ead6d2dc4", null ],
+    [ "IsLegalRotation", "db/dee/class_mg_coordinate_system_geodetic_transformation_a502453c99f62a11bcc8f9cada1776e86.htm#a502453c99f62a11bcc8f9cada1776e86", null ],
+    [ "SetBursaWolfeTransform", "db/dee/class_mg_coordinate_system_geodetic_transformation_a34230be9745f4be8a347332c431c50d0.htm#a34230be9745f4be8a347332c431c50d0", null ],
+    [ "SetGeodeticTransformationMethod", "db/dee/class_mg_coordinate_system_geodetic_transformation_afbd227fc9ba2d33b704e01f419477341.htm#afbd227fc9ba2d33b704e01f419477341", null ],
+    [ "SetOffset", "db/dee/class_mg_coordinate_system_geodetic_transformation_a21f01dbc90b91ae5f88433b92d2b8c80.htm#a21f01dbc90b91ae5f88433b92d2b8c80", null ],
+    [ "SetSourceAndTarget", "db/dee/class_mg_coordinate_system_geodetic_transformation_ab320f08d8b7a1370de9a143161c53906.htm#ab320f08d8b7a1370de9a143161c53906", null ],
+    [ "Shift", "db/dee/class_mg_coordinate_system_geodetic_transformation_aeb07f1fe428adde97b480ba553c068fe.htm#aeb07f1fe428adde97b480ba553c068fe", null ],
+    [ "Shift", "db/dee/class_mg_coordinate_system_geodetic_transformation_a96235ed4774fc5f46df44a04fdb64b0f.htm#a96235ed4774fc5f46df44a04fdb64b0f", null ],
+    [ "Shift", "db/dee/class_mg_coordinate_system_geodetic_transformation_ab6ad3eb2f3e20a8c56bdd3310239d65c.htm#ab6ad3eb2f3e20a8c56bdd3310239d65c", null ]
+];

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node6" href="$d8/d07/class_mg_end_of_stream_exception.htm" title="Thrown when attempting to read past the end of a stream." alt="" coords="5,379,181,405"/>
+<area shape="rect" id="node7" href="$dc/d29/class_mg_invalid_stream_header_exception.htm" title="Thrown when a stream header is invalid." alt="" coords="205,379,421,405"/>
+<area shape="rect" id="node2" href="$d0/d5a/class_mg_io_exception.htm" title="Thrown when an I/O error occurs." alt="" coords="149,229,257,256"/>
+<area shape="rect" id="node3" href="$d5/da0/class_mg_system_exception.htm" title="Base class for all exceptions representing a system error." alt="" coords="131,155,274,181"/>
+<area shape="rect" id="node4" href="$db/d05/class_mg_exception.htm" title="Base class for exceptions." alt="" coords="153,80,252,107"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="149,5,256,32"/>
+</map>

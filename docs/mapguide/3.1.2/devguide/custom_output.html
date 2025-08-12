@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Custom Output &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Fusion" href="fusion.html" />
+    <link rel="prev" title="Digitizing and Redlining" href="digitizing_and_redlining.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fusion.html" title="Fusion"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="digitizing_and_redlining.html" title="Digitizing and Redlining"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Custom Output</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#rendering-service">Rendering Service</a></li>
+<li><a class="reference internal" href="#mapping-service">Mapping Service</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="digitizing_and_redlining.html"
+                        title="previous chapter">Digitizing and Redlining</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fusion.html"
+                        title="next chapter">Fusion</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/custom_output.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="custom-output">
+<span id="index-0"></span><h1>Custom Output<a class="headerlink" href="#custom-output" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The Custom Output sample, in the Developer&#8217;s Guide samples, demonstrates
+concepts from this chapter.</p>
+</div>
+<p>MapGuide includes services for saving map representations for use in external
+programs.</p>
+<p>To save a map as a bit-mapped image (PNG or GIF), use the Rendering Service.</p>
+<p>To save a map as a Design Web Format (DWF), use the Mapping Service.</p>
+<p>An ePlot DWF is designed for offline viewing or printing. It can contain multiple
+sheets, where each sheet is a complete map image that can be viewed offline
+using Autodesk Design Review. Each sheet in an ePlot DWF is a static
+representation of a single map view state.</p>
+<p>Characteristics of bit-mapped images:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Images can be in PNG or GIF formats.</li>
+<li>An image displays a portion of the the map view state at a particular scale.</li>
+<li>The image is static with a fixed resolution. Zooming in creates a pixelated image.</li>
+<li>Images are cross-platform.</li>
+<li>Images are suitable for use in HTML pages, word processor documents, or graphics editing programs.</li>
+</ul>
+</div></blockquote>
+<p>Characteristics of an ePlot DWF:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A single ePlot can contain multiple sheets.</li>
+<li>Each sheet shows a single image, showing a portion of the map view at a particular scale.</li>
+<li>The ePlot area and scale are static, but geometric features are stored as vector graphics, so zooming is smooth.</li>
+<li>Some interactive features of the MapGuide DWF Viewer are available, such as the ability to turn layers on and off.</li>
+<li>The ePlot requires the Autodesk Design Review, either standalone or as a plug-in for Internet Explorer.</li>
+<li>Images can be copied to the Windows clipboard and used in other applications.</li>
+<li>Autodesk Design Review is a free program that is only available on Windows. Visit <a class="reference external" href="http://www.autodesk.com">http://www.autodesk.com</a> to download.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rendering-service">
+<span id="index-1"></span><span id="id1"></span><h2>Rendering Service<a class="headerlink" href="#rendering-service" title="Permalink to this headline">¶</a></h2>
+<p>The Rendering Service creates bit-mapped images of a map suitable for
+displaying in a browser or saving to a file. The image is returned as an
+<code class="docutils literal"><span class="pre">MgByteReader</span></code> object, which can be sent to a browser or saved to a file.</p>
+<p>For example, to create a PNG image of a map area, perform the following
+operations. Note that the aspect ratio of the envelope should match the image
+dimensions or the image will be distorted.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$byteReader</span> <span class="o">=</span> <span class="nv">$renderingService</span><span class="o">-&gt;</span><span class="na">RenderMap</span><span class="p">(</span><span class="nv">$map</span><span class="p">,</span> <span class="nv">$selection</span><span class="p">,</span> <span class="nv">$envelope</span><span class="p">,</span> <span class="nv">$imageWidth</span><span class="p">,</span> <span class="nv">$imageHeight</span><span class="p">,</span> <span class="nv">$color</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">&quot;Content-type: &quot;</span> <span class="o">.</span> <span class="nv">$byteReader</span><span class="o">-&gt;</span><span class="na">GetMimeType</span><span class="p">()</span> <span class="p">);</span>
+<span class="nv">$buffer</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$byteReader</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$buffer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="n">MgByteReader</span> <span class="n">byteReader</span> <span class="p">=</span> <span class="n">renderingService</span><span class="p">.</span><span class="n">RenderMap</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">envelope</span><span class="p">,</span> <span class="n">imageWidth</span><span class="p">,</span> <span class="n">imageHeight</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="s">&quot;PNG&quot;</span><span class="p">);</span>
+<span class="c1">//See common/common.aspx for implementation of Utility.OutputReaderContent()</span>
+<span class="n">Utility</span><span class="p">.</span><span class="n">OutputReaderContent</span><span class="p">(</span><span class="n">byteReader</span><span class="p">,</span> <span class="n">Response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">//Code sample not yet available</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mapping-service">
+<span id="index-2"></span><h2>Mapping Service<a class="headerlink" href="#mapping-service" title="Permalink to this headline">¶</a></h2>
+<p>The Mapping Service creates ePlot DWFs.</p>
+<p>An ePlot DWF is designed primarily for offline viewing or printing. It includes
+an <code class="docutils literal"><span class="pre">MgPlotSpecification</span></code> that defines the page size and margins. It can also
+include an optional <code class="docutils literal"><span class="pre">MgLayout</span></code> that defines additional components to include
+in the plot, like a legend or a custom logo. The layout is based on a print
+layout in the repository. For a description of the PrintLayout schema, see the
+MapGuide Web API Reference.</p>
+<p>To create an ePlot DWF with more than one sheet, use an
+<code class="docutils literal"><span class="pre">MgMapPlotCollection</span></code>, where each item in the collection is an <code class="docutils literal"><span class="pre">MgMapPlot</span></code> that
+describes a single sheet.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The map name becomes the sheet name in the multi-plot DWF. Because
+each sheet in the DWF must have a unique name, you must create a separate
+MgMap object for each sheet in the DWF.</p>
+</div>
+<p>The following example creates a multi-plot DWF with two sheets. The second
+sheet displays the same map area as the first, but it adds the title and legend
+information from the print layout.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$dwfVersion</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDwfVersion</span><span class="p">(</span><span class="s2">&quot;6.01&quot;</span><span class="p">,</span> <span class="s2">&quot;1.2&quot;</span><span class="p">);</span>
+
+<span class="nv">$plotSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgPlotSpecification</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="nx">MgPageUnitsType</span><span class="o">::</span><span class="na">Inches</span><span class="p">);</span>
+<span class="nv">$plotSpec</span><span class="o">-&gt;</span><span class="na">SetMargins</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+
+<span class="nv">$plotCollection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMapPlotCollection</span><span class="p">();</span>
+
+<span class="nv">$plot1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMapPlot</span><span class="p">(</span><span class="nv">$map</span><span class="p">,</span> <span class="nv">$plotSpec</span><span class="p">,</span> <span class="nv">$layout</span><span class="p">);</span>
+<span class="nv">$plotCollection</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$plot1</span><span class="p">);</span>
+<span class="c1">// Create a second map for the second sheet in the DWF. This</span>
+<span class="c1">// second map uses the print layout</span>
+<span class="c1">// to display a page title and legend.</span>
+<span class="nv">$map2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMap</span><span class="p">(</span><span class="nv">$siteConnection</span><span class="p">);</span>
+<span class="nv">$map2</span><span class="o">-&gt;</span><span class="na">Create</span><span class="p">(</span><span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetMapDefinition</span><span class="p">(),</span> <span class="s1">&#39;Sheet 2&#39;</span><span class="p">);</span>
+<span class="nv">$layoutRes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="s2">&quot;Library://Samples/Sheboygan/Layouts/SheboyganMap.PrintLayout&quot;</span><span class="p">);</span>
+<span class="nv">$layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgLayout</span><span class="p">(</span><span class="nv">$layoutRes</span><span class="p">,</span> <span class="s2">&quot;City of Sheboygan&quot;</span><span class="p">,</span> <span class="nx">MgPageUnitsType</span><span class="o">::</span><span class="na">Inches</span><span class="p">);</span>
+<span class="nv">$plot2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgMapPlot</span><span class="p">(</span><span class="nv">$map2</span><span class="p">,</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetViewCenter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">GetCoordinate</span><span class="p">(),</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetViewScale</span><span class="p">(),</span> <span class="nv">$plotSpec</span><span class="p">,</span> <span class="nv">$layout</span><span class="p">);</span>
+<span class="nv">$plotCollection</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$plot2</span><span class="p">);</span>
+<span class="nv">$byteReader</span> <span class="o">=</span> <span class="nv">$mappingService</span><span class="o">-&gt;</span><span class="na">GenerateMultiPlot</span><span class="p">(</span><span class="nv">$plotCollection</span><span class="p">,</span> <span class="nv">$dwfVersion</span><span class="p">);</span>
+<span class="c1">// Now output the resulting DWF.</span>
+<span class="nv">$outputBuffer</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="nv">$buffer</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$byteReader</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$outputBuffer</span> <span class="o">.=</span> <span class="nv">$buffer</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: &#39;</span> <span class="o">.</span> <span class="nv">$byteReader</span><span class="o">-&gt;</span><span class="na">GetMimeType</span><span class="p">());</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Length: &#39;</span> <span class="o">.</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$outputBuffer</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$outputBuffer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="n">MgDwfVersion</span> <span class="n">dwfVersion</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDwfVersion</span><span class="p">(</span><span class="s">&quot;6.01&quot;</span><span class="p">,</span> <span class="s">&quot;1.2&quot;</span><span class="p">);</span>
+
+<span class="n">MgPlotSpecification</span> <span class="n">plotSpec</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgPlotSpecification</span><span class="p">(</span><span class="m">8.5f</span><span class="p">,</span> <span class="m">11.0f</span><span class="p">,</span> <span class="n">MgPageUnitsType</span><span class="p">.</span><span class="n">Inches</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+
+<span class="n">MgResourceIdentifier</span> <span class="n">layoutRes</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Samples/Sheboygan/Layouts/SheboyganMap.PrintLayout&quot;</span><span class="p">);</span>
+<span class="n">MgLayout</span> <span class="n">layout</span> <span class="p">=</span>  <span class="k">new</span> <span class="n">MgLayout</span><span class="p">(</span><span class="n">layoutRes</span><span class="p">,</span> <span class="s">&quot;City of Sheboygan&quot;</span><span class="p">,</span> <span class="n">MgPageUnitsType</span><span class="p">.</span><span class="n">Inches</span><span class="p">);</span>
+
+<span class="n">MgMapPlotCollection</span> <span class="n">plotCollection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMapPlotCollection</span><span class="p">();</span>
+
+<span class="n">MgMapPlot</span> <span class="n">plot1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMapPlot</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">plotSpec</span><span class="p">,</span> <span class="n">layout</span><span class="p">);</span>
+<span class="n">plot1</span><span class="p">.</span><span class="n">SetCenterAndScale</span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">GetViewCenter</span><span class="p">().</span><span class="n">GetCoordinate</span><span class="p">(),</span> <span class="n">map</span><span class="p">.</span><span class="n">GetViewScale</span><span class="p">()</span> <span class="p">*</span> <span class="m">2</span><span class="p">);</span>
+<span class="n">plotCollection</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">plot1</span><span class="p">);</span>
+
+<span class="c1">// Create a second map for the second sheet in the DWF. This second sheet uses the print layout</span>
+<span class="c1">// to display a page title and legend.</span>
+
+<span class="n">MgMap</span> <span class="n">map2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMap</span><span class="p">(</span><span class="n">siteConnection</span><span class="p">);</span>
+<span class="n">map2</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">GetMapDefinition</span><span class="p">(),</span> <span class="s">&quot;Sheet 2&quot;</span><span class="p">);</span>
+<span class="n">MgMapPlot</span> <span class="n">plot2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgMapPlot</span><span class="p">(</span><span class="n">map2</span><span class="p">,</span> <span class="n">plotSpec</span><span class="p">,</span> <span class="n">layout</span><span class="p">);</span>
+<span class="n">plot2</span><span class="p">.</span><span class="n">SetCenterAndScale</span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">GetViewCenter</span><span class="p">().</span><span class="n">GetCoordinate</span><span class="p">(),</span> <span class="n">map</span><span class="p">.</span><span class="n">GetViewScale</span><span class="p">());</span>
+<span class="n">plotCollection</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">plot2</span><span class="p">);</span>
+
+<span class="n">MgByteReader</span> <span class="n">byteReader</span> <span class="p">=</span> <span class="n">mappingService</span><span class="p">.</span><span class="n">GenerateMultiPlot</span><span class="p">(</span><span class="n">plotCollection</span><span class="p">,</span> <span class="n">dwfVersion</span><span class="p">);</span>
+
+<span class="c1">// Now output the resulting DWF.</span>
+<span class="c1">// See common/common.aspx for implementation of Utility.OutputReaderContent()</span>
+<span class="n">Utility</span><span class="p">.</span><span class="n">OutputReaderContent</span><span class="p">(</span><span class="n">byteReader</span><span class="p">,</span> <span class="n">Response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">//Code sample not yet available</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fusion.html" title="Fusion"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="digitizing_and_redlining.html" title="Digitizing and Redlining"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

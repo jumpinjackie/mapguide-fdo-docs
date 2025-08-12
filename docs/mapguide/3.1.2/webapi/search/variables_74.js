@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['targetcrserror',['TargetCrsError',['../da/d12/class_mg_coordinate_system_transform_a6d4773e713f8cbcba1fc086120e1b64e.htm#a6d4773e713f8cbcba1fc086120e1b64e',1,'MgCoordinateSystemTransform']]],
+  ['taskbutton',['TaskButton',['../d4/dfd/class_mg_web_widget_type_ab66599bb61379dbc190ec715e4a6bb69.htm#ab66599bb61379dbc190ec715e4a6bb69',1,'MgWebWidgetType']]],
+  ['taskpane',['TaskPane',['../d6/d02/class_mg_web_target_type_acfd4d63aa44d8515342d91bed7f3e589.htm#acfd4d63aa44d8515342d91bed7f3e589',1,'MgWebTargetType']]],
+  ['tasks',['Tasks',['../d6/d05/class_mg_web_task_button_type_a5803db865da9f67f9c54230d38cf815c.htm#a5803db865da9f67f9c54230d38cf815c',1,'MgWebTaskButtonType']]],
+  ['teacyl',['Teacyl',['../d7/d44/class_mg_coordinate_system_projection_code_ad63bb1efe41c3b580fb7cf6410ac5511.htm#ad63bb1efe41c3b580fb7cf6410ac5511',1,'MgCoordinateSystemProjectionCode']]],
+  ['text',['Text',['../d4/d92/class_mg_mime_type_aaff5931f0b2eb6185a6b649372acb865.htm#aaff5931f0b2eb6185a6b649372acb865',1,'MgMimeType']]],
+  ['threeparameter',['ThreeParameter',['../d6/d1c/class_mg_coordinate_system_geodetic_analytical_transformation_method_a7b006c953c8b507c521d24827798caa9.htm#a7b006c953c8b507c521d24827798caa9',1,'MgCoordinateSystemGeodeticAnalyticalTransformationMethod::ThreeParameter()'],['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_a22ec807a16e83d33d4590de49626e1ea.htm#a22ec807a16e83d33d4590de49626e1ea',1,'MgCoordinateSystemGeodeticTransformationMethod::ThreeParameter()']]],
+  ['tiff',['Tiff',['../d4/d92/class_mg_mime_type_a328280ae1555df4bf4d7eb0e87c587db.htm#a328280ae1555df4bf4d7eb0e87c587db',1,'MgMimeType::Tiff()'],['../da/d63/class_mg_image_formats_aa78e902d99e09fda61efd95819d86e8a.htm#aa78e902d99e09fda61efd95819d86e8a',1,'MgImageFormats::Tiff()']]],
+  ['tilecachepath',['TileCachePath',['../df/d91/class_mg_resource_tag_a3299f716a830cb436fd1b2a6df03f845.htm#a3299f716a830cb436fd1b2a6df03f845',1,'MgResourceTag']]],
+  ['tileservice',['TileService',['../de/d80/class_mg_service_type_af3ffbaea66c757265f1eb80a946e9e99.htm#af3ffbaea66c757265f1eb80a946e9e99',1,'MgServiceType']]],
+  ['tilesetdefinition',['TileSetDefinition',['../d0/d19/class_mg_resource_type_ae1d5700a62347bea3bb29ca600ae30aa.htm#ae1d5700a62347bea3bb29ca600ae30aa',1,'MgResourceType']]],
+  ['tm',['Tm',['../d7/d44/class_mg_coordinate_system_projection_code_a44d6ac72c16f7fa2727ba08f7799aadd.htm#a44d6ac72c16f7fa2727ba08f7799aadd',1,'MgCoordinateSystemProjectionCode']]],
+  ['tmkrg0',['TMKRG0',['../d0/d7c/class_mg_coordinate_system_error_code_a704bdaa41765da8d390712922e9216b8.htm#a704bdaa41765da8d390712922e9216b8',1,'MgCoordinateSystemErrorCode']]],
+  ['tokyo',['TOKYO',['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_a037af256d87a63e0716a23bb0a9e322a.htm#a037af256d87a63e0716a23bb0a9e322a',1,'MgCoordinateSystemGeodeticTransformationMethod']]],
+  ['touches',['Touches',['../d7/d86/class_mg_feature_spatial_operations_a2bcbe87676e79429ce63101cc8eef0fb.htm#a2bcbe87676e79429ce63101cc8eef0fb',1,'MgFeatureSpatialOperations']]],
+  ['transformdatumshiftwarning',['TransformDatumShiftWarning',['../da/d12/class_mg_coordinate_system_transform_a319d23d0706612c7140d32104ad12e26.htm#a319d23d0706612c7140d32104ad12e26',1,'MgCoordinateSystemTransform']]],
+  ['transformok',['TransformOk',['../da/d12/class_mg_coordinate_system_transform_ad1bc4bc6060e2081dc424c55bc45cf07.htm#ad1bc4bc6060e2081dc424c55bc45cf07',1,'MgCoordinateSystemTransform']]],
+  ['transformoutsidedomainwarning',['TransformOutsideDomainWarning',['../da/d12/class_mg_coordinate_system_transform_a9771ad3a3b159338265e15b4aabf3033.htm#a9771ad3a3b159338265e15b4aabf3033',1,'MgCoordinateSystemTransform']]],
+  ['transformtotalfailure',['TransformTotalFailure',['../da/d12/class_mg_coordinate_system_transform_a7a9bb24476a4c21e299948b65c509e88.htm#a7a9bb24476a4c21e299948b65c509e88',1,'MgCoordinateSystemTransform']]],
+  ['trmeraf',['Trmeraf',['../d7/d44/class_mg_coordinate_system_projection_code_a1fc12c4d8791a31ee1a454054a475d3d.htm#a1fc12c4d8791a31ee1a454054a475d3d',1,'MgCoordinateSystemProjectionCode']]],
+  ['trmrkrg',['Trmrkrg',['../d7/d44/class_mg_coordinate_system_projection_code_a27910d0d40cdae8a42fb7e5319e7986e.htm#a27910d0d40cdae8a42fb7e5319e7986e',1,'MgCoordinateSystemProjectionCode']]],
+  ['trmrs',['Trmrs',['../d7/d44/class_mg_coordinate_system_projection_code_a343283f3f65e9ac3c04abb76904b1456.htm#a343283f3f65e9ac3c04abb76904b1456',1,'MgCoordinateSystemProjectionCode']]]
+];

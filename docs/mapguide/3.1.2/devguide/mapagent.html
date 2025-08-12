@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Map Agent &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Advanced MapGuide Topics" href="mapguide_advanced.html" />
+    <link rel="prev" title="Fusion" href="fusion.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mapguide_advanced.html" title="Advanced MapGuide Topics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fusion.html" title="Fusion"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fusion.html"
+                        title="previous chapter">Fusion</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mapguide_advanced.html"
+                        title="next chapter">Advanced MapGuide Topics</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mapagent.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-map-agent">
+<h1>The Map Agent<a class="headerlink" href="#the-map-agent" title="Permalink to this headline">¶</a></h1>
+<p>The MapGuide API is only accessible from the web tier, and only communicates with the server tier. Client applications like the AJAX viewer do not use the MapGuide API to communicate with the MapGuide Server, instead they communicate with the MapGuide Server through a subset of the MapGuide API exposed by the <cite>mapagent</cite> over the standard http protocol.</p>
+<p>When the AJAX viewer renders a map, it is not using the <a class="reference internal" href="custom_output.html#rendering-service"><span class="std std-ref">Rendering Service</span></a> of the MapGuide API to do this. It is issuing a basic HTTP request to the mapagent to do this.</p>
+<p>The mapagent, exposes a pretty large set of the MapGuide API over http, that is available for client consumption. The only pieces of the MapGuide API that are not exposed are:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Feature Service API that involve updating/inserting data and transactions</dt>
+<dd><ul class="first last simple">
+<li>UpdateFeatures</li>
+<li>ApplySchema</li>
+<li>BeginTransaction</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Because this functionality is exposed over http, you can programmatically communicate with the mapagent by making http requests to the mapagent url.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The mapagent URL is generally <cite>http://yourservername:port/mapguide/mapagent/mapagent.fcgi</cite>. On a default Apache installation, this port number is usually 8008</p>
+</div>
+<p>Unlike the MapGuide API, you can use any language that supports making http requests. In this respects, using the mapagent is a more flexible approach.</p>
+<p>For a strongly-typed client service interface to the mapagent, you can use the <a class="reference internal" href="supplemental_development.html#maestroapi"><span class="std std-ref">Maestro API</span></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mapguide_advanced.html" title="Advanced MapGuide Topics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fusion.html" title="Fusion"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

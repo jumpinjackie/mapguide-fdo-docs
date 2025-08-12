@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d2/d5c/class_mg_delete_features.htm" title="A feature command that features from a datastore. The feature class name and filter text define featu..." alt="" coords="5,155,133,181"/>
+<area shape="rect" id="node4" href="$d4/d63/class_mg_insert_features.htm" title="Creates an insert feature data command. You must add this command to an MgFeatureCommandCollection ob..." alt="" coords="157,155,280,181"/>
+<area shape="rect" id="node5" href="$de/d95/class_mg_lock_features.htm" title="Creates an insert feature data command. You must add this command to an MgFeatureCommandCollection ob..." alt="" coords="305,155,423,181"/>
+<area shape="rect" id="node6" href="$db/dc6/class_mg_unlock_features.htm" title="Creates an unlock feature command. You must add this command to an MgFeatureCommandCollection object ..." alt="" coords="448,155,579,181"/>
+<area shape="rect" id="node7" href="$de/d25/class_mg_update_features.htm" title="Creates an update feature data command. You must add this command to an MgFeatureCommandCollection ob..." alt="" coords="603,155,735,181"/>
+<area shape="rect" id="node2" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="311,5,417,32"/>
+</map>

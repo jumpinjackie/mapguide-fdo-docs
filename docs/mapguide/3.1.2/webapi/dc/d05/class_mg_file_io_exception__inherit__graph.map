@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node6" href="$da/d09/class_mg_directory_not_found_exception.htm" title="Thrown when a directory cannot be found." alt="" coords="831,5,1037,32"/>
+<area shape="rect" id="node7" href="$d6/d7d/class_mg_file_not_found_exception.htm" title="Thrown when attempting to access a file that cannot be found." alt="" coords="847,56,1021,83"/>
+<area shape="rect" id="node8" href="$da/d1b/class_mg_log_open_failed_exception.htm" title="Thrown when a log file could not be opened." alt="" coords="841,107,1027,133"/>
+<area shape="rect" id="node9" href="$d0/d6f/class_mg_path_too_long_exception.htm" title="Thrown when a pathname is longer than the system&#45;defined maximum length." alt="" coords="847,157,1021,184"/>
+<area shape="rect" id="node2" href="$d0/d5a/class_mg_io_exception.htm" title="Thrown when an I/O error occurs." alt="" coords="497,81,605,108"/>
+<area shape="rect" id="node3" href="$d5/da0/class_mg_system_exception.htm" title="Base class for all exceptions representing a system error." alt="" coords="307,81,449,108"/>
+<area shape="rect" id="node4" href="$db/d05/class_mg_exception.htm" title="Base class for exceptions." alt="" coords="160,81,259,108"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,81,112,108"/>
+</map>

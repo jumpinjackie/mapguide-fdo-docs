@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d7/d5f/class_mg_batch_property_collection.htm" title="MgBatchPropertyCollection represents a collection of properties. Properties are name/value pairs used..." alt="" coords="315,5,495,32"/>
+<area shape="rect" id="node4" href="$df/d14/class_mg_class_definition_collection.htm" title="ClassDefinitionCollection represents a collection of class definitions in a feature schema..." alt="" coords="313,56,496,83"/>
+<area shape="rect" id="node5" href="$d8/d88/class_mg_feature_schema_collection.htm" title="FeatureSchemaCollection represents a collection of feature schemas." alt="" coords="310,107,499,133"/>
+<area shape="rect" id="node6" href="$d8/dd9/class_mg_int_collection.htm" title="This class represents a collection of integers. The integers are owned and managed by the collection..." alt="" coords="349,157,460,184"/>
+<area shape="rect" id="node7" href="$da/d54/class_mg_parameter_collection.htm" title="MgParameterCollection represents a collection of parameters. All parameters contained in an instance ..." alt="" coords="326,208,483,235"/>
+<area shape="rect" id="node8" href="$d3/dec/class_mg_property_collection.htm" title="MgPropertyCollection represents a collection of properties. All properties contained in an instance o..." alt="" coords="331,259,478,285"/>
+<area shape="rect" id="node9" href="$db/d70/class_mg_property_definition_collection.htm" title="This class contains property definitions for a feature class and makes up a portion of the complete f..." alt="" coords="305,309,504,336"/>
+<area shape="rect" id="node10" href="$da/d99/class_mg_string_collection.htm" title="This class represents a collection of strings. The collection maintains its own copy of strings..." alt="" coords="339,360,470,387"/>
+<area shape="rect" id="node2" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,183,112,209"/>
+</map>

@@ -1,0 +1,1360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Analyzing Features &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Digitizing and Redlining" href="digitizing_and_redlining.html" />
+    <link rel="prev" title="Modifying Maps and Layers" href="modifying_maps_and_layers.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="digitizing_and_redlining.html" title="Digitizing and Redlining"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modifying_maps_and_layers.html" title="Modifying Maps and Layers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Analyzing Features</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#representations-of-geometry">Representations of Geometry</a><ul>
+<li><a class="reference internal" href="#geometry-objects">Geometry Objects</a></li>
+<li><a class="reference internal" href="#comparing-geometry-objects">Comparing Geometry Objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coordinate-systems">Coordinate Systems</a></li>
+<li><a class="reference internal" href="#measuring-distance">Measuring Distance</a></li>
+<li><a class="reference internal" href="#temporary-feature-sources">Temporary Feature Sources</a><ul>
+<li><a class="reference internal" href="#inserting-deleting-and-updating-features">Inserting, Deleting and Updating Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-a-buffer">Creating a Buffer</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modifying_maps_and_layers.html"
+                        title="previous chapter">Modifying Maps and Layers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="digitizing_and_redlining.html"
+                        title="next chapter">Digitizing and Redlining</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/analyzing_features.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="analyzing-features">
+<h1>Analyzing Features<a class="headerlink" href="#analyzing-features" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Analyzing Features sample, in the Developer&#8217;s Guide samples, demonstrates concepts from this chapter.</p>
+</div>
+<p>MapGuide includes methods for analyzing map features, including comparing
+the spatial relationships between features, measuring distances, and creating
+buffer areas around features.</p>
+<p>Analyzing features requires knowing how the features are represented and what
+spatial reference systems are being used. If different spatial reference systems
+are being used, it is important to be able to convert between them.</p>
+</div>
+<div class="section" id="representations-of-geometry">
+<span id="index-0"></span><span id="id1"></span><h2>Representations of Geometry<a class="headerlink" href="#representations-of-geometry" title="Permalink to this headline">¶</a></h2>
+<p>MapGuide can represent geometric data in three different forms:</p>
+<blockquote>
+<div><ul class="simple">
+<li>AGF text format, which is an extension of the Open Geospatial Consortium (OGC) Well Known Text (WKT) format. This is used to represent geometry as a character string.</li>
+<li>Binary AGF format. This is used by the FDO technology supporting the Feature Service.</li>
+<li>MapGuide internal representation, using <code class="docutils literal"><span class="pre">MgGeometry</span></code> and classes derived from it.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This guide and the Web API Reference will often use the term WKT to mean
+AGF text format. Be aware that AGF Text values do not always conform to the
+OGC WKT standard. See the Geometry module in the Web API Reference for
+details.</p>
+</div>
+<p>To convert between AGF text and the MapGuide internal representation, use
+an <code class="docutils literal"><span class="pre">MgWktReaderWriter</span></code> object. Call <code class="docutils literal"><span class="pre">MgWktReaderWriter.Read()</span></code> to convert AGF
+text to <code class="docutils literal"><span class="pre">MgGeometry</span></code>. Call <code class="docutils literal"><span class="pre">MgWktReaderWriter.Write()</span></code> to convert <code class="docutils literal"><span class="pre">MgGeometry</span></code>
+to AGF text.</p>
+<p>To convert between binary AGF and the MapGuide internal representation,
+use an <code class="docutils literal"><span class="pre">MgAgfReaderWriter</span></code> object. Call <code class="docutils literal"><span class="pre">MgAgfReaderWriter.Read()</span></code> to convert
+binary AGF to <code class="docutils literal"><span class="pre">MgGeometry</span></code>. Call <code class="docutils literal"><span class="pre">MgAgfReaderWriter.Write()</span></code> to convert
+<code class="docutils literal"><span class="pre">MgGeometry</span></code> to binary AGF.</p>
+<p>For example, if you have a WKT representation of the geometry, you could
+create a geometry object as follows:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$wktReaderWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgWktReaderWriter</span><span class="p">();</span>
+<span class="nv">$geometry</span> <span class="o">=</span> <span class="nx">wktReaderWriter</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$wktGeometry</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgWktReaderWriter</span> <span class="n">wktReaderWriter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgWktReaderWriter</span><span class="p">();</span>
+<span class="n">MgGeometry</span> <span class="n">geometry</span> <span class="p">=</span> <span class="n">wktReaderWriter</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="n">wktGeometry</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgWktReaderWriter</span> <span class="n">wktReaderWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgWktReaderWriter</span><span class="o">();</span>
+<span class="n">MgGeometry</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">wktReaderWriter</span><span class="o">.</span><span class="na">Read</span><span class="o">(</span><span class="n">wktGeometry</span><span class="o">);</span>
+</pre></div>
+</div>
+<div class="section" id="geometry-objects">
+<span id="index-1"></span><h3>Geometry Objects<a class="headerlink" href="#geometry-objects" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">MgGeometry</span></code> is the base class for all the geometry types. The simple geometry
+types are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">MgPoint</span></code> - a single point</li>
+<li><code class="docutils literal"><span class="pre">MgLineString</span></code> - a series of connected line segments</li>
+<li><code class="docutils literal"><span class="pre">MgCurveString</span></code> - a series of connected curve segments</li>
+<li><code class="docutils literal"><span class="pre">MgPolygon</span></code> - a polygon with sides formed from line segments</li>
+<li><code class="docutils literal"><span class="pre">MgCurvePolygon</span></code> - a polygon with sides formed from curve segments</li>
+</ul>
+</div></blockquote>
+<p>The curve segments are circular arcs, defined by a start point, an end point,
+and a control point.</p>
+<p>Complex types are formed by aggregating simple types. The complex types
+are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">MgMultiPoint</span></code> - a group of points</li>
+<li><code class="docutils literal"><span class="pre">MgMultiLineString</span></code> - a group of line strings</li>
+<li><code class="docutils literal"><span class="pre">MgMultiCurveString</span></code> - a group of curve strings</li>
+<li><code class="docutils literal"><span class="pre">MgMultiPolygon</span></code> - a group of polygons</li>
+<li><code class="docutils literal"><span class="pre">MgMultiCurvePolygon</span></code> - a group of curve polygons</li>
+<li><code class="docutils literal"><span class="pre">MgMultiGeometry</span></code> - a group of simple geometry objects of any type</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="comparing-geometry-objects">
+<span id="index-2"></span><h3>Comparing Geometry Objects<a class="headerlink" href="#comparing-geometry-objects" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">MgGeometry</span></code> class contains methods for comparing different geometry
+objects. These are similar to the spatial filters described in <a class="reference internal" href="working_with_feature_data.html#selecting-with-web-api"><span class="std std-ref">Selecting with the Web API</span></a>. Methods to test spatial relationships include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">Contains()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Crosses()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Disjoint()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Equals()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Intersects()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Overlaps()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Touches()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Within()</span></code></li>
+</ul>
+</div></blockquote>
+<p>For example, if you have an <code class="docutils literal"><span class="pre">MgLineString</span></code> object <code class="docutils literal"><span class="pre">$line</span></code> and an <code class="docutils literal"><span class="pre">MgPolygon</span></code>
+object <code class="docutils literal"><span class="pre">$polygon</span></code>, you can test if the line crosses the polygon with a call to</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$line</span><span class="o">-&gt;</span><span class="na">Crosses</span><span class="p">(</span><span class="nv">$polygon</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="n">line</span><span class="p">.</span><span class="n">Crosses</span><span class="p">(</span><span class="n">polygon</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">line</span><span class="o">.</span><span class="na">Crosses</span><span class="o">(</span><span class="n">polygon</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Methods to create new geometry objects from the point set of two other
+geometries include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">Difference()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Intersection()</span></code></li>
+<li><code class="docutils literal"><span class="pre">SymmetricDifference()</span></code></li>
+<li><code class="docutils literal"><span class="pre">Union()</span></code></li>
+</ul>
+</div></blockquote>
+<p>Complete details are in the Geometry module of the Web API reference, under
+Spatial Relationships.</p>
+</div>
+</div>
+<div class="section" id="coordinate-systems">
+<span id="index-3"></span><h2>Coordinate Systems<a class="headerlink" href="#coordinate-systems" title="Permalink to this headline">¶</a></h2>
+<p>A single map will often combine data from different sources, and the different
+sources may use different coordinate systems. The map has its own coordinate
+system, and any feature sources used in the map may have different coordinate
+systems. It is important for display and analysis that all locations are
+transformed to the same coordinate system.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A coordinate system can also be called a spatial reference system (SRS) or
+a coordinate reference system (CRS). This guide uses the abbreviation SRS.</p>
+</div>
+<p>MapGuide supports three different types of coordinate system:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Arbitrary X-Y</li>
+<li>Geographic, or latitude/longitude</li>
+<li>Projected</li>
+</ul>
+</div></blockquote>
+<p>An <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object represents a coordinate system.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot transform between arbitrary X-Y coordinates and either
+geographic or projected coordinates.</p>
+</div>
+<p>To create an <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object from an <code class="docutils literal"><span class="pre">MgMap</span></code> object,</p>
+<blockquote>
+<div><ul class="simple">
+<li>Get the WKT representation of the map coordinate system, using <code class="docutils literal"><span class="pre">MgMap::GetMapSRS()</span></code>.</li>
+<li>Create an <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object, using <code class="docutils literal"><span class="pre">MgCoordinateSystemFactory::Create()</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>To create an <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object from a map layer,</p>
+<blockquote>
+<div><ul class="simple">
+<li>Get the feature source for the layer.</li>
+<li>Get the active spatial context for the feature source.</li>
+<li>Convert the spatial context to a WKT.</li>
+<li>Create an <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object from the WKT.</li>
+</ul>
+</div></blockquote>
+<p>To transform geometry from one coordinate system to another, create an
+<code class="docutils literal"><span class="pre">MgCoordinateSystemTransform</span></code> object using the two coordinate systems. Apply
+this transform to the <code class="docutils literal"><span class="pre">MgGeometry</span></code> object.</p>
+<p>For example, if you have geometry representing a feature on a layer that uses
+one coordinate system, and you want to compare it to a feature on another
+layer that uses a different coordinate system, perform the following steps:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$featureSource1</span> <span class="o">=</span> <span class="nv">$layer1</span><span class="o">-&gt;</span><span class="na">GetFeatureSourceId</span><span class="p">();</span>
+<span class="nv">$contexts1</span> <span class="o">=</span> <span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">GetSpatialContexts</span><span class="p">(</span><span class="nv">$featureSource1</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$contexts1</span><span class="o">-&gt;</span><span class="na">ReadNext</span><span class="p">();</span>
+<span class="nv">$srs1</span> <span class="o">=</span> <span class="nv">$contexts1</span><span class="o">-&gt;</span><span class="na">GetCoordinateSystemWkt</span><span class="p">();</span>
+<span class="nv">$contexts1</span><span class="o">-&gt;</span><span class="na">Close</span><span class="p">();</span>
+<span class="nv">$featureSource2</span> <span class="o">=</span> <span class="nv">$layer2</span><span class="o">-&gt;</span><span class="na">GetFeatureSourceId</span><span class="p">();</span>
+<span class="nv">$contexts2</span> <span class="o">=</span> <span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">GetSpatialContexts</span><span class="p">(</span><span class="nv">$featureSource2</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$contexts2</span><span class="o">-&gt;</span><span class="na">ReadNext</span><span class="p">();</span>
+<span class="nv">$srs2</span> <span class="o">=</span> <span class="nv">$contexts2</span><span class="o">-&gt;</span><span class="na">GetCoordinateSystemWkt</span><span class="p">();</span>
+<span class="nv">$contexts2</span><span class="o">-&gt;</span><span class="na">Close</span><span class="p">();</span>
+<span class="nv">$csFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="nv">$srcCs</span> <span class="o">=</span> <span class="nv">$csFactory</span><span class="o">-&gt;</span><span class="na">Create</span><span class="p">(</span><span class="nv">$srs1</span><span class="p">);</span>
+<span class="nv">$dstCs</span> <span class="o">=</span> <span class="nv">$csFactory</span><span class="o">-&gt;</span><span class="na">Create</span><span class="p">(</span><span class="nv">$srs2</span><span class="p">);</span>
+<span class="nv">$xform</span> <span class="o">=</span> <span class="nv">$csFactory</span><span class="o">-&gt;</span><span class="na">GetTransform</span><span class="p">(</span><span class="nv">$srcCS</span><span class="p">,</span> <span class="nv">$dstCs</span><span class="p">);</span>
+<span class="nv">$geometry1xform</span> <span class="o">=</span> <span class="nv">$geometry1</span><span class="o">-&gt;</span><span class="na">Transform</span><span class="p">(</span><span class="nv">$xform</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSource1</span> <span class="p">=</span> <span class="n">layer1</span><span class="p">.</span><span class="n">GetFeatureSourceId</span><span class="p">();</span>
+<span class="n">MgSpatialContextReader</span> <span class="n">contexts1</span> <span class="p">=</span> <span class="n">featureService</span><span class="p">.</span><span class="n">GetSpatialContexts</span><span class="p">(</span><span class="n">featureSource1</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="n">contexts1</span><span class="p">.</span><span class="n">ReadNext</span><span class="p">();</span>
+<span class="n">String</span> <span class="n">srs1</span> <span class="p">=</span> <span class="n">contexts1</span><span class="p">.</span><span class="n">GetCoordinateSystemWkt</span><span class="p">();</span>
+<span class="n">contexts1</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSource2</span> <span class="p">=</span> <span class="n">layer2</span><span class="p">.</span><span class="n">GetFeatureSourceId</span><span class="p">();</span>
+<span class="n">MgSpatialContextReader</span> <span class="n">contexts2</span> <span class="p">=</span> <span class="n">featureService</span><span class="p">.</span><span class="n">GetSpatialContexts</span><span class="p">(</span><span class="n">featureSource2</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="n">contexts2</span><span class="p">.</span><span class="n">ReadNext</span><span class="p">();</span>
+<span class="n">String</span> <span class="n">srs2</span> <span class="p">=</span> <span class="n">contexts2</span><span class="p">.</span><span class="n">GetCoordinateSystemWkt</span><span class="p">();</span>
+<span class="n">contexts2</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+<span class="n">MgCoordinateSystemFactory</span> <span class="n">csFactory</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="n">MgCoordinateSystem</span> <span class="n">srcCs</span> <span class="p">=</span> <span class="n">csFactory</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">srs1</span><span class="p">);</span>
+<span class="n">MgCoordinateSystem</span> <span class="n">dstCs</span> <span class="p">=</span> <span class="n">csFactory</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">srs2</span><span class="p">);</span>
+<span class="n">MgCoordianteSystemTransform</span> <span class="n">xform</span> <span class="p">=</span> <span class="n">csFactory</span><span class="p">.</span><span class="n">GetTransform</span><span class="p">(</span><span class="n">srcCs</span><span class="p">,</span> <span class="n">dstCs</span><span class="p">);</span>
+<span class="n">MgGeometry</span> <span class="n">geometry1xform</span> <span class="p">=</span> <span class="n">geometry1</span><span class="p">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">xform</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSource1</span> <span class="o">=</span> <span class="n">layer1</span><span class="o">.</span><span class="na">GetFeatureSourceId</span><span class="o">();</span>
+<span class="n">MgSpatialContextReader</span> <span class="n">contexts1</span> <span class="o">=</span> <span class="n">featureService</span><span class="o">.</span><span class="na">GetSpatialContexts</span><span class="o">(</span><span class="n">featureSource1</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="n">contexts1</span><span class="o">.</span><span class="na">ReadNext</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">srs1</span> <span class="o">=</span> <span class="n">contexts1</span><span class="o">.</span><span class="na">GetCoordinateSystemWkt</span><span class="o">();</span>
+<span class="n">contexts1</span><span class="o">.</span><span class="na">Close</span><span class="o">();</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureSource2</span> <span class="o">=</span> <span class="n">layer2</span><span class="o">.</span><span class="na">GetFeatureSourceId</span><span class="o">();</span>
+<span class="n">MgSpatialContextReader</span> <span class="n">contexts2</span> <span class="o">=</span> <span class="n">featureService</span><span class="o">.</span><span class="na">GetSpatialContexts</span><span class="o">(</span><span class="n">featureSource2</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="n">contexts2</span><span class="o">.</span><span class="na">ReadNext</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">srs2</span> <span class="o">=</span> <span class="n">contexts2</span><span class="o">.</span><span class="na">GetCoordinateSystemWkt</span><span class="o">();</span>
+<span class="n">contexts2</span><span class="o">.</span><span class="na">Close</span><span class="o">();</span>
+<span class="n">MgCoordinateSystemFactory</span> <span class="n">csFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgCoordinateSystemFactory</span><span class="o">();</span>
+<span class="n">MgCoordinateSystem</span> <span class="n">srcCs</span> <span class="o">=</span> <span class="n">csFactory</span><span class="o">.</span><span class="na">Create</span><span class="o">(</span><span class="n">srs1</span><span class="o">);</span>
+<span class="n">MgCoordinateSystem</span> <span class="n">dstCs</span> <span class="o">=</span> <span class="n">csFactory</span><span class="o">.</span><span class="na">Create</span><span class="o">(</span><span class="n">srs2</span><span class="o">);</span>
+<span class="n">MgCoordianteSystemTransform</span> <span class="n">xform</span> <span class="o">=</span> <span class="n">csFactory</span><span class="o">.</span><span class="na">GetTransform</span><span class="o">(</span><span class="n">srcCs</span><span class="o">,</span> <span class="n">dstCs</span><span class="o">);</span>
+<span class="n">MgGeometry</span> <span class="n">geometry1xform</span> <span class="o">=</span> <span class="n">geometry1</span><span class="o">.</span><span class="na">Transform</span><span class="o">(</span><span class="n">xform</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="measuring-distance">
+<span id="index-4"></span><h2>Measuring Distance<a class="headerlink" href="#measuring-distance" title="Permalink to this headline">¶</a></h2>
+<p>Measuring distance in geographic or projected coordinate systems requires
+great circle calculations. Both <code class="docutils literal"><span class="pre">MgGeometry::Buffer()</span></code> and
+<code class="docutils literal"><span class="pre">MgGeometry::Distance()</span></code> accept a measurement parameter that defines the
+great circle to be used. If the measurement parameter is null, the calculation
+is done using a linear algorithm.</p>
+<p>Create the measurement parameter, an <code class="docutils literal"><span class="pre">MgCoordinateSystemMeasure</span></code> object,
+from the <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> object.</p>
+<p>Distance is calculated in the units of the SRS. <code class="docutils literal"><span class="pre">MgCoordinateSystem</span></code> includes
+two methods, <code class="docutils literal"><span class="pre">ConvertCoordinateSystemUnitsToMeters()</span></code> and
+<code class="docutils literal"><span class="pre">ConvertMetersToCoordinateSystemUnits()</span></code> to convert to and from linear
+distances.</p>
+<p>For example, to calculate the distance between two <code class="docutils literal"><span class="pre">MgGeometry</span></code> objects <code class="docutils literal"><span class="pre">$a</span></code> and
+<code class="docutils literal"><span class="pre">$b</span></code>, using the coordinate system <code class="docutils literal"><span class="pre">$srs</span></code>, perform the following steps:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$measure</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">GetMeasure</span><span class="p">();</span>
+<span class="nv">$distInMapUnits</span> <span class="o">=</span> <span class="nv">$a</span><span class="o">-&gt;</span><span class="na">Distance</span><span class="p">(</span><span class="nv">$b</span><span class="p">,</span> <span class="nv">$measure</span><span class="p">);</span>
+<span class="nv">$distInMeters</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">ConvertCoordinateSystemUnitsToMeters</span><span class="p">(</span><span class="nv">$distInMapUnits</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgCoordinateSystemMeasure</span> <span class="n">measure</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">GetMeasure</span><span class="p">();</span>
+<span class="kt">double</span> <span class="n">distInMapUnits</span> <span class="p">=</span> <span class="n">a</span><span class="p">.</span><span class="n">Distance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">measure</span><span class="p">);</span>
+<span class="kt">double</span> <span class="n">distInMeters</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">ConvertCoordinateSystemUnitsToMeters</span><span class="p">(</span><span class="n">distInMapUnits</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgCoordinateSystemMeasure</span> <span class="n">measure</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="na">GetMeasure</span><span class="o">();</span>
+<span class="kt">double</span> <span class="n">distInMapUnits</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">Distance</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">measure</span><span class="o">);</span>
+<span class="kt">double</span> <span class="n">distInMeters</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="na">ConvertCoordinateSystemUnitsToMeters</span><span class="o">(</span><span class="n">distInMapUnits</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Another way to calculate the distance is to use <code class="docutils literal"><span class="pre">MgCoordinateSystemMeasure::GetDistance()</span></code>, as in the following:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$distInMapUnits</span> <span class="o">=</span> <span class="nv">$measure</span><span class="o">-&gt;</span><span class="na">GetDistance</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="kt">double</span> <span class="n">distInMapUnits</span> <span class="p">=</span> <span class="n">measure</span><span class="p">.</span><span class="n">GetDistance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">double</span> <span class="n">distInMapUnits</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="na">GetDistance</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="temporary-feature-sources">
+<span id="index-5"></span><h2>Temporary Feature Sources<a class="headerlink" href="#temporary-feature-sources" title="Permalink to this headline">¶</a></h2>
+<p>Many geometric analysis operations require creating new features and new
+feature sources. For example, drawing a buffer around a point on a map requires
+a layer to display the buffer polygon, and the layer requires a feature source.</p>
+<p>To create a temporary feature source, perform the following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Create a feature class definition.</li>
+<li>Determine what properties you need to store for the features. Add the property definitions to the feature class definition.</li>
+<li>Create a feature schema containing the feature class definition.</li>
+<li>Determine the SRS for the feature source. This can be the same as the SRS used for the map.</li>
+<li>Create a feature source using the schema and the SRS. The feature source can be stored in the session repository.</li>
+</ul>
+</div></blockquote>
+<p>It is possible for a single feature source to contain more than one feature class.
+A feature source that is to be used for temporary data, however, normally
+contains one feature class.</p>
+<p>A feature schema (<code class="docutils literal"><span class="pre">MgFeatureSchema</span></code> object) contains class definitions
+(<code class="docutils literal"><span class="pre">MgClassDefinition</span></code> objects) for each feature class in the schema.</p>
+<p>Each class definition contains property definitions for each property in the
+feature class. The property definitions can be the following types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">MgDataPropertyDefinition</span></code></li>
+<li><code class="docutils literal"><span class="pre">MgGeometryPropertyDefinition</span></code></li>
+<li><code class="docutils literal"><span class="pre">MgObjectPropertyDefinition</span></code></li>
+<li><code class="docutils literal"><span class="pre">MgRasterPropertyDefinition</span></code></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unlike FDO, MapGuide does not currently support Association Properties</p>
+</div>
+<p><code class="docutils literal"><span class="pre">MgDataPropertyDefinition</span></code> is used to define simple properties like numbers
+or strings. <code class="docutils literal"><span class="pre">MgGeometryPropertyDefinition</span></code> is used to define geometric
+properties. Most feature classes will have a geometric property to describe the
+feature&#8217;s location.</p>
+<p>For example, the following creates a temporary feature source to hold buffer
+features. The feature source contains a single feature class named <code class="docutils literal"><span class="pre">BufferClass</span></code>.</p>
+<p>Features in <code class="docutils literal"><span class="pre">BufferClass</span></code> have two properties. <code class="docutils literal"><span class="pre">ID</span></code> is an autogenerated unique
+ID number, and <code class="docutils literal"><span class="pre">BufferGeometry</span></code> contains the geometry for the buffer polygon.</p>
+<p>The FDO technology supporting the Feature Service allows for multiple spatial
+reference systems within a single feature source. However, this capability is
+dependent on the data provider, and does not apply to the SDF provider that
+is used for creating feature sources within MapGuide. For temporary feature
+sources, you must define a single default SRS for the feature source, and you
+must set any geometry properties to use the same SRS. The name of the SRS
+is user-defined.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$bufferClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgClassDefinition</span><span class="p">();</span>
+<span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">SetName</span><span class="p">(</span><span class="s1">&#39;BufferClass&#39;</span><span class="p">);</span>
+<span class="nv">$properties</span> <span class="o">=</span> <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">GetProperties</span><span class="p">();</span>
+
+<span class="nv">$idProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDataPropertyDefinition</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">);</span>
+<span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetDataType</span><span class="p">(</span><span class="nx">MgPropertyType</span><span class="o">::</span><span class="na">Int32</span><span class="p">);</span>
+<span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetNullable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$idProperty</span><span class="p">);</span>
+
+<span class="nv">$polygonProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="s1">&#39;BufferGeometry&#39;</span><span class="p">);</span>
+<span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetGeometryTypes</span><span class="p">(</span><span class="nx">MgFeatureGeometricType</span><span class="o">::</span><span class="na">Surface</span><span class="p">);</span>
+<span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetHasElevation</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetHasMeasure</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetReadOnly</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetSpatialContextAssociation</span><span class="p">(</span><span class="s1">&#39;defaultSrs&#39;</span><span class="p">);</span>
+<span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$polygonProperty</span><span class="p">);</span>
+
+<span class="nv">$idProperties</span> <span class="o">=</span> <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">GetIdentityProperties</span><span class="p">();</span>
+<span class="nv">$idProperties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$idProperty</span><span class="p">);</span>
+
+<span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">SetDefaultGeometryPropertyName</span><span class="p">(</span><span class="s1">&#39;BufferGeometry&#39;</span><span class="p">);</span>
+<span class="nv">$bufferSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureSchema</span><span class="p">(</span><span class="s1">&#39;BufferLayerSchema&#39;</span><span class="p">,</span> <span class="s1">&#39;temporary schema to hold a buffer&#39;</span><span class="p">);</span>
+<span class="nv">$bufferSchema</span><span class="o">-&gt;</span><span class="na">GetClasses</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$bufferClass</span><span class="p">);</span>
+<span class="nv">$sdfParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s1">&#39;OSGeo.SDF&#39;</span><span class="p">,</span> <span class="s1">&#39;defaultSrs&#39;</span><span class="p">,</span> <span class="nv">$wkt</span><span class="p">,</span> <span class="nv">$bufferSchema</span><span class="p">);</span>
+<span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">CreateFeatureSource</span><span class="p">(</span><span class="nv">$bufferFeatureResId</span><span class="p">,</span> <span class="nv">$sdfParams</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgClassDefinition</span> <span class="n">bufferClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgClassDefinition</span><span class="p">();</span>
+<span class="n">bufferClass</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;BufferClass&quot;</span><span class="p">);</span>
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="n">bufferClass</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">();</span>
+
+<span class="n">MgDataPropertyDefinition</span> <span class="n">idProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">);</span>
+<span class="n">idProperty</span><span class="p">.</span><span class="n">SetDataType</span><span class="p">(</span><span class="n">MgPropertyType</span><span class="p">.</span><span class="n">Int32</span><span class="p">);</span>
+<span class="n">idProperty</span><span class="p">.</span><span class="n">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="n">idProperty</span><span class="p">.</span><span class="n">SetNullable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="n">idProperty</span><span class="p">.</span><span class="n">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">idProperty</span><span class="p">);</span>
+
+<span class="n">MgGeometricPropertyDefinition</span> <span class="n">polygonProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="p">);</span>
+<span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetGeometryTypes</span><span class="p">(</span><span class="n">MgFeatureGeometricType</span><span class="p">.</span><span class="n">Surface</span><span class="p">);</span>
+<span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetHasElevation</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetHasMeasure</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetReadOnly</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetSpatialContextAssociation</span><span class="p">(</span><span class="s">&quot;defaultSrs&quot;</span><span class="p">);</span>
+<span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">polygonProperty</span><span class="p">);</span>
+
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">idProperties</span> <span class="p">=</span> <span class="n">bufferClass</span><span class="p">.</span><span class="n">GetIdentityProperties</span><span class="p">();</span>
+<span class="n">idProperties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">idProperty</span><span class="p">);</span>
+
+<span class="n">bufferClass</span><span class="p">.</span><span class="n">SetDefaultGeometryPropertyName</span><span class="p">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="p">);</span>
+<span class="n">MgFeatureSchema</span> <span class="n">bufferSchema</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureSchema</span><span class="p">(</span><span class="s">&quot;BufferLayerSchema&quot;</span><span class="p">,</span> <span class="s">&quot;temporary schema to hold a buffer&quot;</span><span class="p">);</span>
+<span class="n">bufferSchema</span><span class="p">.</span><span class="n">GetClasses</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">bufferClass</span><span class="p">);</span>
+<span class="n">MgFileFeatureSourceParams</span> <span class="n">sdfParams</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s">&quot;OSGeo.SDF&quot;</span><span class="p">,</span> <span class="s">&quot;defaultSrs&quot;</span><span class="p">,</span> <span class="n">wkt</span><span class="p">,</span> <span class="n">bufferSchema</span><span class="p">);</span>
+<span class="n">featureService</span><span class="p">.</span><span class="n">CreateFeatureSource</span><span class="p">(</span><span class="n">bufferFeatureResId</span><span class="p">,</span> <span class="n">sdfParams</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgClassDefinition</span> <span class="n">bufferClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgClassDefinition</span><span class="o">();</span>
+<span class="n">bufferClass</span><span class="o">.</span><span class="na">SetName</span><span class="o">(</span><span class="s">&quot;BufferClass&quot;</span><span class="o">);</span>
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">properties</span> <span class="o">=</span> <span class="n">bufferClass</span><span class="o">.</span><span class="na">GetProperties</span><span class="o">();</span>
+
+<span class="n">MgDataPropertyDefinition</span> <span class="n">idProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="o">(</span><span class="s">&quot;ID&quot;</span><span class="o">);</span>
+<span class="n">idProperty</span><span class="o">.</span><span class="na">SetDataType</span><span class="o">(</span><span class="n">MgPropertyType</span><span class="o">.</span><span class="na">Int32</span><span class="o">);</span>
+<span class="n">idProperty</span><span class="o">.</span><span class="na">SetReadOnly</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">idProperty</span><span class="o">.</span><span class="na">SetNullable</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">idProperty</span><span class="o">.</span><span class="na">SetAutoGeneration</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">properties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">idProperty</span><span class="o">);</span>
+
+<span class="n">MgGeometricPropertyDefinition</span> <span class="n">polygonProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgGeometricPropertyDefinition</span><span class="o">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="o">);</span>
+<span class="n">polygonProperty</span><span class="o">.</span><span class="na">SetGeometryTypes</span><span class="o">(</span><span class="n">MgFeatureGeometricType</span><span class="o">.</span><span class="na">Surface</span><span class="o">);</span>
+<span class="n">polygonProperty</span><span class="o">.</span><span class="na">SetHasElevation</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">polygonProperty</span><span class="o">.</span><span class="na">SetHasMeasure</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">polygonProperty</span><span class="o">.</span><span class="na">SetReadOnly</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">polygonProperty</span><span class="o">.</span><span class="na">SetSpatialContextAssociation</span><span class="o">(</span><span class="s">&quot;defaultSrs&quot;</span><span class="o">);</span>
+<span class="n">properties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">polygonProperty</span><span class="o">);</span>
+
+<span class="n">MgPropertyDefinitionCollection</span> <span class="n">idProperties</span> <span class="o">=</span> <span class="n">bufferClass</span><span class="o">.</span><span class="na">GetIdentityProperties</span><span class="o">();</span>
+<span class="n">idProperties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">idProperty</span><span class="o">);</span>
+
+<span class="n">bufferClass</span><span class="o">.</span><span class="na">SetDefaultGeometryPropertyName</span><span class="o">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="o">);</span>
+<span class="n">MgFeatureSchema</span> <span class="n">bufferSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureSchema</span><span class="o">(</span><span class="s">&quot;BufferLayerSchema&quot;</span><span class="o">,</span> <span class="s">&quot;temporary schema to hold a buffer&quot;</span><span class="o">);</span>
+<span class="n">bufferSchema</span><span class="o">.</span><span class="na">GetClasses</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">bufferClass</span><span class="o">);</span>
+<span class="n">MgFileFeatureSourceParams</span> <span class="n">sdfParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFileFeatureSourceParams</span><span class="o">(</span><span class="s">&quot;OSGeo.SDF&quot;</span><span class="o">,</span> <span class="s">&quot;defaultSrs&quot;</span><span class="o">,</span> <span class="n">wkt</span><span class="o">,</span> <span class="n">bufferSchema</span><span class="o">);</span>
+<span class="n">featureService</span><span class="o">.</span><span class="na">CreateFeatureSource</span><span class="o">(</span><span class="n">bufferFeatureResId</span><span class="o">,</span> <span class="n">sdfParams</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>To display features from a temporary feature source in a map, create a layer
+definition that refers to the feature source. Use the techniques described in
+<a class="reference internal" href="modifying_maps_and_layers.html#modifying-maps-and-layers"><span class="std std-ref">Modifying Maps and Layers</span></a>.</p>
+<div class="section" id="inserting-deleting-and-updating-features">
+<span id="index-6"></span><h3>Inserting, Deleting and Updating Features<a class="headerlink" href="#inserting-deleting-and-updating-features" title="Permalink to this headline">¶</a></h3>
+<p>To change data in a feature source, create an MgFeatureCommandCollection
+object. This can contain commands to insert, delete, or update features in an
+FDO data source. The commands are executed sequentially. For FDO providers
+that support transaction processing, the commands can be treated as a single
+transaction.</p>
+<p>Feature commands can be one of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">MgDeleteFeatures</span></code></li>
+<li><code class="docutils literal"><span class="pre">MgInsertFeatures</span></code></li>
+<li><code class="docutils literal"><span class="pre">MgUpdateFeatures</span></code></li>
+</ul>
+</div></blockquote>
+<p>To execute the commands, call <code class="docutils literal"><span class="pre">MgFeatureService::UpdateFeatures()</span></code>. The
+feature class name and property names in any of the feature commands must
+match the class name and property names in the feature source. If you want to execute
+feature commands against a <code class="docutils literal"><span class="pre">MgLayer</span></code> object, call <code class="docutils literal"><span class="pre">MgLayer::UpdateFeatures()</span></code>. The
+feature class name and feature source id of the <code class="docutils literal"><span class="pre">MgLayer</span></code> object is used</p>
+<p>For example, to delete all features in a feature class with an identity property
+<code class="docutils literal"><span class="pre">ID</span></code>, execute the following:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="nv">$deleteCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDeleteFeatures</span><span class="p">(</span><span class="nv">$className</span><span class="p">,</span> <span class="s2">&quot;ID like &#39;%&#39;&quot;</span><span class="p">);</span>
+<span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$deleteCommand</span><span class="p">);</span>
+<span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$featureSource</span><span class="p">,</span> <span class="nv">$commands</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to delete features from it</span>
+<span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="nv">$deleteCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDeleteFeatures</span><span class="p">(</span><span class="nv">$className</span><span class="p">,</span> <span class="s2">&quot;ID like &#39;%&#39;&quot;</span><span class="p">);</span>
+<span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$deleteCommand</span><span class="p">);</span>
+<span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$commands</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="n">MgDeleteFeature</span> <span class="n">deleteCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDeleteFeatures</span><span class="p">(</span><span class="n">className</span><span class="p">,</span> <span class="s">&quot;ID like &#39;%&#39;&quot;</span><span class="p">);</span>
+<span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">deleteCommand</span><span class="p">);</span>
+<span class="n">featureService</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">featureSource</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to delete features from it</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="n">MgDeleteFeature</span> <span class="n">deleteCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDeleteFeatures</span><span class="p">(</span><span class="n">className</span><span class="p">,</span> <span class="s">&quot;ID like &#39;%&#39;&quot;</span><span class="p">);</span>
+<span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">deleteCommand</span><span class="p">);</span>
+<span class="n">layer</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">commands</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="o">();</span>
+<span class="n">MgDeleteFeature</span> <span class="n">deleteCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgDeleteFeatures</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="s">&quot;ID like &#39;%&#39;&quot;</span><span class="o">);</span>
+<span class="n">commands</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">deleteCommand</span><span class="o">);</span>
+<span class="n">featureService</span><span class="o">.</span><span class="na">UpdateFeatures</span><span class="o">(</span><span class="n">featureSource</span><span class="o">,</span> <span class="n">commands</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to delete features from it</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="o">();</span>
+<span class="n">MgDeleteFeature</span> <span class="n">deleteCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgDeleteFeatures</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="s">&quot;ID like &#39;%&#39;&quot;</span><span class="o">);</span>
+<span class="n">commands</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">deleteCommand</span><span class="o">);</span>
+<span class="n">layer</span><span class="o">.</span><span class="na">UpdateFeatures</span><span class="o">(</span><span class="n">commands</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>To insert features, create an <code class="docutils literal"><span class="pre">MgPropertyCollection</span></code> object that contains the
+properties of the new feature. Create an <code class="docutils literal"><span class="pre">MgInsertFeatures</span></code> object and add
+this to the <code class="docutils literal"><span class="pre">MgFeatureCommandCollection</span></code> object.</p>
+<p>For example, to add a new feature with a single geometry property, execute
+the following:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="nv">$properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgPropertyCollection</span><span class="p">();</span>
+<span class="nv">$agfByteStream</span> <span class="o">=</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Write</span><span class="p">(</span><span class="nv">$geometry</span><span class="p">);</span>
+<span class="nv">$geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometryProperty</span><span class="p">(</span><span class="nv">$propertyName</span><span class="p">,</span> <span class="nv">$agfByteStream</span><span class="p">);</span>
+<span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$geometryProperty</span><span class="p">);</span>
+
+<span class="nv">$insertCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgInsertFeatures</span><span class="p">(</span><span class="nv">$className</span><span class="p">,</span> <span class="nv">$properties</span><span class="p">);</span>
+<span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$insertCommand</span><span class="p">);</span>
+
+<span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$featureSource</span><span class="p">,</span> <span class="nv">$commands</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to update features in it</span>
+<span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="nv">$properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgPropertyCollection</span><span class="p">();</span>
+<span class="nv">$agfByteStream</span> <span class="o">=</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Write</span><span class="p">(</span><span class="nv">$geometry</span><span class="p">);</span>
+<span class="nv">$geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometryProperty</span><span class="p">(</span><span class="nv">$propertyName</span><span class="p">,</span> <span class="nv">$agfByteStream</span><span class="p">);</span>
+<span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$geometryProperty</span><span class="p">);</span>
+
+<span class="nv">$insertCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgInsertFeatures</span><span class="p">(</span><span class="nv">$className</span><span class="p">,</span> <span class="nv">$properties</span><span class="p">);</span>
+<span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$insertCommand</span><span class="p">);</span>
+
+<span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$commands</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="p">();</span>
+<span class="n">MgByteReader</span> <span class="n">agfByteStream</span> <span class="p">=</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">geometry</span><span class="p">);</span>
+<span class="n">MgGeometryProperty</span> <span class="n">geometryProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="p">(</span><span class="n">propertyName</span><span class="p">,</span> <span class="n">agfByteStream</span><span class="p">);</span>
+<span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">geometryProperty</span><span class="p">);</span>
+
+<span class="n">MgInsertFeatures</span> <span class="n">insertCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="p">(</span><span class="n">className</span><span class="p">,</span> <span class="n">properties</span><span class="p">);</span>
+<span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">insertCommand</span><span class="p">);</span>
+
+<span class="n">featureService</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">featureSource</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to update features in it</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="p">();</span>
+<span class="n">MgByteReader</span> <span class="n">agfByteStream</span> <span class="p">=</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">geometry</span><span class="p">);</span>
+<span class="n">MgGeometryProperty</span> <span class="n">geometryProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="p">(</span><span class="n">propertyName</span><span class="p">,</span> <span class="n">agfByteStream</span><span class="p">);</span>
+<span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">geometryProperty</span><span class="p">);</span>
+
+<span class="n">MgInsertFeatures</span> <span class="n">insertCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="p">(</span><span class="n">className</span><span class="p">,</span> <span class="n">properties</span><span class="p">);</span>
+<span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">insertCommand</span><span class="p">);</span>
+<span class="n">layer</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">commands</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="o">();</span>
+<span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="o">();</span>
+<span class="n">MgByteReader</span> <span class="n">agfByteStream</span> <span class="o">=</span> <span class="n">agfReaderWriter</span><span class="o">.</span><span class="na">Write</span><span class="o">(</span><span class="n">geometry</span><span class="o">);</span>
+<span class="n">MgGeometryProperty</span> <span class="n">geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="o">(</span><span class="n">propertyName</span><span class="o">,</span> <span class="n">agfByteStream</span><span class="o">);</span>
+<span class="n">properties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">geometryProperty</span><span class="o">);</span>
+
+<span class="n">MgInsertFeatures</span> <span class="n">insertCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="n">properties</span><span class="o">);</span>
+<span class="n">commands</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">insertCommand</span><span class="o">);</span>
+
+<span class="n">featureService</span><span class="o">.</span><span class="na">UpdateFeatures</span><span class="o">(</span><span class="n">featureSource</span><span class="o">,</span> <span class="n">commands</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+
+<span class="c1">//You can do this instead if you have a MgLayer object and want to update features in it</span>
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="o">();</span>
+<span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="o">();</span>
+<span class="n">MgByteReader</span> <span class="n">agfByteStream</span> <span class="o">=</span> <span class="n">agfReaderWriter</span><span class="o">.</span><span class="na">Write</span><span class="o">(</span><span class="n">geometry</span><span class="o">);</span>
+<span class="n">MgGeometryProperty</span> <span class="n">geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="o">(</span><span class="n">propertyName</span><span class="o">,</span> <span class="n">agfByteStream</span><span class="o">);</span>
+<span class="n">properties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">geometryProperty</span><span class="o">);</span>
+
+<span class="n">MgInsertFeatures</span> <span class="n">insertCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="n">properties</span><span class="o">);</span>
+<span class="n">commands</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">insertCommand</span><span class="o">);</span>
+<span class="n">layer</span><span class="o">.</span><span class="na">UpdateFeatures</span><span class="o">(</span><span class="n">commands</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>To update existing features, create an MgPropertyCollection object that
+contains the new values for the properties and a filter expression that selects
+the correct feature or features. See <a class="reference internal" href="working_with_feature_data.html#querying-feature-data"><span class="std std-ref">Querying Feature Data</span></a> for details
+about filter expressions.</p>
+</div>
+</div>
+<div class="section" id="creating-a-buffer">
+<span id="index-7"></span><h2>Creating a Buffer<a class="headerlink" href="#creating-a-buffer" title="Permalink to this headline">¶</a></h2>
+<p>To create a buffer around a feature, use the <code class="docutils literal"><span class="pre">MgGeometry::Buffer()</span></code> method.
+This returns an <code class="docutils literal"><span class="pre">MgGeometry</span></code> object that you can use for further analysis. For
+example, you could display the buffer by creating a feature in a temporary
+feature source and adding a new layer to the map. You could also use the
+buffer geometry as part of a spatial filter. For example, you might want to find
+all the features within the buffer zone that match certain criteria, or you might
+want to find all roads that cross the buffer zone.</p>
+<p>To create a buffer, get the geometry of the feature to be buffered. If the feature
+is being processed in an <code class="docutils literal"><span class="pre">MgFeatureReader</span></code> as part of a selection, this requires
+getting the geometry data from the feature reader and converting it to an
+<code class="docutils literal"><span class="pre">MgGeometry</span></code> object. For example:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$geometryData</span> <span class="o">=</span> <span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">GetGeometry</span><span class="p">(</span><span class="nv">$geometryName</span><span class="p">);</span>
+<span class="nv">$featureGeometry</span> <span class="o">=</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$geometryData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgByteReader</span> <span class="n">geometryData</span> <span class="p">=</span> <span class="n">featureReader</span><span class="p">.</span><span class="n">GetGeometry</span><span class="p">(</span><span class="n">geometryName</span><span class="p">);</span>
+<span class="n">MgGeometry</span> <span class="n">featureGeometry</span> <span class="p">=</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="n">geometryData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgByteReader</span> <span class="n">geometryData</span> <span class="o">=</span> <span class="n">featureReader</span><span class="o">.</span><span class="na">GetGeometry</span><span class="o">(</span><span class="n">geometryName</span><span class="o">);</span>
+<span class="n">MgGeometry</span> <span class="n">featureGeometry</span> <span class="o">=</span> <span class="n">agfReaderWriter</span><span class="o">.</span><span class="na">Read</span><span class="o">(</span><span class="n">geometryData</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>If the buffer is to be calculated using coordinate system units, create an
+<code class="docutils literal"><span class="pre">MgCoordinateSystemMeasure</span></code> object from the coordinate system for the map.
+For example:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$mapWktSrs</span> <span class="o">=</span> <span class="nv">$currentMap</span><span class="o">-&gt;</span><span class="na">GetMapSRS</span><span class="p">();</span>
+<span class="nv">$coordSysFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="nv">$srs</span> <span class="o">=</span> <span class="nv">$coordSysFactory</span><span class="o">-&gt;</span><span class="na">Create</span><span class="p">(</span><span class="nv">$mapWktSrs</span><span class="p">);</span>
+<span class="nv">$srsMeasure</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">GetMeasure</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">String</span> <span class="n">mapWktSrs</span> <span class="p">=</span> <span class="n">currentMap</span><span class="p">.</span><span class="n">GetMapSRS</span><span class="p">();</span>
+<span class="n">MgCoordinateSystemFactory</span> <span class="n">coordSysFactory</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="n">MgCoordianteSystem</span> <span class="n">srs</span> <span class="p">=</span> <span class="n">coordSysFactory</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">mapWktSrs</span><span class="p">);</span>
+<span class="n">MgCoordinateSystemMeasure</span> <span class="n">srsMeasure</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">GetMeasure</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">String</span> <span class="n">mapWktSrs</span> <span class="o">=</span> <span class="n">currentMap</span><span class="o">.</span><span class="na">GetMapSRS</span><span class="o">();</span>
+<span class="n">MgCoordinateSystemFactory</span> <span class="n">coordSysFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgCoordinateSystemFactory</span><span class="o">();</span>
+<span class="n">MgCoordianteSystem</span> <span class="n">srs</span> <span class="o">=</span> <span class="n">coordSysFactory</span><span class="o">.</span><span class="na">Create</span><span class="o">(</span><span class="n">mapWktSrs</span><span class="o">);</span>
+<span class="n">MgCoordinateSystemMeasure</span> <span class="n">srsMeasure</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="na">GetMeasure</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>Use the coordinate system measure to determine the buffer size in the
+coordinate system, and create the buffer object from the geometry to be
+buffered.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$srsDist</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="nv">$bufferDist</span><span class="p">);</span>
+<span class="nv">$bufferGeometry</span> <span class="o">=</span> <span class="nv">$featureGeometry</span><span class="o">-&gt;</span><span class="na">Buffer</span><span class="p">(</span><span class="nv">$srsDist</span><span class="p">,</span> <span class="nv">$srsMeasure</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="kt">double</span> <span class="n">srsDist</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="n">bufferDist</span><span class="p">);</span>
+<span class="n">MgGeometry</span> <span class="n">bufferGeometry</span> <span class="p">=</span> <span class="n">featureGeometry</span><span class="p">.</span><span class="n">Buffer</span><span class="p">(</span><span class="n">srsDist</span><span class="p">,</span> <span class="n">srsMeasure</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="kt">double</span> <span class="n">srsDist</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="na">ConvertMetersToCoordinateSystemUnits</span><span class="o">(</span><span class="n">bufferDist</span><span class="o">);</span>
+<span class="n">MgGeometry</span> <span class="n">bufferGeometry</span> <span class="o">=</span> <span class="n">featureGeometry</span><span class="o">.</span><span class="na">Buffer</span><span class="o">(</span><span class="n">srsDist</span><span class="o">,</span> <span class="n">srsMeasure</span><span class="o">);</span>
+</pre></div>
+</div>
+<p id="index-8">To display the buffer in the map, perform the following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Create a feature source for the buffer.</li>
+<li>Insert a buffer feature in the feature source.</li>
+<li>Create a layer that references the feature source.</li>
+<li>Add the layer to the map and make it visible.</li>
+</ul>
+</div></blockquote>
+<p>To use the buffer as part of a query, create a spatial filter using the buffer
+geometry, and use this in a call to <code class="docutils literal"><span class="pre">MgFeatureService::SelectFeatures()</span></code> or
+<code class="docutils literal"><span class="pre">MgLayer::SelectFeatures()</span></code>. For example, the following code selects parcels
+inside the buffer area that are of type &#8220;MFG&#8221;. You can use the <code class="docutils literal"><span class="pre">MgFeatureReader</span></code>
+to perform tasks like generating a report of the parcels, or creating a new layer
+that puts point markers on each parcel.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$queryOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureQueryOptions</span><span class="p">();</span>
+<span class="nv">$queryOptions</span><span class="o">-&gt;</span><span class="na">SetFilter</span><span class="p">(</span><span class="s2">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="p">);</span>
+<span class="nv">$queryOptions</span><span class="o">-&gt;</span><span class="na">SetSpatialFilter</span><span class="p">(</span><span class="s1">&#39;SHPGEOM&#39;</span><span class="p">,</span> <span class="nv">$bufferGeometry</span><span class="p">,</span> <span class="nx">MgFeatureSpatialOperations</span><span class="o">::</span><span class="na">Inside</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">// Old way, pre MapGuide OS 2.0. Kept here for reference</span>
+<span class="cm">$featureResId = new MgResourceIdentifier(&quot;Library://Samples/Sheboygan/Data/Parcels.FeatureSource&quot;);</span>
+<span class="cm">$featureReader = $featureService-&gt;SelectFeatures($featureResId, &quot;Parcels&quot;, $queryOptions);</span>
+<span class="cm">*/</span>
+
+<span class="c1">// New way, post MapGuide OS 2.0</span>
+<span class="nv">$featureReader</span> <span class="o">=</span> <span class="nv">$layer</span><span class="o">-&gt;</span><span class="na">SelectFeatures</span><span class="p">(</span><span class="nv">$queryOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgFeatureQueryOptions</span> <span class="n">queryOptions</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureQueryOptions</span><span class="p">();</span>
+<span class="n">queryOptions</span><span class="p">.</span><span class="n">SetFilter</span><span class="p">(</span><span class="s">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="p">);</span>
+<span class="n">queryOptions</span><span class="p">.</span><span class="n">SetSpatialFilter</span><span class="p">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="p">,</span> <span class="n">bufferGeometry</span><span class="p">,</span> <span class="n">MgFeatureSpatialOperations</span><span class="p">.</span><span class="n">Inside</span><span class="p">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureResId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Library://Samples/Sheboygan/Data/Parcels.FeatureSource&quot;</span><span class="p">);</span>
+<span class="n">MgFeatureReader</span> <span class="n">featureReader</span> <span class="p">=</span> <span class="n">featureService</span><span class="p">.</span><span class="n">SelectFeatures</span><span class="p">(</span><span class="n">featureResId</span><span class="p">,</span> <span class="s">&quot;Parcels&quot;</span><span class="p">,</span> <span class="n">queryOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+<span class="n">MgFeatureQueryOptions</span> <span class="n">queryOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureQueryOptions</span><span class="o">();</span>
+<span class="n">queryOptions</span><span class="o">.</span><span class="na">SetFilter</span><span class="o">(</span><span class="s">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="o">);</span>
+<span class="n">queryOptions</span><span class="o">.</span><span class="na">SetSpatialFilter</span><span class="o">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="o">,</span> <span class="n">bufferGeometry</span><span class="o">,</span> <span class="n">MgFeatureSpatialOperations</span><span class="o">.</span><span class="na">Inside</span><span class="o">);</span>
+<span class="n">MgResourceIdentifier</span> <span class="n">featureResId</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="o">(</span><span class="s">&quot;Library://Samples/Sheboygan/Data/Parcels.FeatureSource&quot;</span><span class="o">);</span>
+<span class="n">MgFeatureReader</span> <span class="n">featureReader</span> <span class="o">=</span> <span class="n">featureService</span><span class="o">.</span><span class="na">SelectFeatures</span><span class="o">(</span><span class="n">featureResId</span><span class="o">,</span> <span class="s">&quot;Parcels&quot;</span><span class="o">,</span> <span class="n">queryOptions</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example builds on the example from <a class="reference internal" href="working_with_feature_data.html#working-with-the-active-selection"><span class="std std-ref">Working with the Active Selection</span></a>. Instead of listing the parcels in the selection, it creates a series of
+concentric buffers around the selection, showing increasing distance. The
+code sections below contain the significant additions in this example. The
+complete source code is available with the Developer&#8217;s Guide samples.</p>
+<p>Because this example modifies the map, it must refresh the map when it loads,
+by executing a JavaScript function. Add the function to the page.</p>
+<div class="highlight-javascript"><div class="highlight"><pre>&lt;script language=&quot;javascript&quot;&gt;
+function OnPageLoad()
+{
+    parent.parent.Refresh();
+}
+&lt;/script&gt;
+</pre></div>
+</div>
+<p>Add an <code class="docutils literal"><span class="pre">OnLoad</span></code> command to the <code class="docutils literal"><span class="pre">&lt;body&gt;</span></code> element:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;body</span> <span class="na">onLoad=</span><span class="s">&quot;OnPageLoad()&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>The example uses a temporary map layer named <code class="docutils literal"><span class="pre">Buffer</span></code> to store the buffer
+feature. It creates a feature source and the layer if it does not exist. Otherwise,
+it deletes any existing features before creating the new buffer. The functions
+<code class="docutils literal"><span class="pre">CreateBufferFeatureSource()</span></code> and <code class="docutils literal"><span class="pre">CreateBufferLayer()</span></code> are in
+<em>bufferfunctions.php</em>, which is described below.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">include</span> <span class="s1">&#39;bufferfunctions.php&#39;</span><span class="p">;</span>
+<span class="nv">$bufferRingSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// measured in metres</span>
+<span class="nv">$bufferRingCount</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="c1">// Set up some objects for coordinate conversion</span>
+
+<span class="nv">$mapWktSrs</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetMapSRS</span><span class="p">();</span>
+<span class="nv">$agfReaderWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgAgfReaderWriter</span><span class="p">();</span>
+<span class="nv">$wktReaderWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgWktReaderWriter</span><span class="p">();</span>
+<span class="nv">$coordinateSystemFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="nv">$srs</span> <span class="o">=</span> <span class="nv">$coordinateSystemFactory</span><span class="o">-&gt;</span><span class="na">Create</span><span class="p">(</span><span class="nv">$mapWktSrs</span><span class="p">);</span>
+<span class="nv">$srsMeasure</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">GetMeasure</span><span class="p">();</span>
+
+<span class="c1">// Check for a buffer layer. If it exists, delete</span>
+<span class="c1">// the current features.</span>
+<span class="c1">// If it does not exist, create a feature source and</span>
+<span class="c1">// a layer to hold the buffer.</span>
+
+<span class="c1">// This is how things can be done now</span>
+<span class="nv">$layerIndex</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">IndexOf</span><span class="p">(</span><span class="s1">&#39;Buffer&#39;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$layerIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// The layer does not exist and must be created.</span>
+
+    <span class="nv">$bufferFeatureResId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="s2">&quot;Session:&quot;</span> <span class="o">.</span> <span class="nv">$sessionId</span> <span class="o">.</span> <span class="s2">&quot;//Buffer.FeatureSource&quot;</span><span class="p">);</span>
+    <span class="nx">CreateBufferFeatureSource</span><span class="p">(</span><span class="nv">$featureService</span><span class="p">,</span> <span class="nv">$mapWktSrs</span><span class="p">,</span> <span class="nv">$bufferFeatureResId</span><span class="p">);</span>
+    <span class="nv">$bufferLayer</span> <span class="o">=</span> <span class="nx">CreateBufferLayer</span><span class="p">(</span><span class="nv">$resourceService</span><span class="p">,</span> <span class="nv">$bufferFeatureResId</span><span class="p">,</span> <span class="nv">$sessionId</span><span class="p">);</span>
+    <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$bufferLayer</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="nv">$bufferLayer</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetLayers</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">GetItem</span><span class="p">(</span><span class="nv">$layerIndex</span><span class="p">);</span>
+    <span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+    <span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgDeleteFeatures</span><span class="p">(</span><span class="s1">&#39;BufferClass&#39;</span><span class="p">,</span> <span class="s2">&quot;ID like &#39;%&#39;&quot;</span><span class="p">));</span>
+
+    <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$commands</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="kt">int</span> <span class="n">bufferRingSize</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span> <span class="c1">// measured in metres</span>
+<span class="kt">int</span> <span class="n">bufferRingCount</span> <span class="p">=</span> <span class="m">5</span><span class="p">;</span>
+
+<span class="c1">// Set up some objects for coordinate conversion</span>
+
+<span class="n">String</span> <span class="n">mapWktSrs</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetMapSRS</span><span class="p">();</span>
+<span class="n">MgAgfReaderWriter</span> <span class="n">agfReaderWriter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgAgfReaderWriter</span><span class="p">();</span>
+<span class="n">MgWktReaderWriter</span> <span class="n">wktReaderWriter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgWktReaderWriter</span><span class="p">();</span>
+<span class="n">MgCoordinateSystemFactory</span> <span class="n">coordinateSystemFactory</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgCoordinateSystemFactory</span><span class="p">();</span>
+<span class="n">MgCoordinateSystem</span> <span class="n">srs</span> <span class="p">=</span> <span class="n">coordinateSystemFactory</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">mapWktSrs</span><span class="p">);</span>
+<span class="n">MgMeasure</span> <span class="n">srsMeasure</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">GetMeasure</span><span class="p">();</span>
+
+<span class="n">BufferHelper</span> <span class="n">helper</span> <span class="p">=</span> <span class="k">new</span> <span class="n">BufferHelper</span><span class="p">(</span><span class="n">Server</span><span class="p">);</span>
+
+<span class="c1">// Check for a buffer layer. If it exists, delete</span>
+<span class="c1">// the current features.</span>
+<span class="c1">// If it does not exist, create a feature source and</span>
+<span class="c1">// a layer to hold the buffer.</span>
+
+<span class="n">MgLayer</span> <span class="n">bufferLayer</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">layerIndex</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">().</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">&quot;Buffer&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">layerIndex</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// The layer does not exist and must be created.</span>
+
+    <span class="n">MgResourceIdentifier</span> <span class="n">bufferFeatureResId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Session:&quot;</span> <span class="p">+</span> <span class="n">sessionId</span> <span class="p">+</span> <span class="s">&quot;//Buffer.FeatureSource&quot;</span><span class="p">);</span>
+    <span class="n">helper</span><span class="p">.</span><span class="n">CreateBufferFeatureSource</span><span class="p">(</span><span class="n">featureService</span><span class="p">,</span> <span class="n">mapWktSrs</span><span class="p">,</span> <span class="n">bufferFeatureResId</span><span class="p">);</span>
+    <span class="n">bufferLayer</span> <span class="p">=</span> <span class="n">helper</span><span class="p">.</span><span class="n">CreateBufferLayer</span><span class="p">(</span><span class="n">resourceService</span><span class="p">,</span> <span class="n">bufferFeatureResId</span><span class="p">,</span> <span class="n">sessionId</span><span class="p">);</span>
+    <span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">().</span><span class="n">Insert</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">bufferLayer</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">bufferLayer</span> <span class="p">=</span> <span class="p">(</span><span class="n">MgLayer</span><span class="p">)</span><span class="n">map</span><span class="p">.</span><span class="n">GetLayers</span><span class="p">().</span><span class="n">GetItem</span><span class="p">(</span><span class="n">layerIndex</span><span class="p">);</span>
+    <span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+    <span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MgDeleteFeatures</span><span class="p">(</span><span class="s">&quot;BufferClass&quot;</span><span class="p">,</span> <span class="s">&quot;ID like &#39;%&#39;&quot;</span><span class="p">));</span>
+
+    <span class="n">bufferLayer</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">commands</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+</pre></div>
+</div>
+<p id="index-9">The geometries for the selected features are merged into a single
+multi-geometry. Then a series of concentric buffers is created and added to
+the feature source. The style for the layer, which is set when function
+<code class="docutils literal"><span class="pre">CreateBufferLayer()</span></code> processes <code class="docutils literal"><span class="pre">bufferlayerdefinition.xml</span></code>, should define the
+buffer features to be partly transparent. When they are drawn on the map,
+the rings get progressively darker towards the center of the buffer area.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Process each item in the MgFeatureReader.</span>
+<span class="c1">// Merge them into a single feature.</span>
+
+<span class="nv">$inputGeometries</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometryCollection</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">ReadNext</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="nv">$featureGeometryData</span> <span class="o">=</span> <span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">GetGeometry</span><span class="p">(</span><span class="s1">&#39;SHPGEOM&#39;</span><span class="p">);</span>
+    <span class="nv">$featureGeometry</span> <span class="o">=</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$featureGeometryData</span><span class="p">);</span>
+
+    <span class="nv">$inputGeometries</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$featureGeometry</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$geometryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometryFactory</span><span class="p">();</span>
+<span class="nv">$mergedFeatures</span> <span class="o">=</span> <span class="nv">$geometryFactory</span><span class="o">-&gt;</span><span class="na">CreateMultiGeometry</span><span class="p">(</span><span class="nv">$inputGeometries</span><span class="p">);</span>
+
+<span class="c1">// Add buffer features to the temporary feature source.</span>
+<span class="c1">// Create multiple concentric buffers to show area.</span>
+
+<span class="nv">$commands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$bufferRing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$bufferRing</span> <span class="o">&lt;</span> <span class="nv">$bufferRingCount</span><span class="p">;</span> <span class="nv">$bufferRing</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$bufferDist</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="nv">$bufferRingSize</span> <span class="o">*</span> <span class="p">(</span><span class="nv">$bufferRing</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="nv">$bufferGeometry</span> <span class="o">=</span> <span class="nv">$mergedFeatures</span><span class="o">-&gt;</span><span class="na">Buffer</span><span class="p">(</span><span class="nv">$bufferDist</span><span class="p">,</span> <span class="nv">$srsMeasure</span><span class="p">);</span>
+
+    <span class="nv">$properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgPropertyCollection</span><span class="p">();</span>
+    <span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgGeometryProperty</span><span class="p">(</span><span class="s1">&#39;BufferGeometry&#39;</span><span class="p">,</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Write</span><span class="p">(</span><span class="nv">$bufferGeometry</span><span class="p">)));</span>
+
+    <span class="nv">$commands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgInsertFeatures</span><span class="p">(</span><span class="s1">&#39;BufferClass&#39;</span><span class="p">,</span> <span class="nv">$properties</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="nv">$results</span> <span class="o">=</span> <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$commands</span><span class="p">);</span>
+
+<span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetVisible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">ForceRefresh</span><span class="p">();</span>
+<span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+
+<span class="c1">//If you created a MgMap with a MgSiteConnection</span>
+<span class="nv">$map</span><span class="o">-&gt;</span><span class="na">Save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+<span class="n">MgGeometryCollection</span> <span class="n">inputGeometries</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometryCollection</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">featureReader</span><span class="p">.</span><span class="n">ReadNext</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">MgByteReader</span> <span class="n">featureGeometryData</span> <span class="p">=</span> <span class="n">featureReader</span><span class="p">.</span><span class="n">GetGeometry</span><span class="p">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="p">);</span>
+    <span class="n">MgGeometry</span> <span class="n">featureGeometry</span> <span class="p">=</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="n">featureGeometryData</span><span class="p">);</span>
+
+    <span class="n">inputGeometries</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">featureGeometry</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">MgGeometryFactory</span> <span class="n">geometryFactory</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometryFactory</span><span class="p">();</span>
+<span class="n">MgGeometry</span> <span class="n">mergedGeometries</span> <span class="p">=</span> <span class="n">geometryFactory</span><span class="p">.</span><span class="n">CreateMultiGeometry</span><span class="p">(</span><span class="n">inputGeometries</span><span class="p">);</span>
+
+<span class="c1">// Add buffer features to the temporary feature source.</span>
+<span class="c1">// Create multiple concentric buffers to show area.</span>
+<span class="c1">// If the stylization for the layer draws the features</span>
+<span class="c1">// partially transparent, the concentric rings will be</span>
+<span class="c1">// progressively darker towards the center.</span>
+<span class="c1">// The stylization is set in the layer template file, which</span>
+<span class="c1">// is used in function CreateBufferLayer().</span>
+
+<span class="n">MgFeatureCommandCollection</span> <span class="n">commands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">bufferRing</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">bufferRing</span> <span class="p">&lt;</span> <span class="n">bufferRingCount</span><span class="p">;</span> <span class="n">bufferRing</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">bufferDist</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="n">bufferRingSize</span> <span class="p">*</span> <span class="p">(</span><span class="n">bufferRing</span> <span class="p">+</span> <span class="m">1</span><span class="p">));</span>
+    <span class="n">MgGeometry</span> <span class="n">bufferGeometry</span> <span class="p">=</span> <span class="n">mergedGeometries</span><span class="p">.</span><span class="n">Buffer</span><span class="p">(</span><span class="n">bufferDist</span><span class="p">,</span> <span class="n">srsMeasure</span><span class="p">);</span>
+
+    <span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="p">();</span>
+    <span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="p">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="p">,</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">bufferGeometry</span><span class="p">)));</span>
+
+    <span class="n">commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="p">(</span><span class="s">&quot;BufferClass&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="n">bufferLayer</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">commands</span><span class="p">);</span>
+
+<span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetVisible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="n">bufferLayer</span><span class="p">.</span><span class="n">ForceRefresh</span><span class="p">();</span>
+<span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="n">map</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">//No code sample available yet.</span>
+</pre></div>
+</div>
+<p>The functions <code class="docutils literal"><span class="pre">CreateBufferFeatureSource()</span></code> and <code class="docutils literal"><span class="pre">CreateBufferLayer()</span></code> are
+in <code class="docutils literal"><span class="pre">bufferfunctions.php</span></code>. <code class="docutils literal"><span class="pre">CreateBufferFeatureSource()</span></code> creates a temporary
+feature source, with a single feature class, <code class="docutils literal"><span class="pre">BufferClass</span></code>. The feature class has
+two properties, <code class="docutils literal"><span class="pre">ID</span></code> and <code class="docutils literal"><span class="pre">BufferGeometry</span></code>. <code class="docutils literal"><span class="pre">ID</span></code> is autogenerated, so it does not
+need to be added with a new feature. <code class="docutils literal"><span class="pre">CreateBufferLayer()</span></code> modifies a layer
+definition from an external file and saves it to the repository. For more details,
+see <a class="reference internal" href="modifying_maps_and_layers.html#modifying-maps-and-layers"><span class="std std-ref">Modifying Maps and Layers</span></a>.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">function</span> <span class="nf">CreateBufferFeatureSource</span><span class="p">(</span><span class="nv">$featureService</span><span class="p">,</span> <span class="nv">$wkt</span><span class="p">,</span> <span class="nv">$bufferFeatureResId</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$bufferClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgClassDefinition</span><span class="p">();</span>
+    <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">SetName</span><span class="p">(</span><span class="s1">&#39;BufferClass&#39;</span><span class="p">);</span>
+    <span class="nv">$properties</span> <span class="o">=</span> <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">GetProperties</span><span class="p">();</span>
+    <span class="nv">$idProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDataPropertyDefinition</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">);</span>
+    <span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetDataType</span><span class="p">(</span><span class="nx">MgPropertyType</span><span class="o">::</span><span class="na">Int32</span><span class="p">);</span>
+    <span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetNullable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="nv">$idProperty</span><span class="o">-&gt;</span><span class="na">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$idProperty</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="s1">&#39;BufferGeometry&#39;</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetGeometryTypes</span><span class="p">(</span><span class="nx">MgFeatureGeometricType</span><span class="o">::</span><span class="na">Surface</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetHasElevation</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetHasMeasure</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetReadOnly</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="nv">$polygonProperty</span><span class="o">-&gt;</span><span class="na">SetSpatialContextAssociation</span><span class="p">(</span><span class="s1">&#39;defaultSrs&#39;</span><span class="p">);</span>
+    <span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$polygonProperty</span><span class="p">);</span>
+    <span class="nv">$idProperties</span> <span class="o">=</span> <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">GetIdentityProperties</span><span class="p">();</span>
+    <span class="nv">$idProperties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$idProperty</span><span class="p">);</span>
+    <span class="nv">$bufferClass</span><span class="o">-&gt;</span><span class="na">SetDefaultGeometryPropertyName</span><span class="p">(</span><span class="s1">&#39;BufferGeometry&#39;</span><span class="p">);</span>
+    <span class="nv">$bufferSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureSchema</span><span class="p">(</span><span class="s1">&#39;BufferLayerSchema&#39;</span><span class="p">,</span> <span class="s1">&#39;temporary schema to hold a buffer&#39;</span><span class="p">);</span>
+    <span class="nv">$bufferSchema</span><span class="o">-&gt;</span><span class="na">GetClasses</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$bufferClass</span><span class="p">);</span>
+    <span class="nv">$sdfParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s1">&#39;OSGeo.SDF&#39;</span><span class="p">,</span> <span class="s1">&#39;defaultSrs&#39;</span><span class="p">,</span> <span class="nv">$wkt</span><span class="p">,</span> <span class="nv">$bufferSchema</span><span class="p">);</span>
+    <span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">CreateFeatureSource</span><span class="p">(</span><span class="nv">$bufferFeatureResId</span><span class="p">,</span> <span class="nv">$sdfParams</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">CreateBufferLayer</span><span class="p">(</span><span class="nv">$resourceService</span><span class="p">,</span> <span class="nv">$bufferFeatureResId</span><span class="p">,</span> <span class="nv">$sessionId</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Load the layer definition template into</span>
+    <span class="c1">// a PHP DOM object, find the &quot;ResourceId&quot; element, and</span>
+    <span class="c1">// modify its content to reference the temporary</span>
+    <span class="c1">// feature source.</span>
+    <span class="nv">$doc</span> <span class="o">=</span> <span class="nx">DOMDocument</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;bufferlayerdefinition.xml&#39;</span><span class="p">);</span>
+    <span class="nv">$featureSourceNode</span> <span class="o">=</span> <span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;ResourceId&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="nv">$featureSourceNode</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="nv">$bufferFeatureResId</span><span class="o">-&gt;</span><span class="na">ToString</span><span class="p">();</span>
+    <span class="c1">// Get the updated layer definition from the DOM object</span>
+    <span class="c1">// and save it to the session repository using the</span>
+    <span class="c1">// ResourceService object.</span>
+    <span class="nv">$layerDefinition</span> <span class="o">=</span> <span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">saveXML</span><span class="p">();</span>
+    <span class="nv">$byteSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgByteSource</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$layerDefinition</span><span class="p">));</span>
+    <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">SetMimeType</span><span class="p">(</span><span class="nx">MgMimeType</span><span class="o">::</span><span class="na">Xml</span><span class="p">);</span>
+    <span class="nv">$tempLayerResId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="s2">&quot;Session:&quot;</span> <span class="o">.</span> <span class="nv">$sessionId</span> <span class="o">.</span> <span class="s2">&quot;//Buffer.LayerDefinition&quot;</span><span class="p">);</span>
+    <span class="nv">$resourceService</span><span class="o">-&gt;</span><span class="na">SetResource</span><span class="p">(</span><span class="nv">$tempLayerResId</span><span class="p">,</span> <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">GetReader</span><span class="p">(),</span> <span class="k">null</span><span class="p">);</span>
+    <span class="c1">// Create an MgLayer object based on the new layer definition</span>
+    <span class="c1">// and return it to the caller.</span>
+    <span class="nv">$bufferLayer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgLayer</span><span class="p">(</span><span class="nv">$tempLayerResId</span><span class="p">,</span> <span class="nv">$resourceService</span><span class="p">);</span>
+    <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetName</span><span class="p">(</span><span class="s2">&quot;Buffer&quot;</span><span class="p">);</span>
+    <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetLegendLabel</span><span class="p">(</span><span class="s2">&quot;Buffer&quot;</span><span class="p">);</span>
+    <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="nv">$bufferLayer</span><span class="o">-&gt;</span><span class="na">SetSelectable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$bufferLayer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="c1">//NOTE: This is only subset of the BufferHelper relevant to this particular chapter</span>
+<span class="c1">//of the developer&#39;s guide. For the full source, see bufferfunctions.aspx from the</span>
+<span class="c1">//.net Developer Guide sample.</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">BufferHelper</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpServerUtility</span> <span class="n">_server</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">BufferHelper</span><span class="p">(</span><span class="n">HttpServerUtility</span> <span class="n">server</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_server</span> <span class="p">=</span> <span class="n">server</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">HttpServerUtility</span> <span class="n">Server</span> <span class="p">{</span> <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_server</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">CreateBufferFeatureSource</span><span class="p">(</span><span class="n">MgFeatureService</span> <span class="n">featureService</span><span class="p">,</span> <span class="n">String</span> <span class="n">wkt</span><span class="p">,</span> <span class="n">MgResourceIdentifier</span> <span class="n">bufferFeatureResId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">MgClassDefinition</span> <span class="n">bufferClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgClassDefinition</span><span class="p">();</span>
+        <span class="n">bufferClass</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;BufferClass&quot;</span><span class="p">);</span>
+        <span class="n">MgPropertyDefinitionCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="n">bufferClass</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">();</span>
+
+        <span class="n">MgDataPropertyDefinition</span> <span class="n">idProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">);</span>
+        <span class="n">idProperty</span><span class="p">.</span><span class="n">SetDataType</span><span class="p">(</span><span class="n">MgPropertyType</span><span class="p">.</span><span class="n">Int32</span><span class="p">);</span>
+        <span class="n">idProperty</span><span class="p">.</span><span class="n">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="n">idProperty</span><span class="p">.</span><span class="n">SetNullable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="n">idProperty</span><span class="p">.</span><span class="n">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">idProperty</span><span class="p">);</span>
+
+        <span class="n">MgGeometricPropertyDefinition</span> <span class="n">polygonProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="p">);</span>
+        <span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetGeometryTypes</span><span class="p">(</span><span class="n">MgFeatureGeometricType</span><span class="p">.</span><span class="n">Surface</span><span class="p">);</span>
+        <span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetHasElevation</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetHasMeasure</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetReadOnly</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="n">polygonProperty</span><span class="p">.</span><span class="n">SetSpatialContextAssociation</span><span class="p">(</span><span class="s">&quot;defaultSrs&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">polygonProperty</span><span class="p">);</span>
+
+        <span class="n">MgPropertyDefinitionCollection</span> <span class="n">idProperties</span> <span class="p">=</span> <span class="n">bufferClass</span><span class="p">.</span><span class="n">GetIdentityProperties</span><span class="p">();</span>
+        <span class="n">idProperties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">idProperty</span><span class="p">);</span>
+
+        <span class="n">bufferClass</span><span class="p">.</span><span class="n">SetDefaultGeometryPropertyName</span><span class="p">(</span><span class="s">&quot;BufferGeometry&quot;</span><span class="p">);</span>
+
+        <span class="n">MgFeatureSchema</span> <span class="n">bufferSchema</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureSchema</span><span class="p">(</span><span class="s">&quot;BufferLayerSchema&quot;</span><span class="p">,</span> <span class="s">&quot;temporary schema to hold a buffer&quot;</span><span class="p">);</span>
+        <span class="n">bufferSchema</span><span class="p">.</span><span class="n">GetClasses</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">bufferClass</span><span class="p">);</span>
+
+        <span class="n">MgFileFeatureSourceParams</span> <span class="n">sdfParams</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s">&quot;OSGeo.SDF&quot;</span><span class="p">,</span> <span class="s">&quot;defaultSrs&quot;</span><span class="p">,</span> <span class="n">wkt</span><span class="p">,</span> <span class="n">bufferSchema</span><span class="p">);</span>
+
+        <span class="n">featureService</span><span class="p">.</span><span class="n">CreateFeatureSource</span><span class="p">(</span><span class="n">bufferFeatureResId</span><span class="p">,</span> <span class="n">sdfParams</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">MgLayer</span> <span class="nf">CreateBufferLayer</span><span class="p">(</span><span class="n">MgResourceService</span> <span class="n">resourceService</span><span class="p">,</span> <span class="n">MgResourceIdentifier</span> <span class="n">bufferFeatureResId</span><span class="p">,</span> <span class="n">String</span> <span class="n">sessionId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Load the layer definition template into</span>
+        <span class="c1">// a XmlDocument object, find the &quot;ResourceId&quot; element, and</span>
+        <span class="c1">// modify its content to reference the temporary</span>
+        <span class="c1">// feature source.</span>
+
+        <span class="n">XmlDocument</span> <span class="n">doc</span> <span class="p">=</span> <span class="k">new</span> <span class="n">XmlDocument</span><span class="p">();</span>
+        <span class="n">doc</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">Server</span><span class="p">.</span><span class="n">MapPath</span><span class="p">(</span><span class="s">&quot;bufferlayerdefinition.xml&quot;</span><span class="p">));</span>
+        <span class="n">XmlNode</span> <span class="n">featureSourceNode</span> <span class="p">=</span> <span class="n">doc</span><span class="p">.</span><span class="n">GetElementsByTagName</span><span class="p">(</span><span class="s">&quot;ResourceId&quot;</span><span class="p">)[</span><span class="m">0</span><span class="p">];</span>
+        <span class="n">featureSourceNode</span><span class="p">.</span><span class="n">InnerText</span> <span class="p">=</span> <span class="n">bufferFeatureResId</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+
+        <span class="c1">// Get the updated layer definition from the XmlDocument</span>
+        <span class="c1">// and save it to the session repository using the</span>
+        <span class="c1">// ResourceService object.</span>
+
+        <span class="n">MgByteSource</span> <span class="n">byteSource</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+        <span class="k">using</span> <span class="p">(</span><span class="n">MemoryStream</span> <span class="n">ms</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MemoryStream</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">doc</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="n">ms</span><span class="p">);</span>
+            <span class="n">ms</span><span class="p">.</span><span class="n">Position</span> <span class="p">=</span> <span class="m">0L</span><span class="p">;</span>
+
+            <span class="c1">//Note we do this to ensure our XML content is free of any BOM characters</span>
+            <span class="kt">byte</span> <span class="p">[]</span> <span class="n">layerDefinition</span> <span class="p">=</span> <span class="n">ms</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+            <span class="n">Encoding</span> <span class="n">utf8</span> <span class="p">=</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">;</span>
+            <span class="n">String</span> <span class="n">layerDefStr</span> <span class="p">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">utf8</span><span class="p">.</span><span class="n">GetChars</span><span class="p">(</span><span class="n">layerDefinition</span><span class="p">));</span>
+            <span class="n">layerDefinition</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="p">[</span><span class="n">layerDefStr</span><span class="p">.</span><span class="n">Length</span><span class="p">-</span><span class="m">1</span><span class="p">];</span>
+            <span class="kt">int</span> <span class="n">byteCount</span> <span class="p">=</span> <span class="n">utf8</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="n">layerDefStr</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">layerDefStr</span><span class="p">.</span><span class="n">Length</span><span class="p">-</span><span class="m">1</span><span class="p">,</span> <span class="n">layerDefinition</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+
+            <span class="n">byteSource</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgByteSource</span><span class="p">(</span><span class="n">layerDefinition</span><span class="p">,</span> <span class="n">layerDefinition</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+            <span class="n">byteSource</span><span class="p">.</span><span class="n">SetMimeType</span><span class="p">(</span><span class="n">MgMimeType</span><span class="p">.</span><span class="n">Xml</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">MgResourceIdentifier</span> <span class="n">tempLayerResId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgResourceIdentifier</span><span class="p">(</span><span class="s">&quot;Session:&quot;</span> <span class="p">+</span> <span class="n">sessionId</span> <span class="p">+</span> <span class="s">&quot;//Buffer.LayerDefinition&quot;</span><span class="p">);</span>
+
+        <span class="n">resourceService</span><span class="p">.</span><span class="n">SetResource</span><span class="p">(</span><span class="n">tempLayerResId</span><span class="p">,</span> <span class="n">byteSource</span><span class="p">.</span><span class="n">GetReader</span><span class="p">(),</span> <span class="k">null</span><span class="p">);</span>
+
+        <span class="c1">// Create an MgLayer object based on the new layer definition</span>
+        <span class="c1">// and return it to the caller.</span>
+
+        <span class="n">MgLayer</span> <span class="n">bufferLayer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgLayer</span><span class="p">(</span><span class="n">tempLayerResId</span><span class="p">,</span> <span class="n">resourceService</span><span class="p">);</span>
+        <span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;Buffer&quot;</span><span class="p">);</span>
+        <span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetLegendLabel</span><span class="p">(</span><span class="s">&quot;Buffer&quot;</span><span class="p">);</span>
+        <span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetDisplayInLegend</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="n">bufferLayer</span><span class="p">.</span><span class="n">SetSelectable</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">bufferLayer</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">//No code sample available yet</span>
+</pre></div>
+</div>
+<p>There is an additional example in the Developer&#8217;s Guide samples. It queries
+the parcels in the buffer area and selects parcels that match certain criteria.
+The selection is done using a query that combines a basic filter and a spatial
+filter.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$bufferDist</span> <span class="o">=</span> <span class="nv">$srs</span><span class="o">-&gt;</span><span class="na">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="nv">$bufferRingSize</span><span class="p">);</span>
+<span class="nv">$bufferGeometry</span> <span class="o">=</span> <span class="nv">$mergedGeometries</span><span class="o">-&gt;</span><span class="na">Buffer</span><span class="p">(</span><span class="nv">$bufferDist</span><span class="p">,</span> <span class="nv">$srsMeasure</span><span class="p">);</span>
+<span class="c1">// Create a filter to select parcels within the buffer. Combine</span>
+<span class="c1">// a basic filter and a spatial filter to select all parcels</span>
+<span class="c1">// within the buffer that are of type &quot;MFG&quot;.</span>
+<span class="nv">$queryOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureQueryOptions</span><span class="p">();</span>
+<span class="nv">$queryOptions</span><span class="o">-&gt;</span><span class="na">SetFilter</span><span class="p">(</span><span class="s2">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="p">);</span>
+<span class="nv">$queryOptions</span><span class="o">-&gt;</span><span class="na">SetSpatialFilter</span><span class="p">(</span><span class="s1">&#39;SHPGEOM&#39;</span><span class="p">,</span> <span class="nv">$bufferGeometry</span><span class="p">,</span> <span class="nx">MgFeatureSpatialOperations</span><span class="o">::</span><span class="na">Inside</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="kt">double</span> <span class="n">bufferDist</span> <span class="p">=</span> <span class="n">srs</span><span class="p">.</span><span class="n">ConvertMetersToCoordinateSystemUnits</span><span class="p">(</span><span class="n">bufferRingSize</span><span class="p">);</span>
+<span class="n">MgGeometry</span> <span class="n">bufferGeometry</span> <span class="p">=</span> <span class="n">mergedGeometries</span><span class="p">.</span><span class="n">Buffer</span><span class="p">(</span><span class="n">bufferDist</span><span class="p">,</span> <span class="n">srsMeasure</span><span class="p">);</span>
+
+<span class="c1">// Create a filter to select parcels within the buffer. Combine</span>
+<span class="c1">// a basic filter and a spatial filter to select all parcels</span>
+<span class="c1">// within the buffer that are of type &quot;MFG&quot;.</span>
+
+<span class="n">queryOptions</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureQueryOptions</span><span class="p">();</span>
+<span class="n">queryOptions</span><span class="p">.</span><span class="n">SetFilter</span><span class="p">(</span><span class="s">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="p">);</span>
+<span class="n">queryOptions</span><span class="p">.</span><span class="n">SetSpatialFilter</span><span class="p">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="p">,</span> <span class="n">bufferGeometry</span><span class="p">,</span> <span class="n">MgFeatureSpatialOperations</span><span class="p">.</span><span class="n">Inside</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="kt">double</span> <span class="n">bufferDist</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="na">ConvertMetersToCoordinateSystemUnits</span><span class="o">(</span><span class="n">bufferRingSize</span><span class="o">);</span>
+<span class="n">MgGeometry</span> <span class="n">bufferGeometry</span> <span class="o">=</span> <span class="n">mergedGeometries</span><span class="o">.</span><span class="na">Buffer</span><span class="o">(</span><span class="n">bufferDist</span><span class="o">,</span> <span class="n">srsMeasure</span><span class="o">);</span>
+
+<span class="c1">// Create a filter to select parcels within the buffer. Combine</span>
+<span class="c1">// a basic filter and a spatial filter to select all parcels</span>
+<span class="c1">// within the buffer that are of type &quot;MFG&quot;.</span>
+
+<span class="n">queryOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureQueryOptions</span><span class="o">();</span>
+<span class="n">queryOptions</span><span class="o">.</span><span class="na">SetFilter</span><span class="o">(</span><span class="s">&quot;RTYPE = &#39;MFG&#39;&quot;</span><span class="o">);</span>
+<span class="n">queryOptions</span><span class="o">.</span><span class="na">SetSpatialFilter</span><span class="o">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="o">,</span> <span class="n">bufferGeometry</span><span class="o">,</span> <span class="n">MgFeatureSpatialOperations</span><span class="o">.</span><span class="na">Inside</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>It creates an additional feature source that contains point markers for each of
+the selected parcels.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Get the features from the feature source,</span>
+<span class="c1">// determine the centroid of each selected feature, and</span>
+<span class="c1">// add a point to the ParcelMarker layer to mark the</span>
+<span class="c1">// centroid.</span>
+<span class="c1">// Collect all the points into an MgFeatureCommandCollection,</span>
+<span class="c1">// so they can all be added in one operation.</span>
+
+<span class="nv">$parcelMarkerCommands</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">ReadNext</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="nv">$byteReader</span> <span class="o">=</span> <span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">GetGeometry</span><span class="p">(</span><span class="s1">&#39;SHPGEOM&#39;</span><span class="p">);</span>
+    <span class="nv">$geometry</span> <span class="o">=</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Read</span><span class="p">(</span><span class="nv">$byteReader</span><span class="p">);</span>
+    <span class="nv">$point</span> <span class="o">=</span> <span class="nv">$geometry</span><span class="o">-&gt;</span><span class="na">GetCentroid</span><span class="p">();</span>
+
+    <span class="c1">// Create an insert command for this parcel.</span>
+    <span class="nv">$properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgPropertyCollection</span><span class="p">();</span>
+
+    <span class="nv">$properties</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgGeometryProperty</span><span class="p">(</span><span class="s1">&#39;ParcelLocation&#39;</span><span class="p">,</span> <span class="nv">$agfReaderWriter</span><span class="o">-&gt;</span><span class="na">Write</span><span class="p">(</span><span class="nv">$point</span><span class="p">)));</span>
+    <span class="nv">$parcelMarkerCommands</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgInsertFeatures</span><span class="p">(</span><span class="s1">&#39;ParcelMarkerClass&#39;</span><span class="p">,</span> <span class="nv">$properties</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="nv">$featureReader</span><span class="o">-&gt;</span><span class="na">Close</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$parcelMarkerCommands</span><span class="o">-&gt;</span><span class="na">GetCount</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$parcelMarkerLayer</span><span class="o">-&gt;</span><span class="na">UpdateFeatures</span><span class="p">(</span><span class="nv">$parcelMarkerCommands</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;&lt;/p&gt;&lt;p&gt;No parcels within the buffer area match.&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="c1">// Get the features from the feature source,</span>
+<span class="c1">// determine the centroid of each selected feature, and</span>
+<span class="c1">// add a point to the ParcelMarker layer to mark the</span>
+<span class="c1">// centroid.</span>
+<span class="c1">// Collect all the points into an MgFeatureCommandCollection,</span>
+<span class="c1">// so they can all be added in one operation.</span>
+
+<span class="n">MgFeatureCommandCollection</span> <span class="n">parcelMarkerCommands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">featureReader</span><span class="p">.</span><span class="n">ReadNext</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">MgByteReader</span> <span class="n">byteReader</span> <span class="p">=</span> <span class="n">featureReader</span><span class="p">.</span><span class="n">GetGeometry</span><span class="p">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="p">);</span>
+    <span class="n">MgGeometry</span> <span class="n">geometry</span> <span class="p">=</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="n">byteReader</span><span class="p">);</span>
+    <span class="n">MgPoint</span> <span class="n">point</span> <span class="p">=</span> <span class="n">geometry</span><span class="p">.</span><span class="n">GetCentroid</span><span class="p">();</span>
+
+    <span class="c1">// Create an insert command for this parcel.</span>
+    <span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="p">();</span>
+    <span class="n">properties</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="p">(</span><span class="s">&quot;ParcelLocation&quot;</span><span class="p">,</span> <span class="n">agfReaderWriter</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">point</span><span class="p">)));</span>
+    <span class="n">parcelMarkerCommands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="p">(</span><span class="s">&quot;ParcelMarkerClass&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="n">featureReader</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">parcelMarkerCommands</span><span class="p">.</span><span class="n">GetCount</span><span class="p">()</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">parcelMarkerLayer</span><span class="p">.</span><span class="n">UpdateFeatures</span><span class="p">(</span><span class="n">parcelMarkerCommands</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;&lt;/p&gt;&lt;p&gt;No parcels within the buffer area match.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">// Get the features from the feature source,</span>
+<span class="c1">// determine the centroid of each selected feature, and</span>
+<span class="c1">// add a point to the ParcelMarker layer to mark the</span>
+<span class="c1">// centroid.</span>
+<span class="c1">// Collect all the points into an MgFeatureCommandCollection,</span>
+<span class="c1">// so they can all be added in one operation.</span>
+
+<span class="n">MgFeatureCommandCollection</span> <span class="n">parcelMarkerCommands</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureCommandCollection</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">featureReader</span><span class="o">.</span><span class="na">ReadNext</span><span class="o">())</span>
+<span class="o">{</span>
+    <span class="n">MgByteReader</span> <span class="n">byteReader</span> <span class="o">=</span> <span class="n">featureReader</span><span class="o">.</span><span class="na">GetGeometry</span><span class="o">(</span><span class="s">&quot;SHPGEOM&quot;</span><span class="o">);</span>
+    <span class="n">MgGeometry</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">agfReaderWriter</span><span class="o">.</span><span class="na">Read</span><span class="o">(</span><span class="n">byteReader</span><span class="o">);</span>
+    <span class="n">MgPoint</span> <span class="n">point</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="na">GetCentroid</span><span class="o">();</span>
+
+    <span class="c1">// Create an insert command for this parcel.</span>
+    <span class="n">MgPropertyCollection</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgPropertyCollection</span><span class="o">();</span>
+    <span class="n">properties</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">MgGeometryProperty</span><span class="o">(</span><span class="s">&quot;ParcelLocation&quot;</span><span class="o">,</span> <span class="n">agfReaderWriter</span><span class="o">.</span><span class="na">Write</span><span class="o">(</span><span class="n">point</span><span class="o">)));</span>
+    <span class="n">parcelMarkerCommands</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">MgInsertFeatures</span><span class="o">(</span><span class="s">&quot;ParcelMarkerClass&quot;</span><span class="o">,</span> <span class="n">properties</span><span class="o">));</span>
+<span class="o">}</span>
+<span class="n">featureReader</span><span class="o">.</span><span class="na">Close</span><span class="o">();</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="n">parcelMarkerCommands</span><span class="o">.</span><span class="na">GetCount</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">{</span>
+    <span class="n">parcelMarkerLayer</span><span class="o">.</span><span class="na">UpdateFeatures</span><span class="o">(</span><span class="n">parcelMarkerCommands</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="k">else</span>
+<span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">Write</span><span class="o">(</span><span class="s">&quot;&lt;/p&gt;&lt;p&gt;No parcels within the buffer area match.&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="digitizing_and_redlining.html" title="Digitizing and Redlining"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modifying_maps_and_layers.html" title="Modifying Maps and Layers"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

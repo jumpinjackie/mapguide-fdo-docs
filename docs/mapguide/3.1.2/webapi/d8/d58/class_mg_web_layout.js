@@ -1,0 +1,25 @@
+var class_mg_web_layout =
+[
+    [ "MgWebLayout", "d8/d58/class_mg_web_layout_af36288670298070e981d96879d36ec59.htm#af36288670298070e981d96879d36ec59", null ],
+    [ "GetAjaxPreviewUrl", "d8/d58/class_mg_web_layout_afa38db58e4f05f59250f540f5e4e0dd7.htm#afa38db58e4f05f59250f540f5e4e0dd7", null ],
+    [ "GetCenter", "d8/d58/class_mg_web_layout_a90f253d71e28c85cd07ea6d68f1563a9.htm#a90f253d71e28c85cd07ea6d68f1563a9", null ],
+    [ "GetCommands", "d8/d58/class_mg_web_layout_a447de5c87bee8d199493145a90006505.htm#a447de5c87bee8d199493145a90006505", null ],
+    [ "GetContextMenu", "d8/d58/class_mg_web_layout_a9bb30e9a81e26d77cac75d8977a99bb7.htm#a9bb30e9a81e26d77cac75d8977a99bb7", null ],
+    [ "GetDwfPreviewUrl", "d8/d58/class_mg_web_layout_a8cc04d7f17b84a4174e4c52c5d56c5e3.htm#a8cc04d7f17b84a4174e4c52c5d56c5e3", null ],
+    [ "GetEnablePingServer", "d8/d58/class_mg_web_layout_a48d8e721f53bcdaf4b3c83c956ac654c.htm#a48d8e721f53bcdaf4b3c83c956ac654c", null ],
+    [ "GetHyperlinkTarget", "d8/d58/class_mg_web_layout_aeac674571226dd9523512ddb6a77a4f8.htm#aeac674571226dd9523512ddb6a77a4f8", null ],
+    [ "GetHyperlinkTargetFrame", "d8/d58/class_mg_web_layout_aa6855a3f1dd53eb6147e5582db5a2cca.htm#aa6855a3f1dd53eb6147e5582db5a2cca", null ],
+    [ "GetInformationPane", "d8/d58/class_mg_web_layout_aae5f91456351a3680a0848761474667e.htm#aae5f91456351a3680a0848761474667e", null ],
+    [ "GetMapDefinition", "d8/d58/class_mg_web_layout_ad64ee176ff503507fd1f769851dbf360.htm#ad64ee176ff503507fd1f769851dbf360", null ],
+    [ "GetMapImageFormat", "d8/d58/class_mg_web_layout_a427ec49f8af64593a46b2d3f5cfd088b.htm#a427ec49f8af64593a46b2d3f5cfd088b", null ],
+    [ "GetPointSelectionBuffer", "d8/d58/class_mg_web_layout_a0b3722661ee847508a1ea57a8a0fa4d6.htm#a0b3722661ee847508a1ea57a8a0fa4d6", null ],
+    [ "GetScale", "d8/d58/class_mg_web_layout_a188d2a977b518585e073eab37b0b09d5.htm#a188d2a977b518585e073eab37b0b09d5", null ],
+    [ "GetSelectionColor", "d8/d58/class_mg_web_layout_a0c00e8d2a9742b349bf2b8fd2a0ab13c.htm#a0c00e8d2a9742b349bf2b8fd2a0ab13c", null ],
+    [ "GetSelectionImageFormat", "d8/d58/class_mg_web_layout_abf9ad6655e39f7e456d5b9099eca3cfd.htm#abf9ad6655e39f7e456d5b9099eca3cfd", null ],
+    [ "GetStartupScript", "d8/d58/class_mg_web_layout_ad716644bac080636015120168113789a.htm#ad716644bac080636015120168113789a", null ],
+    [ "GetStatusBar", "d8/d58/class_mg_web_layout_ac7275a935004ca862a54b0f2cce1f09f.htm#ac7275a935004ca862a54b0f2cce1f09f", null ],
+    [ "GetTaskPane", "d8/d58/class_mg_web_layout_a2ac0fadb23b58309d41aec9113f949b9.htm#a2ac0fadb23b58309d41aec9113f949b9", null ],
+    [ "GetTitle", "d8/d58/class_mg_web_layout_a0c83d67cc675bb70d8d60c8e83b442c3.htm#a0c83d67cc675bb70d8d60c8e83b442c3", null ],
+    [ "GetToolBar", "d8/d58/class_mg_web_layout_a45fef691872ea06eac56cb4b1cfd6f91.htm#a45fef691872ea06eac56cb4b1cfd6f91", null ],
+    [ "IsZoomControlVisible", "d8/d58/class_mg_web_layout_aa23583451dfb9bd60a453c6f2d7f19b2.htm#aa23583451dfb9bd60a453c6f2d7f19b2", null ]
+];

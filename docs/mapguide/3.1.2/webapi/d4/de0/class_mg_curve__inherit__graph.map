@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$de/d04/class_mg_curve_string.htm" title="An MgCurveString is composed of one or more curve segments." alt="" coords="5,304,112,331"/>
+<area shape="rect" id="node6" href="$d2/d02/class_mg_line_string.htm" title="An MgLineString is a curve with linear interpolation between points." alt="" coords="136,304,235,331"/>
+<area shape="rect" id="node2" href="$d1/d85/class_mg_geometry.htm" title="MgGeometry is an abstract base class for all of the geometry types." alt="" coords="73,155,170,181"/>
+<area shape="rect" id="node3" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="54,80,189,107"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="68,5,175,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$d8/d66/class_mg_argument_out_of_range_exception.htm" title="Thrown when the value of an argument is outside the allowable range of values as defined by the invok..." alt="" coords="5,304,231,331"/>
+<area shape="rect" id="node6" href="$d5/d96/class_mg_index_out_of_range_exception.htm" title="Thrown when attempting to access an element of an array with an index that is outside the bounds of t..." alt="" coords="255,304,455,331"/>
+<area shape="rect" id="node2" href="$d5/da0/class_mg_system_exception.htm" title="Base class for all exceptions representing a system error." alt="" coords="165,155,308,181"/>
+<area shape="rect" id="node3" href="$db/d05/class_mg_exception.htm" title="Base class for exceptions." alt="" coords="187,80,286,107"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="183,5,290,32"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$dd/da7/class_mg_drawing_service.htm" title="Allows low level access to DWF™ &#160;(Design Web Format™) data stored in a resource repository as part of a..." alt="" coords="481,5,609,32"/>
+<area shape="rect" id="node5" href="$d5/d10/class_mg_feature_service.htm" title="Provides an abstraction layer for the storage and retrieval of feature data in a technology&#45;independe..." alt="" coords="481,56,608,83"/>
+<area shape="rect" id="node6" href="$dd/d71/class_mg_kml_service.htm" title="This class provides services to retrieve KML documents." alt="" coords="492,107,597,133"/>
+<area shape="rect" id="node7" href="$d9/d86/class_mg_mapping_service.htm" title="Performs map related operations such as getting an eMap DWF representing a map or updates to a map..." alt="" coords="479,157,610,184"/>
+<area shape="rect" id="node8" href="$da/d95/class_mg_profiling_service.htm" title="This class provides services to profile exsiting MapGuide APIs." alt="" coords="481,208,609,235"/>
+<area shape="rect" id="node9" href="$de/dbd/class_mg_rendering_service.htm" title="This class provides services to render a map into an image." alt="" coords="475,259,615,285"/>
+<area shape="rect" id="node10" href="$d8/de1/class_mg_resource_service.htm" title="Enables you to manipulate repositories and resources." alt="" coords="476,309,613,336"/>
+<area shape="rect" id="node11" href="$df/dba/class_mg_tile_service.htm" title="This class provides services to render a map into an image." alt="" coords="493,360,596,387"/>
+<area shape="rect" id="node2" href="$de/de2/class_mg_guard_disposable.htm" title="MgGuardDisposable" alt="" coords="157,183,296,209"/>
+<area shape="rect" id="node3" href="$d1/df5/class_mg_disposable.htm" title="MgDisposable" alt="" coords="5,183,109,209"/>
+</map>

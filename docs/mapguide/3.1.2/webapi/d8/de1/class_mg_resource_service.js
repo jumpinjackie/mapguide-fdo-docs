@@ -1,0 +1,27 @@
+var class_mg_resource_service =
+[
+    [ "ApplyResourcePackage", "d8/de1/class_mg_resource_service_a5bbecbda7de66f5690d4465d2d7d3fa2.htm#a5bbecbda7de66f5690d4465d2d7d3fa2", null ],
+    [ "ChangeResourceOwner", "d8/de1/class_mg_resource_service_a1284242a0b98a1f63bb9552300a054bd.htm#a1284242a0b98a1f63bb9552300a054bd", null ],
+    [ "CopyResource", "d8/de1/class_mg_resource_service_acda44f564fa22cdbecd6a5d04071656a.htm#acda44f564fa22cdbecd6a5d04071656a", null ],
+    [ "DeleteResource", "d8/de1/class_mg_resource_service_a9930877bf0fa669208eefbda0c4928f5.htm#a9930877bf0fa669208eefbda0c4928f5", null ],
+    [ "DeleteResourceData", "d8/de1/class_mg_resource_service_ae82b7a1a4ef07a7eed19025ffff9ad75.htm#ae82b7a1a4ef07a7eed19025ffff9ad75", null ],
+    [ "EnumerateReferences", "d8/de1/class_mg_resource_service_ae79e94789cbf87f8721396c56097064e.htm#ae79e94789cbf87f8721396c56097064e", null ],
+    [ "EnumerateResourceData", "d8/de1/class_mg_resource_service_afdb11430bd4b5da3d97a6957b2e1519a.htm#afdb11430bd4b5da3d97a6957b2e1519a", null ],
+    [ "EnumerateResources", "d8/de1/class_mg_resource_service_ade732787e769efc5b1bc1aeb8e2b1770.htm#ade732787e769efc5b1bc1aeb8e2b1770", null ],
+    [ "EnumerateResources", "d8/de1/class_mg_resource_service_a62e9d18071ce489a87cd32c7b023e05e.htm#a62e9d18071ce489a87cd32c7b023e05e", null ],
+    [ "EnumerateUnmanagedData", "d8/de1/class_mg_resource_service_ab887096c0285c455b87cb14e781d8410.htm#ab887096c0285c455b87cb14e781d8410", null ],
+    [ "GetRepositoryContent", "d8/de1/class_mg_resource_service_aed544959d4282cdb999ff5f20d5fcfee.htm#aed544959d4282cdb999ff5f20d5fcfee", null ],
+    [ "GetRepositoryHeader", "d8/de1/class_mg_resource_service_abecdde326c3990ae3871a42401360776.htm#abecdde326c3990ae3871a42401360776", null ],
+    [ "GetResourceContent", "d8/de1/class_mg_resource_service_af3e44accc3622242f46f3f88c463540e.htm#af3e44accc3622242f46f3f88c463540e", null ],
+    [ "GetResourceContents", "d8/de1/class_mg_resource_service_afbf1c8a61833e3f1b366e428350bb430.htm#afbf1c8a61833e3f1b366e428350bb430", null ],
+    [ "GetResourceData", "d8/de1/class_mg_resource_service_a3f041e33c577a05d08dff937a6343868.htm#a3f041e33c577a05d08dff937a6343868", null ],
+    [ "GetResourceHeader", "d8/de1/class_mg_resource_service_a208cd56d35c50a9637a9fbab4ba31890.htm#a208cd56d35c50a9637a9fbab4ba31890", null ],
+    [ "InheritPermissionsFrom", "d8/de1/class_mg_resource_service_ae205b977e2a1cbad1eb3722c2c06e231.htm#ae205b977e2a1cbad1eb3722c2c06e231", null ],
+    [ "MoveResource", "d8/de1/class_mg_resource_service_a9a17439507832f8b4e477d21bcedca38.htm#a9a17439507832f8b4e477d21bcedca38", null ],
+    [ "MoveResource", "d8/de1/class_mg_resource_service_a45380d79c2b232d8fb8d21f06f2cb430.htm#a45380d79c2b232d8fb8d21f06f2cb430", null ],
+    [ "RenameResourceData", "d8/de1/class_mg_resource_service_af4f5b8c00e06bc7cd71718c3875cd976.htm#af4f5b8c00e06bc7cd71718c3875cd976", null ],
+    [ "ResourceExists", "d8/de1/class_mg_resource_service_a77720872ca0657a91c4cacdddc8c0281.htm#a77720872ca0657a91c4cacdddc8c0281", null ],
+    [ "SetResource", "d8/de1/class_mg_resource_service_a613e2512f7e7c06b772e57ffd132aedd.htm#a613e2512f7e7c06b772e57ffd132aedd", null ],
+    [ "SetResourceData", "d8/de1/class_mg_resource_service_acb0e9ea54a9bb752daf8355f3b8a0a31.htm#acb0e9ea54a9bb752daf8355f3b8a0a31", null ],
+    [ "UpdateRepository", "d8/de1/class_mg_resource_service_ae0294dc308ecc4708b79d493086f210b.htm#ae0294dc308ecc4708b79d493086f210b", null ]
+];

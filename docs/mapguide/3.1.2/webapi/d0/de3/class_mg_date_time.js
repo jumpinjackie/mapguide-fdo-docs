@@ -1,0 +1,25 @@
+var class_mg_date_time =
+[
+    [ "MgDateTime", "d0/de3/class_mg_date_time_ad2e25934652cd3a4bd22c9f7d6678b19.htm#ad2e25934652cd3a4bd22c9f7d6678b19", null ],
+    [ "MgDateTime", "d0/de3/class_mg_date_time_a0e9219725f4ed7ee10412cd9a7e29825.htm#a0e9219725f4ed7ee10412cd9a7e29825", null ],
+    [ "MgDateTime", "d0/de3/class_mg_date_time_a9e5356b9ed7bafafb30fc68aee81deaf.htm#a9e5356b9ed7bafafb30fc68aee81deaf", null ],
+    [ "MgDateTime", "d0/de3/class_mg_date_time_a330744a4e7f7240abbfe55417acea6da.htm#a330744a4e7f7240abbfe55417acea6da", null ],
+    [ "GetDay", "d0/de3/class_mg_date_time_afe7cd0b34a710a38e6290a8de74436dc.htm#afe7cd0b34a710a38e6290a8de74436dc", null ],
+    [ "GetHour", "d0/de3/class_mg_date_time_af7d94ab5c5c61870f2ef06c105facf1e.htm#af7d94ab5c5c61870f2ef06c105facf1e", null ],
+    [ "GetMicrosecond", "d0/de3/class_mg_date_time_adccb9b883538c1485eba3ca915091202.htm#adccb9b883538c1485eba3ca915091202", null ],
+    [ "GetMinute", "d0/de3/class_mg_date_time_a41e403b136c1d894116c568d2f807b81.htm#a41e403b136c1d894116c568d2f807b81", null ],
+    [ "GetMonth", "d0/de3/class_mg_date_time_aa899698058a1774ce95350553be93c5f.htm#aa899698058a1774ce95350553be93c5f", null ],
+    [ "GetSecond", "d0/de3/class_mg_date_time_a869aaa2deb398cb2feff15dac43c60a1.htm#a869aaa2deb398cb2feff15dac43c60a1", null ],
+    [ "GetYear", "d0/de3/class_mg_date_time_a2ed0d8080b8cf5a611691bc282901409.htm#a2ed0d8080b8cf5a611691bc282901409", null ],
+    [ "IsDate", "d0/de3/class_mg_date_time_ad4ea8b4e905e183f0d37ccb2a2f9e3ee.htm#ad4ea8b4e905e183f0d37ccb2a2f9e3ee", null ],
+    [ "IsDateTime", "d0/de3/class_mg_date_time_acad4089bd0f66afe83ea2f6dfd425e35.htm#acad4089bd0f66afe83ea2f6dfd425e35", null ],
+    [ "IsTime", "d0/de3/class_mg_date_time_a8120939c4809723d382e35853875629f.htm#a8120939c4809723d382e35853875629f", null ],
+    [ "SetDay", "d0/de3/class_mg_date_time_ad09ce06162b5cc972bcbde10beffb9b9.htm#ad09ce06162b5cc972bcbde10beffb9b9", null ],
+    [ "SetHour", "d0/de3/class_mg_date_time_a43d38b0358a6369bbee696be10d6d74a.htm#a43d38b0358a6369bbee696be10d6d74a", null ],
+    [ "SetMicrosecond", "d0/de3/class_mg_date_time_ac00bc826b226ad0cffaec45306defbfe.htm#ac00bc826b226ad0cffaec45306defbfe", null ],
+    [ "SetMinute", "d0/de3/class_mg_date_time_a424e895372ee1e96c37d931e0417cb06.htm#a424e895372ee1e96c37d931e0417cb06", null ],
+    [ "SetMonth", "d0/de3/class_mg_date_time_ae1eb485d633f48b2ad6c4e2b76338ff0.htm#ae1eb485d633f48b2ad6c4e2b76338ff0", null ],
+    [ "SetSecond", "d0/de3/class_mg_date_time_a88ef9ef332eb98de153b39833cc9d248.htm#a88ef9ef332eb98de153b39833cc9d248", null ],
+    [ "SetYear", "d0/de3/class_mg_date_time_a1c854c8500b4d7c3dc3c62b35fe0362e.htm#a1c854c8500b4d7c3dc3c62b35fe0362e", null ],
+    [ "Validate", "d0/de3/class_mg_date_time_aec096ba6cbaaf61b0c05f4c374e6fd9f.htm#aec096ba6cbaaf61b0c05f4c374e6fd9f", null ]
+];

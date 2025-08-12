@@ -1,0 +1,25 @@
+var class_mg_coordinate_system_geodetic_analytical_transform_def_params =
+[
+    [ "GetDeltaX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a93bbcb6041268eb977b1876de32963af.htm#a93bbcb6041268eb977b1876de32963af", null ],
+    [ "GetDeltaY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a10ecd514c43b23f7a609e771851d282c.htm#a10ecd514c43b23f7a609e771851d282c", null ],
+    [ "GetDeltaZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a03fd97b75fcc6bf8827e235ae7bb18e3.htm#a03fd97b75fcc6bf8827e235ae7bb18e3", null ],
+    [ "GetRotateX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a5a7dd29e28323988452329d81766ff94.htm#a5a7dd29e28323988452329d81766ff94", null ],
+    [ "GetRotateY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a65c7df5651550f04e59301a7ed91e5c6.htm#a65c7df5651550f04e59301a7ed91e5c6", null ],
+    [ "GetRotateZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_ae4c2783d11d4c9a8587fa5b625de5737.htm#ae4c2783d11d4c9a8587fa5b625de5737", null ],
+    [ "GetScale", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a7dab00bdefc44452c3c47bfd41e97f27.htm#a7dab00bdefc44452c3c47bfd41e97f27", null ],
+    [ "GetTransformationMethod", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_adbc47e7b6924feda268969aac51a0371.htm#adbc47e7b6924feda268969aac51a0371", null ],
+    [ "GetTranslateX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_aa2214c2969e89c7b20320c30eb29cdd1.htm#aa2214c2969e89c7b20320c30eb29cdd1", null ],
+    [ "GetTranslateY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a564360629f93c21afd2a628208237c4a.htm#a564360629f93c21afd2a628208237c4a", null ],
+    [ "GetTranslateZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a13fa81cde09d0e3737216b19897bda30.htm#a13fa81cde09d0e3737216b19897bda30", null ],
+    [ "SetDeltaX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_ad1579b7db09c5f4102c040f1ba56d160.htm#ad1579b7db09c5f4102c040f1ba56d160", null ],
+    [ "SetDeltaY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_abe7de452256fc1aaae77cdb18c6db437.htm#abe7de452256fc1aaae77cdb18c6db437", null ],
+    [ "SetDeltaZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a6b0debb599139f9a0b039114532c488b.htm#a6b0debb599139f9a0b039114532c488b", null ],
+    [ "SetRotateX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a9a32f899dc2a42b3fd098af3fc80fb12.htm#a9a32f899dc2a42b3fd098af3fc80fb12", null ],
+    [ "SetRotateY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a33ce95723d1b50ecec07ba9baa303c02.htm#a33ce95723d1b50ecec07ba9baa303c02", null ],
+    [ "SetRotateZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a71546c15b12fa03a04d6bf35cedb54e4.htm#a71546c15b12fa03a04d6bf35cedb54e4", null ],
+    [ "SetScale", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_aa25aada7340880533d24b4c91cdd1751.htm#aa25aada7340880533d24b4c91cdd1751", null ],
+    [ "SetTransformationMethod", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_af374dc206ced53130dfb4a90089dde5c.htm#af374dc206ced53130dfb4a90089dde5c", null ],
+    [ "SetTranslateX", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a9b56abcc09046cb51baa27569f8602ac.htm#a9b56abcc09046cb51baa27569f8602ac", null ],
+    [ "SetTranslateY", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a65010852b7e829e4b01327b3463f11f6.htm#a65010852b7e829e4b01327b3463f11f6", null ],
+    [ "SetTranslateZ", "df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params_a14f1343cf0eebb8cbfbff0a522f65d00.htm#a14f1343cf0eebb8cbfbff0a522f65d00", null ]
+];

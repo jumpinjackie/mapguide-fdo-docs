@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$df/df3/class_mg_coordinate_system_geodetic_analytical_transform_def_params.htm" title="This class holds all parameters that are specific to analytical geodetic transformation methods..." alt="" coords="739,5,1116,32"/>
+<area shape="rect" id="node5" href="$d6/d1c/class_mg_coordinate_system_geodetic_interpolation_transform_def_params.htm" title="This class holds all parameters that are specific to grid&#45;file based transformation. That is, where the actual datum shift value for a coordinate is determined by interpolating between grid point values as defined in the respective grid file(s)." alt="" coords="732,56,1123,83"/>
+<area shape="rect" id="node6" href="$df/d3b/class_mg_coordinate_system_geodetic_multiple_regression_transform_def_params.htm" title="This class holds all parameters that are specific to the multiple regression transformation method..." alt="" coords="712,107,1143,133"/>
+<area shape="rect" id="node7" href="$d3/d3d/class_mg_coordinate_system_geodetic_standalone_transform_def_params.htm" title="This class (indirectly) describes the parameters of a geodetic transformation method that&#39;s built int..." alt="" coords="735,157,1120,184"/>
+<area shape="rect" id="node2" href="$de/de2/class_mg_guard_disposable.htm" title="MgGuardDisposable" alt="" coords="157,81,296,108"/>
+<area shape="rect" id="node3" href="$d1/df5/class_mg_disposable.htm" title="MgDisposable" alt="" coords="5,81,109,108"/>
+</map>

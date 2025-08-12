@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$d6/d1c/class_mg_web_task_bar.htm" title="MgWebTaskBar" alt="" coords="5,229,120,256"/>
+<area shape="rect" id="node5" href="$d7/d64/class_mg_web_tool_bar.htm" title="MgWebToolBar" alt="" coords="145,229,255,256"/>
+<area shape="rect" id="node6" href="$dc/dad/class_mg_web_ui_sizable_pane.htm" title="MgWebUiSizablePane" alt="" coords="280,229,432,256"/>
+<area shape="rect" id="node2" href="$de/de2/class_mg_guard_disposable.htm" title="MgGuardDisposable" alt="" coords="131,80,269,107"/>
+<area shape="rect" id="node3" href="$d1/df5/class_mg_disposable.htm" title="MgDisposable" alt="" coords="148,5,252,32"/>
+<area shape="rect" id="node7" href="$db/d3d/class_mg_web_information_pane.htm" title="MgWebInformationPane" alt="" coords="193,304,353,331"/>
+<area shape="rect" id="node8" href="$d3/d54/class_mg_web_task_pane.htm" title="MgWebTaskPane" alt="" coords="377,304,503,331"/>
+</map>

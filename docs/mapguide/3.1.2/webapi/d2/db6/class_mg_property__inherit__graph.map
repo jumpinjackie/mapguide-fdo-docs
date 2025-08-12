@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$db/dd4/class_mg_nullable_property.htm" title="This is the base class for all properties which can have NULL values. If a property value is NULL..." alt="" coords="497,360,632,387"/>
+<area shape="rect" id="node19" href="$d7/dfa/class_mg_property_definition.htm" title="Defines the base class for the concrete property definition classes which are used to create data..." alt="" coords="493,765,636,792"/>
+<area shape="rect" id="node2" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="160,563,308,589"/>
+<area shape="rect" id="node3" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,563,112,589"/>
+<area shape="rect" id="node5" href="$d1/da0/class_mg_blob_property.htm" title="Stores BLOB (Binary Large Object) data with an associated key name." alt="" coords="728,5,843,32"/>
+<area shape="rect" id="node6" href="$d0/d12/class_mg_boolean_property.htm" title="Stores boolean data with an associated key name." alt="" coords="717,56,853,83"/>
+<area shape="rect" id="node7" href="$d1/d70/class_mg_byte_property.htm" title="Stores a single BYTE of data with an associated key name." alt="" coords="727,107,843,133"/>
+<area shape="rect" id="node8" href="$db/da9/class_mg_clob_property.htm" title="Stores CLOB (Character Large Object) data with an associated key name." alt="" coords="728,157,843,184"/>
+<area shape="rect" id="node9" href="$d0/d77/class_mg_date_time_property.htm" title="Stores MgDateTime data with an associated key name." alt="" coords="713,208,857,235"/>
+<area shape="rect" id="node10" href="$d5/dde/class_mg_double_property.htm" title="Stores double precision floating point data with an associated key name. An instance of this class ca..." alt="" coords="721,259,850,285"/>
+<area shape="rect" id="node11" href="$db/dce/class_mg_feature_property.htm" title="Stores MgFeatureReader data with an associated key name." alt="" coords="719,309,852,336"/>
+<area shape="rect" id="node12" href="$da/d8a/class_mg_geometry_property.htm" title="Stores MgByteReader data with an associated key name." alt="" coords="712,360,859,387"/>
+<area shape="rect" id="node13" href="$d9/d43/class_mg_int16_property.htm" title="Stores Int16 data with an associated key name." alt="" coords="727,411,844,437"/>
+<area shape="rect" id="node14" href="$da/d61/class_mg_int32_property.htm" title="Stores Int32 data with an associated key name." alt="" coords="727,461,844,488"/>
+<area shape="rect" id="node15" href="$d3/d9f/class_mg_int64_property.htm" title="Stores Int64 data with an associated key name." alt="" coords="727,512,844,539"/>
+<area shape="rect" id="node16" href="$d6/d88/class_mg_raster_property.htm" title="Stores MgRaster data with an associated key name." alt="" coords="722,563,849,589"/>
+<area shape="rect" id="node17" href="$d1/dd2/class_mg_single_property.htm" title="Stores single precision floating point data with an associated key name." alt="" coords="723,613,848,640"/>
+<area shape="rect" id="node18" href="$db/d9f/class_mg_string_property.htm" title="Stores string data with an associated key name." alt="" coords="724,664,847,691"/>
+<area shape="rect" id="node20" href="$d6/d5b/class_mg_data_property_definition.htm" title="Defines a data property belonging to a feature class." alt="" coords="701,715,870,741"/>
+<area shape="rect" id="node21" href="$d0/d7b/class_mg_geometric_property_definition.htm" title="Defines a geometric property belonging to a feature class." alt="" coords="684,765,887,792"/>
+<area shape="rect" id="node22" href="$d7/d31/class_mg_object_property_definition.htm" title="Defines a feature property which contains one or more objects whose type is a feature class..." alt="" coords="695,816,875,843"/>
+<area shape="rect" id="node23" href="$d3/d2a/class_mg_raster_property_definition.htm" title="Defines a feature property which contains a raster image." alt="" coords="695,867,875,893"/>
+</map>

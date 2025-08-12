@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$d7/dfa/class_mg_property_definition.htm" title="Defines the base class for the concrete property definition classes which are used to create data..." alt="" coords="35,229,178,256"/>
+<area shape="rect" id="node3" href="$dc/dc6/class_mg_property.htm" title="A base class for MgNullableProperty, which is the base class for all of the concrete property classes..." alt="" coords="62,155,151,181"/>
+<area shape="rect" id="node4" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="33,80,181,107"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="53,5,160,32"/>
+</map>

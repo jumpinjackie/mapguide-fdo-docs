@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d4/df3/class_mg_coordinate_x_y.htm" title="MgCoordinateXY is a concrete class derived from the abstract class MgCoordinate." alt="" coords="5,155,124,181"/>
+<area shape="rect" id="node4" href="$d9/d79/class_mg_coordinate_x_y_m.htm" title="MgCoordinateXYM is a concrete class derived from the abstract class MgCoordinate." alt="" coords="148,155,277,181"/>
+<area shape="rect" id="node5" href="$d7/d25/class_mg_coordinate_x_y_z.htm" title="MgCoordinateXYZ is a concrete class derived from the abstract class MgCoordinate." alt="" coords="302,155,427,181"/>
+<area shape="rect" id="node6" href="$d6/d8f/class_mg_coordinate_x_y_z_m.htm" title="MgCoordinateXYZM is a concrete class derived from the abstract class MgCoordinate." alt="" coords="451,155,587,181"/>
+<area shape="rect" id="node2" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="235,5,342,32"/>
+</map>

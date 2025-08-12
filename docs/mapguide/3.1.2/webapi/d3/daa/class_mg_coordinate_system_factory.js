@@ -1,0 +1,28 @@
+var class_mg_coordinate_system_factory =
+[
+    [ "MgCoordinateSystemFactory", "d3/daa/class_mg_coordinate_system_factory_a43261df04a36444ff9b729ce3c7131b1.htm#a43261df04a36444ff9b729ce3c7131b1", null ],
+    [ "ConvertCoordinateSystemCodeToWkt", "d3/daa/class_mg_coordinate_system_factory_a2c4508b61fca0fb39e2479bb9afd6f27.htm#a2c4508b61fca0fb39e2479bb9afd6f27", null ],
+    [ "ConvertEpsgCodeToWkt", "d3/daa/class_mg_coordinate_system_factory_adc1022aaabeb8467df43c2dba9723098.htm#adc1022aaabeb8467df43c2dba9723098", null ],
+    [ "ConvertWktToCoordinateSystemCode", "d3/daa/class_mg_coordinate_system_factory_a46e1d9008808face481a265459b264dc.htm#a46e1d9008808face481a265459b264dc", null ],
+    [ "ConvertWktToEpsgCode", "d3/daa/class_mg_coordinate_system_factory_ad6e5c88a4fbbe76cbeb413cfd170f33c.htm#ad6e5c88a4fbbe76cbeb413cfd170f33c", null ],
+    [ "Create", "d3/daa/class_mg_coordinate_system_factory_ae7c8cc77ad6ae3e401294fbd0fb54062.htm#ae7c8cc77ad6ae3e401294fbd0fb54062", null ],
+    [ "CreateFromCode", "d3/daa/class_mg_coordinate_system_factory_a546f242ffcb8b6dd5d8489d9abdeee3e.htm#a546f242ffcb8b6dd5d8489d9abdeee3e", null ],
+    [ "EnumerateCategories", "d3/daa/class_mg_coordinate_system_factory_af84d637420fe35970e2b25df49fcb381.htm#af84d637420fe35970e2b25df49fcb381", null ],
+    [ "EnumerateCoordinateSystems", "d3/daa/class_mg_coordinate_system_factory_a5939f8d71479acd2947fe5a572d71645.htm#a5939f8d71479acd2947fe5a572d71645", null ],
+    [ "GenericGrid", "d3/daa/class_mg_coordinate_system_factory_a3448251555769f2f728af23e7ee6811b.htm#a3448251555769f2f728af23e7ee6811b", null ],
+    [ "GenericGrid", "d3/daa/class_mg_coordinate_system_factory_a73d478faa10917d2616dbe204c2d7834.htm#a73d478faa10917d2616dbe204c2d7834", null ],
+    [ "GetBaseLibrary", "d3/daa/class_mg_coordinate_system_factory_a6354fb1679f8f8088bf8d1151f2da1fe.htm#a6354fb1679f8f8088bf8d1151f2da1fe", null ],
+    [ "GetCatalog", "d3/daa/class_mg_coordinate_system_factory_a46203d9f4b261bf429c302891bd40cdf.htm#a46203d9f4b261bf429c302891bd40cdf", null ],
+    [ "GetMgrs", "d3/daa/class_mg_coordinate_system_factory_abf2b09d1c4daac13e2788a2b7f9a5556.htm#abf2b09d1c4daac13e2788a2b7f9a5556", null ],
+    [ "GetMgrsDatum", "d3/daa/class_mg_coordinate_system_factory_ad94dfb4aa6c0ea8b576a8d5cda8865f7.htm#ad94dfb4aa6c0ea8b576a8d5cda8865f7", null ],
+    [ "GetMgrsEllipsoid", "d3/daa/class_mg_coordinate_system_factory_a1d8e74e481efc21e642a77111ec8dbae.htm#a1d8e74e481efc21e642a77111ec8dbae", null ],
+    [ "GetTransform", "d3/daa/class_mg_coordinate_system_factory_ac9d516f8b248518179e847a527984986.htm#ac9d516f8b248518179e847a527984986", null ],
+    [ "GridBoundary", "d3/daa/class_mg_coordinate_system_factory_ac7f160deda85df4dc7d5d5366aa624e0.htm#ac7f160deda85df4dc7d5d5366aa624e0", null ],
+    [ "GridBoundary", "d3/daa/class_mg_coordinate_system_factory_aa1216bfcd6422079d335c07209ec4b7d.htm#aa1216bfcd6422079d335c07209ec4b7d", null ],
+    [ "GridSpecification", "d3/daa/class_mg_coordinate_system_factory_a2bdfd3dbe37c1cd5613827b2b4487c33.htm#a2bdfd3dbe37c1cd5613827b2b4487c33", null ],
+    [ "GridSpecification", "d3/daa/class_mg_coordinate_system_factory_a7bb15e8e87961ed729a83cdd19a5c2fa.htm#a7bb15e8e87961ed729a83cdd19a5c2fa", null ],
+    [ "GridSpecification", "d3/daa/class_mg_coordinate_system_factory_a529f074500832a23a1dd7b492fac57ed.htm#a529f074500832a23a1dd7b492fac57ed", null ],
+    [ "IsValid", "d3/daa/class_mg_coordinate_system_factory_a791e072e8e78db12fdda38dd44de0d6f.htm#a791e072e8e78db12fdda38dd44de0d6f", null ],
+    [ "MgrsGrid", "d3/daa/class_mg_coordinate_system_factory_ac4870de045ad97a71c29eac39c4f8583.htm#ac4870de045ad97a71c29eac39c4f8583", null ],
+    [ "MgrsGrid", "d3/daa/class_mg_coordinate_system_factory_ac495fd72d09cb89f2035ded903ef4b2c.htm#ac495fd72d09cb89f2035ded903ef4b2c", null ]
+];

@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The MapGuide AJAX Viewer &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Interacting With Layers" href="interacting_with_layers.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="interacting_with_layers.html" title="Interacting With Layers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The MapGuide AJAX Viewer</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#custom-commands">Custom Commands</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#understanding-viewer-frames">Understanding Viewer Frames</a></li>
+<li><a class="reference internal" href="#mapguide-viewer-api">MapGuide Viewer API</a><ul>
+<li><a class="reference internal" href="#calling-the-viewer-api-with-an-invoke-script-command">Calling the Viewer API with an Invoke Script Command</a></li>
+<li><a class="reference internal" href="#calling-the-viewer-api-from-the-script-frame">Calling the Viewer API from the Script Frame</a></li>
+<li><a class="reference internal" href="#calling-the-viewer-api-from-the-task-pane">Calling the Viewer API from the Task Pane</a></li>
+<li><a class="reference internal" href="#extending-map-initialization-functionality">Extending Map Initialization Functionality</a></li>
+<li><a class="reference internal" href="#the-hello-viewer-sample">The Hello Viewer Sample</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#embedding-a-viewer-in-your-own-page">Embedding a Viewer in Your Own Page</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interacting_with_layers.html"
+                        title="next chapter">Interacting With Layers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mapguide_ajax_viewer.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-mapguide-ajax-viewer">
+<span id="mapguide-ajax-viewer"></span><span id="index-0"></span><h1>The MapGuide AJAX Viewer<a class="headerlink" href="#the-mapguide-ajax-viewer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <em>Hello Viewer</em> sample, in the Developer&#8217;s Guide samples, demonstrates
+concepts from this chapter.</p>
+</div>
+<p>The MapGuide Viewer is a browser-based method for displaying map data in a
+MapGuide application. It is a complete application, with support for standard
+mapping functionality like zooming, theming, and selecting features. There are
+two different versions of the Viewer:</p>
+<blockquote>
+<div><ul class="simple">
+<li>DWF Viewer, which runs only within Internet Explorer, and requires a browser plug-in</li>
+<li>AJAX Viewer, which runs within Internet Explorer, Mozilla Firefox, and Safari, without requiring a browser plug-in</li>
+</ul>
+</div></blockquote>
+<p>As much as possible, the two versions of the Viewer operate in the same way,
+so deciding which to use depends on the needs of the application. If all the end
+users of the application use Internet Explorer, the DWF Viewer my be an
+appropriate choice, but if some of them use a different browser the AJAX Viewer
+is a better choice.</p>
+<p>Most MapGuide applications use a Viewer, though it is possible to create
+applications that perform data analysis or manipulation but do not display
+using the Viewer. For example, a MapGuide application can be used as a back-end
+to another mapping application.</p>
+<p>The standard Viewer displays a map along with the following optional
+components surrounding the map:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tool bar</li>
+<li>Layers pane</li>
+<li>Properties pane</li>
+<li>Status bar</li>
+<li>Task bar</li>
+<li>Task list (normally hidden, but available as a drop-down from the task bar)</li>
+<li>Task pane</li>
+<li>Context (right-click) menu</li>
+<li>Zoom slider (AJAX Viewer only)</li>
+</ul>
+</div></blockquote>
+<p><strong>MapGuide Viewer</strong></p>
+<img alt="_images/ajaxviewer.png" src="_images/ajaxviewer.png" />
+<p>The tool bar, task list, task pane, and context menu can contain a combination
+of pre-defined and custom MapGuide commands.</p>
+<p>A <em>web layout</em> defines how the Viewer looks and operates for a map. One
+function of a web layout is to define which optional components display with
+the map. All of the optional components can be disabled, leaving just the
+map itself.</p>
+<p>The web layout also defines any custom functionality added to the web page
+through custom commands.</p>
+<div class="section" id="custom-commands">
+<h3>Custom Commands<a class="headerlink" href="#custom-commands" title="Permalink to this headline">¶</a></h3>
+<p>Custom commands can be of two types:</p>
+<blockquote>
+<div><ul class="simple">
+<li>JavaScript commands</li>
+<li>Web Server Extensions pages, written in PHP, ASP.NET, or JSP</li>
+</ul>
+</div></blockquote>
+<p>JavaScript commands are defined in the web layout as commands of type
+Invoke Script. They are used primarily to interact with the Viewer, and can
+use the Viewer API.</p>
+<p>Web Server Extensions pages can be added to the web layout in two different
+ways. In one method, the web layout includes a home page. This home page
+is loaded in the task pane when the map first displays, and can be re-loaded
+by clicking the Home icon in the task bar. The home page can load other
+pages as needed.</p>
+<p>In addition, other task pages can be defined in the web layout as commands
+of type Invoke URL. These commands can be added to the tool bar, task list,
+or context menu. When a user selects one of these commands the
+corresponding URL is often loaded into the task pane, though it can also be
+loaded into a hidden frame so it is not visible.</p>
+<p>Because Web Server Extensions pages are created at the web tier before being
+passed to the Viewer, they can use both the Web Server Extensions API and
+the Viewer API.</p>
+</div>
+</div>
+<div class="section" id="understanding-viewer-frames">
+<h2>Understanding Viewer Frames<a class="headerlink" href="#understanding-viewer-frames" title="Permalink to this headline">¶</a></h2>
+<p>The MapGuide Viewers use HTML frames to divide the viewer area. Refer to
+the diagram below for the locations of the following frames and frame sets:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&nbsp;</td>
+<td>Unnamed. Contains all the Viewer frames. This can be wrapped
+by an outer frame so you can embed the Viewer in your own
+site.</td>
+</tr>
+<tr class="row-odd"><td>maparea</td>
+<td>Frame set containing the tool bar, map frame, form frame,
+andscript frame.</td>
+</tr>
+<tr class="row-even"><td>tbFrame</td>
+<td>Frame containing the tool bar. Add new commands to the tool
+bar by modifying the web layout.</td>
+</tr>
+<tr class="row-odd"><td>mapFrame</td>
+<td>Frame containing the map data. This includes the map display
+and the layers and properties palettes.</td>
+</tr>
+<tr class="row-even"><td>formFrame</td>
+<td>Hidden frame that can be used to generate HTTP POST requests
+for sending data to the server.</td>
+</tr>
+<tr class="row-odd"><td>scriptFrame</td>
+<td>Hidden frame that can be used to load and execute pages
+out them being visible to the user. This is often used for
+executing client-side JavaScript.</td>
+</tr>
+<tr class="row-even"><td>taskArea</td>
+<td>Frame set containing the task bar and the task frame.</td>
+</tr>
+<tr class="row-odd"><td>taskBar</td>
+<td>Frame containing the task bar</td>
+</tr>
+<tr class="row-even"><td>taskFrame</td>
+<td>Frame used to hold the task list frame and the task pane
+frame</td>
+</tr>
+<tr class="row-odd"><td>taskListFrame</td>
+<td>Frame used for displaying the task list. This is normally
+hidden, and is shown when a user clicks the task list button
+in the task bar. Add new commands to the task list by
+modifying the web layout.</td>
+</tr>
+<tr class="row-even"><td>taskPaneFrame</td>
+<td>Frame used for displaying and executing MapGuide pages. A
+web layout has a default home page that displays in the task
+pane when the layout loads. Custom commands of type Invoke
+URL also load in the task pane.</td>
+</tr>
+<tr class="row-odd"><td>sbFrame</td>
+<td>Frame containing the status bar.</td>
+</tr>
+</tbody>
+</table>
+<img alt="_images/frame_structure.png" src="_images/frame_structure.png" />
+</div>
+<div class="section" id="mapguide-viewer-api">
+<h2>MapGuide Viewer API<a class="headerlink" href="#mapguide-viewer-api" title="Permalink to this headline">¶</a></h2>
+<p>The MapGuide Viewer API is a set of JavaScript functions used to interact with
+the Viewer. Many of the Viewer frames contain embedded JavaScript functions
+that can be called from other locations. For full details about the available
+functions, refer to the online <em>MapGuide Viewer API Reference</em>.</p>
+<p>To execute any of the Viewer API functions, call them from JavaScript
+embedded in a page. There are three common techniques for this:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Define an Invoke Script command in the web layout. Use this technique when you want to call the Viewer API directly from the tool bar, task list, or context menu.</li>
+<li>Load a page into the hidden script frame and execute the script when the page loads. Use this technique when you want the Viewer to change as a result of an action in the MapGuide page, without reloading the page.</li>
+<li>Execute the JavaScript call from a page loaded in the task pane frame. The JavaScript can execute when the page first loads or as a result of user interaction.</li>
+</ul>
+</div></blockquote>
+<p>It is important to know the relationships between the frames. JavaScript
+executes in the context of a single frame, but it can call functions from other
+frames by locating them in the frame hierarchy. The following frames are
+children of the main Viewer frame:</p>
+<blockquote>
+<div><ul class="simple">
+<li>tbFrame</li>
+<li>mapFrame</li>
+<li>formFrame</li>
+<li>scriptFrame</li>
+<li>taskFrame</li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">taskPaneFrame</span></code> is a child of the taskFrame.</p>
+<p>Custom JavaScript code can execute in the context of the main frame, the
+script frame, or the task pane frame.</p>
+<p>JavaScript defined as an Invoke Script command executes in the context of
+the main frame. To execute functions in one of the other frames, identify the
+function with the frame name and function name. For example, the following
+calls the <code class="docutils literal"><span class="pre">ZoomToView()</span></code> function of the mapFrame from the main frame:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">(</span><span class="nx">xLoc</span><span class="p">,</span> <span class="nx">yLoc</span><span class="p">,</span> <span class="nx">newScale</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>JavaScript loaded into the <code class="docutils literal"><span class="pre">scriptFrame</span></code> must go up 1 level in the hierarchy
+using parent. For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">parent</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">(</span><span class="nx">xLoc</span><span class="p">,</span> <span class="nx">yLoc</span><span class="p">,</span> <span class="nx">newScale</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>JavaScript loaded into the <code class="docutils literal"><span class="pre">taskPaneFrame</span></code> must go up 2 levels in the hierarchy
+using <code class="docutils literal"><span class="pre">parent.parent</span></code>. For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">(</span><span class="nx">xLoc</span><span class="p">,</span> <span class="nx">yLoc</span><span class="p">,</span> <span class="nx">newScale</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Many Viewer API calls will generate requests to the site server, either to refresh
+data in the Viewer or to notify the site server of a change in Viewer state.
+These requests are generated automatically.</p>
+<div class="section" id="calling-the-viewer-api-with-an-invoke-script-command">
+<h3>Calling the Viewer API with an Invoke Script Command<a class="headerlink" href="#calling-the-viewer-api-with-an-invoke-script-command" title="Permalink to this headline">¶</a></h3>
+<p>Use this technique when you want to call the API directly from the tool bar,
+task list, or context menu.</p>
+<p>For example, you may want to create a tool bar button that zooms and
+positions the map to show a particular location. In the web layout, create a
+command of type Invoke Script. Enter the API call as the script to invoke:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ZoomToView</span><span class="p">(</span><span class="o">-</span><span class="mf">87.7116768</span><span class="p">,</span> <span class="mf">43.7766789973</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Add the button to the tool bar. When a user clicks the button, the map view
+repositions to the location.</p>
+<p>Commands of type Invoke Script always execute in the context of the main
+frame. This means that all main frame functions are available. To execute a
+function in another frame, use the frame name as part of the function name.
+For example, <code class="docutils literal"><span class="pre">formFrame.Submit()</span></code>.</p>
+</div>
+<div class="section" id="calling-the-viewer-api-from-the-script-frame">
+<h3>Calling the Viewer API from the Script Frame<a class="headerlink" href="#calling-the-viewer-api-from-the-script-frame" title="Permalink to this headline">¶</a></h3>
+<p>Use this technique when you want the Viewer API calls to be made as a result
+of an action in the calling page, but you do not want to reload the page. For
+example, you may have a page that generates a list of locations and you would
+like the user to be able to jump directly to any location, while leaving the list
+still available in the task pane.</p>
+<p>In this case, your page can load another page in the hidden script frame, using
+<code class="docutils literal"><span class="pre">target=&quot;scriptFrame&quot;</span></code> as part of the <code class="docutils literal"><span class="pre">&lt;a&gt;</span></code> tag. This requires creating a separate
+page to load in the script frame and passing the necessary parameters when
+the page loads.</p>
+<p>The Hello Viewer sample application contains a file named <code class="docutils literal"><span class="pre">gotopoint.php</span></code>
+that is designed to run in the script frame. The <code class="docutils literal"><span class="pre">&lt;body&gt;</span></code> element is empty, so
+the page does not produce any output. Instead, it emits a JavaScript function
+to execute when the page loads. This function calls the <code class="docutils literal"><span class="pre">ZoomToView()</span></code> function
+in the Viewer API. The essential parts of <code class="docutils literal"><span class="pre">gotopoint.php</span></code> are:</p>
+<p><strong>PHP (gotopoint.php)</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">language</span><span class="o">=</span><span class="s2">&quot;javascript&quot;</span><span class="o">&gt;</span>
+<span class="k">function</span> <span class="nf">OnPageLoad</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">parent</span><span class="o">.</span><span class="nx">ZoomToView</span><span class="p">(</span>
+        <span class="o">&lt;?=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="cp">?&gt;</span><span class="x">,</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="cp">?&gt;</span><span class="x">,</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;Scale&#39;</span><span class="p">]</span> <span class="cp">?&gt;</span><span class="x">,</span>
+<span class="x">        true);</span>
+<span class="x">}</span>
+<span class="x">&lt;/script&gt;</span>
+<span class="x">&lt;body onLoad=&quot;OnPageLoad()&quot;&gt;</span>
+<span class="x">&lt;/body&gt;</span>
+</pre></div>
+</div>
+<p><strong>.net (gotopoint.aspx)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="p">!</span>
+</pre></div>
+</div>
+<p><strong>Java (gotopoint.jsp)</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="o">!</span>
+</pre></div>
+</div>
+<p>To execute <code class="docutils literal"><span class="pre">gotopoint.php</span></code> from the task frame, insert code similar to the
+following:</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$xLocation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">87.7116768</span><span class="p">;</span> <span class="c1">// Or calculate values</span>
+<span class="nv">$yLocation</span> <span class="o">=</span> <span class="mf">43.7766789973</span><span class="p">;</span>
+<span class="nv">$mapScale</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">gotopoint.php?&quot;</span> <span class="o">.</span>
+<span class="s2">&quot;X=</span><span class="si">$xLocation</span><span class="s2">&amp;Y=</span><span class="si">$yLocation</span><span class="s2">&amp;Scale=</span><span class="si">$mapScale\</span><span class="s2">&quot;&quot; .</span>
+<span class="s2">&quot;</span><span class="nx">target</span><span class="o">=</span><span class="nx">\</span><span class="s2">&quot;scriptFrame</span><span class="se">\&quot;</span><span class="s2">&gt;Click to position map&lt;/a&gt;&lt;/p&gt;&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>.net</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="p">!</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="o">!</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This technique is also appropriate for calling the Web API without reloading the task pane. See the Modifying Maps and Layers sample for an example.</p>
+</div>
+</div>
+<div class="section" id="calling-the-viewer-api-from-the-task-pane">
+<h3>Calling the Viewer API from the Task Pane<a class="headerlink" href="#calling-the-viewer-api-from-the-task-pane" title="Permalink to this headline">¶</a></h3>
+<p>Use this technique when you want the Viewer API calls to be made when the
+page loads or as a result of an <code class="docutils literal"><span class="pre">onclick</span></code> event. For example, if you have a task
+in the task list that zooms the map to a pre-defined location, then you do not
+need any user input. The Viewer should zoom as soon as the page loads.</p>
+<p>The map frame contains a JavaScript function to center the map to a given
+coordinate at a given map scale. To call this function from a page loading in the task pane,
+create a function that will be executed when the <code class="docutils literal"><span class="pre">onLoad</span></code> event occurs. The following is a simple
+example. If you add this to the task list and select the task, the displayed map will reposition to the given location.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>Viewer Sample Application - Zoom<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">&quot;javascript&quot;</span><span class="nt">&gt;</span>
+    <span class="kd">function</span> <span class="nx">OnPageLoad</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">(</span><span class="o">-</span><span class="mf">87.7116768</span><span class="p">,</span> <span class="mf">43.7766789973</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">onLoad=</span><span class="s">&quot;OnPageLoad()&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Zooming...<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>Use a similar technique to call custom JavaScript based on an action in the
+task pane, like clicking a link.</p>
+</div>
+<div class="section" id="extending-map-initialization-functionality">
+<h3>Extending Map Initialization Functionality<a class="headerlink" href="#extending-map-initialization-functionality" title="Permalink to this headline">¶</a></h3>
+<p>At times, it may be necessary to perform some initialization functions when
+the map first loads. To accomplish this, a page loaded into the task pane can
+hook into the standard map initialization process.</p>
+<p>For example, when a browser first connects to a MapGuide site, it specifies a
+web layout. The site uses this layout to determine which Viewer components
+to enable and which map to display in the map area. At the time that the task
+pane first loads, the map name is not yet known. It may be required for some
+operations, though.</p>
+</div>
+<div class="section" id="the-hello-viewer-sample">
+<h3>The Hello Viewer Sample<a class="headerlink" href="#the-hello-viewer-sample" title="Permalink to this headline">¶</a></h3>
+<p>The Hello Viewer sample, installed with the Developer&#8217;s Guide samples, shows
+simple examples of using the Viewer API from different parts of a web layout.</p>
+<p>The tool bar for the sample contains a custom Invoke Script command that
+calls the <code class="docutils literal"><span class="pre">ZoomToView()</span></code> function of the <code class="docutils literal"><span class="pre">mapFrame</span></code>. This is executed in the context
+of the main frame, so the function is available using</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The task pane loads a page that shows two other ways of calling <code class="docutils literal"><span class="pre">ZoomToView()</span></code>.
+One way loads a custom page into the hidden <code class="docutils literal"><span class="pre">scriptFrame</span></code>. The page reads
+<code class="docutils literal"><span class="pre">GET</span></code> parameters and passes them to the JavaScript function call. This is executed
+in the context of the <code class="docutils literal"><span class="pre">scriptFrame</span></code>, so <code class="docutils literal"><span class="pre">ZoomToView()</span></code> is available using</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">parent</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Another way calls <code class="docutils literal"><span class="pre">ZoomToView()</span></code> directly when a link is clicked, using the
+JavaScript <code class="docutils literal"><span class="pre">onclick</span></code> event. This is executed in the context of the <code class="docutils literal"><span class="pre">taskPaneFrame</span></code>,
+so <code class="docutils literal"><span class="pre">ZoomToView()</span></code> is available using</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">ZoomToView</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The Developer&#8217;s Guide samples also demonstrate a more advanced method
+for using JavaScript in a Viewer. The file <em>index.php</em> includes an external
+JavaScript file that solves 2 problems:</p>
+<blockquote>
+<div><ul class="simple">
+<li>When a map is first loading, the task pane displays before the map has been fully initialized. This can cause problems if users click any links in the task pane that depend on the map being available.</li>
+<li>The first time the Viewer loads a page into the task pane, it passes <code class="docutils literal"><span class="pre">SESSION</span></code> and <code class="docutils literal"><span class="pre">WEBLAYOUT</span></code> as <code class="docutils literal"><span class="pre">GET</span></code> parameters. The map name is not known until after the web layout has loaded. When a user clicks the Home button, the Viewer reloads the home page in the task pane, but passes <code class="docutils literal"><span class="pre">SESSION</span></code> and <code class="docutils literal"><span class="pre">MAPNAME</span></code> as <code class="docutils literal"><span class="pre">GET</span></code> parameters instead. In some cases, it may be useful for the home page to have the map name when it first loads.</li>
+</ul>
+</div></blockquote>
+<p>To deal with these problems, the Hello Viewer sample loads <code class="docutils literal"><span class="pre">pageLoadFunctions.js</span></code>, which attaches a function
+to the <code class="docutils literal"><span class="pre">window.onload</span></code> event of the page in the task pane. This function does the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Replaces the <code class="docutils literal"><span class="pre">OnMapLoaded()</span></code> function of the main frame. This function is called after the map has been fully initialized. The new version performs some initialization (see below), then calls the original <code class="docutils literal"><span class="pre">OnMapLoaded()</span></code>.</li>
+<li>Saves the contents of the task pane page and replaces it with the text &#8220;Loading...&#8221;.</li>
+<li>After the map is fully initialized, it calls the new version of <code class="docutils literal"><span class="pre">OnMapLoaded()</span></code>. At this point, the map name is known, and is available from the <code class="docutils literal"><span class="pre">mapFrame.GetMapName()</span></code> function. The new version of <code class="docutils literal"><span class="pre">OnMapLoaded()</span></code> restores the contents of the task pane page, then it searches all <code class="docutils literal"><span class="pre">&lt;a&gt;</span></code> elements, replacing &#8220;<code class="docutils literal"><span class="pre">MAPNAME=unknown</span></code>&#8221; with the correct map name in the <code class="docutils literal"><span class="pre">href</span></code> attributes.</li>
+</ul>
+</div></blockquote>
+<p>See the Hello Viewer sample for links to view <em>index.php</em> and <em>pageLoadFuctions.js</em>.</p>
+</div>
+</div>
+<div class="section" id="embedding-a-viewer-in-your-own-page">
+<h2>Embedding a Viewer in Your Own Page<a class="headerlink" href="#embedding-a-viewer-in-your-own-page" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to incorporate a MapGuide Viewer into your own site is to
+create a frame set that contains a frame for your own page layout and a frame
+for the Viewer. The Developer&#8217;s Guide samples use this technique. The main
+page for the samples, <em>main.php</em>, creates a frame set where the top frame in the
+set contains a site-specific page header, and the bottom frame in the set
+contains the embedded Viewer. The following code contains the important
+parts of <em>main.php</em>.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">HTML</span> <span class="k">PUBLIC</span> <span class="s2">&quot;-//W3C//DTD HTML 4.01 Frameset//EN&quot;</span>
+<span class="s2">&quot;http://www.w3.org/TR/html4/frameset.dtd&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">require_once</span><span class="p">(</span><span class="s1">&#39;common/common.php&#39;</span><span class="p">);</span>
+
+<span class="k">try</span>
+<span class="p">{</span>
+    <span class="c1">// Initialize the web extensions,</span>
+    <span class="nx">MgInitializeWebTier</span> <span class="p">(</span><span class="nv">$webconfigFilePath</span><span class="p">);</span>
+
+    <span class="c1">// Connect to the site server and create a session</span>
+    <span class="nv">$userInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgUserInformation</span><span class="p">(</span><span class="s2">&quot;Author&quot;</span><span class="p">,</span> <span class="s2">&quot;author&quot;</span><span class="p">);</span>
+    <span class="nv">$site</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgSite</span><span class="p">();</span>
+    <span class="nv">$site</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="nv">$userInfo</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">MgException</span> <span class="nv">$e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Could not connect to the MapGuide site server.&quot;</span><span class="p">;</span>
+    <span class="k">die</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">try</span>
+<span class="p">{</span>
+    <span class="nv">$sessionId</span> <span class="o">=</span> <span class="nv">$site</span><span class="o">-&gt;</span><span class="na">CreateSession</span><span class="p">();</span>
+
+    <span class="c1">// Define some constants</span>
+    <span class="nv">$webLayout</span> <span class="o">=</span> <span class="s2">&quot;Library://Samples/Layouts/SamplesPHP.WebLayout&quot;</span><span class="p">;</span>
+    <span class="nv">$title</span> <span class="o">=</span> <span class="s2">&quot;Samples&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">MgException</span> <span class="nv">$e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;ERROR: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">GetMessage</span><span class="p">(</span><span class="s2">&quot;eng&quot;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">GetStackTrace</span><span class="p">(</span><span class="s2">&quot;eng&quot;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        &lt;title&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$title</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">    &lt;frameset rows=&quot;110,*&quot;&gt;</span>
+<span class="x">        &lt;frame src=&quot;common/Title.php?TitleText=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$title</span> <span class="cp">?&gt;</span><span class="x">&quot; name=&quot;TitleFrame&quot; scrolling=&quot;NO&quot; noresize /&gt;</span>
+<span class="x">        &lt;frame src=&quot;/mapguide/mapviewerajax/?SESSION=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$sessionId</span> <span class="cp">?&gt;</span><span class="x">&amp;WEBLAYOUT=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$webLayout</span> <span class="cp">?&gt;</span><span class="x">&quot; name=&quot;ViewerFrame&quot; /&gt;</span>
+<span class="x">    &lt;/frameset&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="p">!</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Code</span> <span class="n">sample</span> <span class="n">coming</span> <span class="n">soon</span><span class="o">!</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="interacting_with_layers.html" title="Interacting With Layers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

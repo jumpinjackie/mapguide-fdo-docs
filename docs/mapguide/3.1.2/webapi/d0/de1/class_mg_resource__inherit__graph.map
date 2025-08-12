@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$d5/d39/class_mg_map_base.htm" title="Defines the runtime state of a map." alt="" coords="5,229,100,256"/>
+<area shape="rect" id="node6" href="$db/df1/class_mg_selection_base.htm" title="MgSelectionBase" alt="" coords="124,229,248,256"/>
+<area shape="rect" id="node2" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="45,80,193,107"/>
+<area shape="rect" id="node3" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="66,5,173,32"/>
+<area shape="rect" id="node5" href="$da/df8/class_mg_map.htm" title="Defines the runtime state of a map." alt="" coords="20,304,85,331"/>
+<area shape="rect" id="node7" href="$d7/d8d/class_mg_selection.htm" title="MgSelection" alt="" coords="139,304,233,331"/>
+</map>

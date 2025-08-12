@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fusion &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="The Map Agent" href="mapagent.html" />
+    <link rel="prev" title="Custom Output" href="custom_output.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mapagent.html" title="The Map Agent"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="custom_output.html" title="Custom Output"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fusion</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#essential-concepts">Essential Concepts</a></li>
+<li><a class="reference internal" href="#hello-sheboygan-an-example-template">Hello Sheboygan - An example template</a><ul>
+<li><a class="reference internal" href="#under-the-hood">Under the hood</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-fusion-is-integrated-with-mapguide">How Fusion is integrated with MapGuide</a></li>
+<li><a class="reference internal" href="#application-definitions-html-and-widgets">Application Definitions, HTML and Widgets</a></li>
+<li><a class="reference internal" href="#widget-basics">Widget Basics</a><ul>
+<li><a class="reference internal" href="#invoke-script">Invoke Script</a></li>
+<li><a class="reference internal" href="#invoke-url">Invoke URL</a></li>
+<li><a class="reference internal" href="#mapguideviewerapi-js">MapGuideViewerApi.js</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#events">Events</a></li>
+<li><a class="reference internal" href="#working-with-maps">Working With Maps</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="custom_output.html"
+                        title="previous chapter">Custom Output</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mapagent.html"
+                        title="next chapter">The Map Agent</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fusion.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fusion">
+<h1>Fusion<a class="headerlink" href="#fusion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Fusion is a web-mapping application development framework for <a class="reference external" href="http://mapguide.osgeo.org">MapGuide Open Source</a> / <a class="reference external" href="http://usa.autodesk.com/adsk/servlet/pc/index?id=16505474&amp;siteID=123112">Autodesk Infrastructure Map Server</a> that is built primarily in JavaScript.</p>
+<p>It allows non-spatial web developers to build rich mapping applications quickly and easily.</p>
+<p>Based on the defacto standard spatial javascript API <a class="reference external" href="http://www.openalayers.org">OpenLayers</a>, you can extend it easily.</p>
+<p>Using widgets, developers are able to add, remove, or modify functionality using standard-compliant HTML and CSS.</p>
+<p>Fusion does not require any proprietary browser plug-ins and works in <a class="reference external" href="http://trac.osgeo.org/fusion/wiki/TechSpecs">all the major browsers on Windows, Mac, and Linux</a>.</p>
+<p>Fusion is also referred to as Flexible Layouts inside Autodesk MapGuide Studio</p>
+</div>
+<div class="section" id="essential-concepts">
+<h2>Essential Concepts<a class="headerlink" href="#essential-concepts" title="Permalink to this headline">¶</a></h2>
+<p>It is very important that you understand how MapGuide works. MapGuide comes with its own extensive documentation. If you are not familiar with creating MapDefinition resources, please review the MapGuide documentation.</p>
+<p>Fusion is all about creating a web application. You will need some familiarity with HTML, JavaScript?, CSS.</p>
+<p>The primary development language for building Fusion applications is JavaScript, but if you need to add server-side functionality using the MapGuide API, then a knowledge of PHP is also required.</p>
+<p>Fusion makes extensive use of static and dynamically generated HTML. You need to be familiar with the Document Object Model (DOM) implemented by various browsers, and the subtle differences between the browsers in how scripting with the DOM works. Although it is possible to use Fusion without any DOM scripting, it is likely that most applications will need to use some scripting to achieve their desired functionality.</p>
+<p>Fusion makes extensive use of CSS to achieve its look and feel in a minimally intrusive way. The design principle behind much of the structure of the user interface components of Fusion is to let the browser do as much of the work as possible with its native layout engine. This is the most efficient and natural design for web pages, and reduces the amount of javascript code that needs to be executed by the client&#8217;s browser. You will need to thoroughly understand CSS design and implementation concepts in order to fully customize the Fusion interface, but to use the default look and feel of Fusion with moderate customization does not require advanced CSS knowledge.</p>
+</div>
+<div class="section" id="hello-sheboygan-an-example-template">
+<span id="hello-sheboygan"></span><h2>Hello Sheboygan - An example template<a class="headerlink" href="#hello-sheboygan-an-example-template" title="Permalink to this headline">¶</a></h2>
+<p>Creating a new Fusion application is really quite straight-forward. The simplest way to demonstrate the core concepts of Fusion is to build a small, working application. The Hello Sheboygan application is going to have a map and three navigation tools (zoom in, zoom out, and pan). It will be fully functional, albeit quite plain!</p>
+<p>&lt;image of app here&gt;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This section is simply to demonstrate the inner workings of a Fusion template. For practical purposes, you would probably be using the using one of the 5 available templates already provided by MapGuide:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>Slate</cite></li>
+<li><cite>Maroon</cite></li>
+<li><cite>Aqua</cite></li>
+<li><cite>LimeGold</cite></li>
+<li><cite>TurquoiseYellow</cite></li>
+</ul>
+</div></blockquote>
+<p class="last">In such cases, any such custom functionality you want to add into a Fusion application would be done through widgets. See <a class="reference internal" href="#widget-basics"><span class="std std-ref">Widget Basics</span></a> for more information.</p>
+</div>
+<p>First, create a directory on your server to hold all the files required by the application. The directory needs to be in a web-accessible location. You can always create a directory in your www folder of your MapGuide Open Source installation if you don&#8217;t know where else to put it. Call this directory hello.</p>
+<p>The next step is to decide what functionality, or widgets, are needed by the application. The list (from the description above) is:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a Map widget</li>
+<li>a Zoom In widget</li>
+<li>a Zoom Out widget</li>
+<li>a Pan widget</li>
+</ul>
+</div></blockquote>
+<p>These widgets need to be described in an ApplicationDefinition xml file. Fusion allows you to store the ApplicationDefinition resource in the MapGuide repository or as a separate XML file. For the purpose of this document, we will be assuming that you are storing the ApplicationDefinition resource as a separate XML file. There are instructions at the end of this document for using an ApplicationDefinition resource stored in a MapGuide repository.</p>
+<p>By convention, the name of the file is ApplicationDefinition.xml. So, create a new file in the hello directory and name it ApplicationDefinition.xml. For our very simple example, we need an ApplicationDefinition tag with a Title tag, a MapGroup tag, and a WidgetSet tag to hold our four widgets (see the ApplicationDefinition page for a more complete description). Individual widgets are represented as Widget tags inside the WidgetSet tag where the actual Widget is specified by the Type tag and the HTML element that the Widget will be created in is specified by the Name tag. Our four widgets each have a specific Widget tag with several options, most of which are not required for this example. The resulting XML for Hello Sheboygan is:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;ApplicationDefinition</span>
+      <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+      <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span>
+      <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">&quot;ApplicationDefinition-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Title&gt;</span>Hello Sheboygan<span class="nt">&lt;/Title&gt;</span>
+  <span class="nt">&lt;MapGroup&gt;</span>
+    <span class="nt">&lt;Map</span> <span class="na">xsi:type=</span><span class="s">&quot;MapGuideLayerType&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Type&gt;</span>MapGuide<span class="nt">&lt;/Type&gt;</span>
+      <span class="nt">&lt;SingleTile&gt;</span>true<span class="nt">&lt;/SingleTile&gt;</span>
+      <span class="nt">&lt;Extension&gt;</span>
+        <span class="nt">&lt;ResourceId&gt;</span>Library://Samples/Sheboygan/Maps/Sheboygan.MapDefinition<span class="nt">&lt;/ResourceId&gt;</span>
+      <span class="nt">&lt;/Extension&gt;</span>
+    <span class="nt">&lt;/Map&gt;</span>
+  <span class="nt">&lt;/MapGroup&gt;</span>
+  <span class="nt">&lt;WidgetSet&gt;</span>
+    <span class="nt">&lt;MapWidget&gt;</span>
+      <span class="nt">&lt;Name&gt;</span>Map<span class="nt">&lt;/Name&gt;</span>
+      <span class="nt">&lt;Type&gt;</span>Map<span class="nt">&lt;/Action&gt;</span>
+      <span class="nt">&lt;StatusText/&gt;</span>
+      <span class="nt">&lt;MapId&gt;</span>HelloSheboygan<span class="nt">&lt;/MapId&gt;</span>
+    <span class="nt">&lt;/Widget&gt;</span>
+    <span class="nt">&lt;Widget&gt;</span>
+      <span class="nt">&lt;Name&gt;</span>ZoomIn<span class="nt">&lt;/Name&gt;</span>
+      <span class="nt">&lt;Type&gt;</span>Zoom<span class="nt">&lt;/Type&gt;</span>
+      <span class="nt">&lt;StatusText/&gt;</span>
+      <span class="nt">&lt;Extension&gt;</span>
+        <span class="nt">&lt;Direction&gt;</span>in<span class="nt">&lt;/Direction&gt;</span>
+      <span class="nt">&lt;/Extension&gt;</span>
+      <span class="nt">&lt;ImageUrl&gt;</span>images/icons/zoom-in.png<span class="nt">&lt;/ImageUrl&gt;</span>
+      <span class="nt">&lt;ImageClass/&gt;</span>
+      <span class="nt">&lt;Label/&gt;</span>
+      <span class="nt">&lt;Tooltip&gt;</span>Click or click and drag on the map to zoom in<span class="nt">&lt;/Tooltip&gt;</span>
+      <span class="nt">&lt;Disabled/&gt;</span>
+    <span class="nt">&lt;/Widget&gt;</span>
+    <span class="nt">&lt;Widget&gt;</span>
+      <span class="nt">&lt;Name&gt;</span>ZoomOut<span class="nt">&lt;/Name&gt;</span>
+      <span class="nt">&lt;Type&gt;</span>Zoom<span class="nt">&lt;/Type&gt;</span>
+      <span class="nt">&lt;StatusText/&gt;</span>
+      <span class="nt">&lt;Extension&gt;</span>
+        <span class="nt">&lt;Direction&gt;</span>out<span class="nt">&lt;/Direction&gt;</span>
+      <span class="nt">&lt;/Extension&gt;</span>
+      <span class="nt">&lt;ImageUrl&gt;</span>images/icons/zoom-out.png<span class="nt">&lt;/ImageUrl&gt;</span>
+      <span class="nt">&lt;ImageClass/&gt;</span>
+      <span class="nt">&lt;Label/&gt;</span>
+      <span class="nt">&lt;Tooltip&gt;</span>Click on the map to zoom out<span class="nt">&lt;/Tooltip&gt;</span>
+      <span class="nt">&lt;Disabled/&gt;</span>
+    <span class="nt">&lt;/Widget&gt;</span>
+    <span class="nt">&lt;Widget&gt;</span>
+      <span class="nt">&lt;Name&gt;</span>Pan<span class="nt">&lt;/Name&gt;</span>
+      <span class="nt">&lt;Type&gt;</span>Pan<span class="nt">&lt;/Type&gt;</span>
+      <span class="nt">&lt;StatusText/&gt;</span>
+      <span class="nt">&lt;Extension/&gt;</span>
+      <span class="nt">&lt;ImageUrl&gt;</span>images/icons/pan.png<span class="nt">&lt;/ImageUrl&gt;</span>
+      <span class="nt">&lt;ImageClass/&gt;</span>
+      <span class="nt">&lt;Label/&gt;</span>
+      <span class="nt">&lt;Tooltip&gt;</span>Click and drag the map to pan<span class="nt">&lt;/Tooltip&gt;</span>
+      <span class="nt">&lt;Disabled/&gt;</span>
+    <span class="nt">&lt;/Widget&gt;</span>
+  <span class="nt">&lt;/WidgetSet&gt;</span>
+  <span class="nt">&lt;Extension</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/ApplicationDefinition&gt;</span>
+</pre></div>
+</div>
+<p>The next thing that our <cite>Hello World</cite> application needs is a template, which is simply an html file. Create a new file in the <cite>hello</cite> directory and name it index.html. Here&#8217;s the <cite>index.html</cite> file contents:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>Hello Sheboygan<span class="nt">&lt;/title&gt;</span>
+<span class="c">&lt;!-- change the source of the following tag to point to your fusion installation --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;../fusion/lib/fusion.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Fusion</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;Toolbar&quot;</span> <span class="na">style=</span><span class="s">&quot;position: relative; width: 400px; height: 24px&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;ZoomIn&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;ZoomOut&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;Pan&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;Map&quot;</span> <span class="na">style=</span><span class="s">&quot;position: relative; width: 400px; height: 400px&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>It is highly recommended to use a valid doctype for your Fusion application template pages. If you omit the doctype or use an invalid doctype, most browsers will revert to a mode called <cite>Quirks Mode</cite>. Fusion will mostly function correctly, but you may notice some minor issues and your application may appear differently depending on the browser. By using a valid HTML or XHTML doctype, browsers will use a mode called <cite>Standards Compliant Mode</cite> and your application will work consistently between different browsers.</p>
+<p>You will need to make sure that the <strong>src</strong> of the script tag that points to <cite>fusion.js</cite> is a valid path, it can be relative (as in the example above) or absolute (starting with <cite>http://</cite>). If it is absolute, then the url must be pointing to the same server as the url you use to load the application.</p>
+<p>That is all that is needed to build a fully functional Fusion application. Save your files and then load the application by entering the URL to the <cite>index.html</cite> page in your web browser. If everything is set up correctly, you should see three buttoms appear, followed shortly by a square map image below the buttons. You can click any of the buttons to activate them, and use them on the map.</p>
+<div class="section" id="under-the-hood">
+<h3>Under the hood<a class="headerlink" href="#under-the-hood" title="Permalink to this headline">¶</a></h3>
+<p>As you can see, quite a lot of things are going on without a lot of code. Adding other widgets is as simple as adding an HTML container for them in the HTML page and adding a Widget in the WidgetSet. So how exactly does Fusion turn this small amount of HTML and XML into a functional web mapping application?</p>
+<p>The first important step is including fusion.js in your web page (the first script tag in the <a class="reference internal" href="#hello-sheboygan"><span class="std std-ref">Hello Sheboygan - An example template</span></a> example). This makes Fusion available to your application. The second important step is invoking the <cite>Fusion.initialize()</cite> method during (or after) the <strong>onload</strong> event of the web page (the contents of the second script tag). <cite>Fusion.initialize()</cite> starts the process of getting the application running and the following steps happen:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the Fusion configuration file (config.json) is loaded and parsed</li>
+<li>the ApplicationDefinition configuration file is loaded and parsed</li>
+<li>Widgets with associated HTML elements are identified</li>
+<li>the JavaScript file associated with each identified Widget is loaded</li>
+<li>any dependencies of the Widget are loaded</li>
+<li>when all Widgets (and their dependencies such as CSS files) are loaded, a new instance of each Widget is created for each HTML element.</li>
+<li>when all Widget have been initialized, the <cite>FUSION_INITIALIZED</cite> event is emitted.</li>
+</ul>
+</div></blockquote>
+<p>An important step in this process is the loading of the MapWidget(s). After each MapWidget has been created, it:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">attempts to create a session with the server for that Map instance. All Map instances of the same Type will share the same session.</p>
+</li>
+<li><dl class="first docutils">
+<dt>if an initial Map is specified:</dt>
+<dd><ul class="first last simple">
+<li>issue a <cite>MAP_LOADING</cite> event</li>
+<li>attempt to load the Map (which will wait until the session has been created)</li>
+<li>issue a <cite>MAP_LOADED</cite> event when the map has finished loading</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>All Widgets in a WidgetSet are associated with the MapWidget of that WidgetSet.</p>
+</div>
+</div>
+<div class="section" id="how-fusion-is-integrated-with-mapguide">
+<h2>How Fusion is integrated with MapGuide<a class="headerlink" href="#how-fusion-is-integrated-with-mapguide" title="Permalink to this headline">¶</a></h2>
+<p>MapGuide Open Source architecture is divided into three tiers:</p>
+<p>Server Tier:</p>
+<blockquote>
+<div>This tier runs the MapGuide Open Source server. Fusion is not integrated into this tier.</div></blockquote>
+<p>Web Extensions Tier:</p>
+<blockquote>
+<div>This tier runs with a Web Server. Fusion is installed in this tier and makes use of the MapGuide Open Source Web Extensions API to implement some functionality.</div></blockquote>
+<p>Client Tier:</p>
+<blockquote>
+<div>This tier runs in the client&#8217;s web browser. Most of Fusion exists in this tier, and it completely replaces the existing MapGuide Open Source client tier (known as the AJAX viewer).</div></blockquote>
+<p>The Fusion Server components work directly with the MapGuide Open Source PHP API to implement specific functionality such as buffering features and working with selections.</p>
+<p>The Fusion JavaScript API and Widget are installed with the MapGuide Open Source Web Tier, but they are actually loaded up to and executed in the Client Tier.</p>
+</div>
+<div class="section" id="application-definitions-html-and-widgets">
+<h2>Application Definitions, HTML and Widgets<a class="headerlink" href="#application-definitions-html-and-widgets" title="Permalink to this headline">¶</a></h2>
+<p>The API and Widget are linked to specific HTML elements within an HTML page through the ApplicationDefinition XML document. A Widget is the executable code (JavaScript class) that is loaded when Fusion identifies an HTML element id and Widget Name that are the same. The Type of the Widget identifies the exact JavaScript file to be loaded and the JavaScript object that needs to be instantiated to create a functional Widget. The runtime instance of the JavaScript object is the Widget.</p>
+<p>When the runtime instance is created, it uses the HTML element id to determine where in the HTML page it should display its user interface. Any custom configuration for the Widget is placed in the ApplicationDefinition Widget XML block as sub tags (each Widget has its own list of what customization is possible, see the Widget API Reference for details).</p>
+<p>If you are customizing the look and feel of a single Widget by overriding the CSS styling for the Widget, this is normally done by using the #&lt;id&gt; syntax to limit your changes to that specific Widget.</p>
+</div>
+<div class="section" id="widget-basics">
+<span id="id1"></span><h2>Widget Basics<a class="headerlink" href="#widget-basics" title="Permalink to this headline">¶</a></h2>
+<p>Widgets are the discrete pieces of functionality that your Fusion application is composed of. The standard fusion template provides a lot of widgets out of the box, and a new Application Definition created by an authoring tool like MapGuide Maestro will include many of these widgets for you. So a default application is already pretty rich in functionality.</p>
+<p>Whereas custom commands are the way to add new behaviour to an AJAX viewer application. Custom functionality in a Fusion application can be provided in the following forms:</p>
+<blockquote>
+<div><ul class="simple">
+<li>An <a class="reference internal" href="#invoke-script-widget"><span class="std std-ref">Invoke Script</span></a> widget</li>
+<li>An <a class="reference internal" href="#invoke-url-widget"><span class="std std-ref">Invoke URL</span></a> widget</li>
+</ul>
+</div></blockquote>
+<div class="section" id="invoke-script">
+<span id="invoke-script-widget"></span><h3>Invoke Script<a class="headerlink" href="#invoke-script" title="Permalink to this headline">¶</a></h3>
+<p>Invoke Script widgets function like their counterpart in the AJAX viewer. The main difference is that your script code has to work against the Fusion API instead of the AJAX viewer API, if you are going to use such features. You will need to use an authoring tool like MapGuide Maestro or hack the Application Defintion XML document itself to modify the script code for a Invoke Script widget</p>
+</div>
+<div class="section" id="invoke-url">
+<span id="invoke-url-widget"></span><h3>Invoke URL<a class="headerlink" href="#invoke-url" title="Permalink to this headline">¶</a></h3>
+<p>Invoke URL widgets function like their counterpart in the AJAX viewer. Just like the Invoke Script widget, the main difference is that any javascript code that you emit from the URL you are invoking that uses the AJAX viewer API will need to be converted to use the Fusion API instead. As Invoke URL widgets just simply invoke a URL, you can use any language (.net/Java/PHP) for the server page that is invoked when working with the MapGuide API.</p>
+</div>
+<div class="section" id="mapguideviewerapi-js">
+<h3>MapGuideViewerApi.js<a class="headerlink" href="#mapguideviewerapi-js" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;ve worked with the AJAX viewer API, then the Fusion API will look completely different to you. The <cite>MapGuideViewerApi.js</cite> utility library is included in the Fusion framework which provides a subset of the AJAX viewer API to help ease the transition of your javascript code from the AJAX viewer API to Fusion.</p>
+<p>The <cite>MapGuideViewerApi.js</cite> file is located under the <cite>layersMapGuide</cite> subdirectory of your Fusion directory</p>
+</div>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>The event code in Fusion is designed to provide an asynchronous notification mechanism that can be used to register for, and receive notification of, key events that happen asynchronously in Fusion. The following terms are used with respect to events:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>event id</cite>: a unique identifier for an event, represented by a javascript variable that is all in upper case (e.g <cite>FUSION_INITIALIZED</cite>)</li>
+<li><cite>trigger</cite>: when an event occurs, it is &#8216;triggered&#8217; and all the registered callback functions are notified</li>
+<li><cite>register</cite>: provide a callback function that is called when an event is triggered</li>
+<li><cite>deregister</cite>: remove a callback function that was previously registered</li>
+<li><cite>publish</cite>: anything that can trigger an event must publish all the valid event ids</li>
+</ul>
+</div></blockquote>
+<p>The event mechanism of Fusion is implemented by two functions: registerForEvent and deregisterForEvent. Both functions have the same signature, taking an event ID as the first parameter and a callback function pointer as the second parameter.</p>
+<p>The Fusion application object provides two specific events that can be used by applications to get notification of when Fusion initialization has completed and when an error occurs anywhere in Fusion. These events are:</p>
+<p><cite>Fusion.Event.FUSION_INITIALIZED:</cite></p>
+<blockquote>
+<div>This is triggered when Fusion&#8217;s initialization is complete and the application is running. This signals that it is safe for the application to communicate with specific Widgets. Note that the MapWidget, specifically, will be ready but may not have actually loaded the map. There is a separate event for that . Applications should register for this event before calling <cite>Fusion.initialize()</cite>.</div></blockquote>
+<p><cite>Fusion.Event.FUSION_ERROR:</cite></p>
+<blockquote>
+<div>This is triggered when an internal error happens. Details on the error are passed to the callback function. Applications should register for this event before calling <cite>Fusion.initialize()</cite> to ensure that they receive errors that happen during initialization.</div></blockquote>
+<p>Widgets in Fusion also use and trigger events. Widgets are designed to be completely independent of one another, allowing them to be added to, or removed from, applications with little or no impact on the other Widgets in the application. However, there are cases (especially with the MapWidget) where it is important that Widgets be able to communicate with other Widgets or with the application as a whole. For these situations, there is an event mechanism built into Fusion that allows Widgets, and applications built on Fusion, to register for and trigger events. The event mechanism allows Widgets to be independent of each other, but still provide a high level of integration when required.</p>
+<p>To register a callback function for a Widget event, the application must first obtain a reference to the Widget through one of the methods of the <cite>Fusion</cite> object (<cite>getWidgetById</cite> typically) and then call <cite>registerForEvent</cite> passing one of the event IDs that is valid for that Widget.</p>
+</div>
+<div class="section" id="working-with-maps">
+<h2>Working With Maps<a class="headerlink" href="#working-with-maps" title="Permalink to this headline">¶</a></h2>
+<p>In Fusion, the MapWidget is central to everything that is going on. It is not valid to design a Fusion application without a Map in it. The MapWidget is the primary interface between the application and the spatial data represented by the map. Most widgets in Fusion either display information about the map or allow the user to interact with the map in some way.</p>
+<p>The Map widget API is probably the most used one in Fusion. It is completely documented in the Command API reference, but the most used methods are described here.</p>
+<p><cite>loadMap(mapDefinition):</cite></p>
+<blockquote>
+<div>This causes the Map widget to load the specified MapDefinition?.</div></blockquote>
+<p><cite>reloadMap():</cite></p>
+<blockquote>
+<div>This causes the Map widget to reload the current MapDefinition?. This is necessary when the map state has changed in certain ways (adding or removing layers in the map, for instance) and is primarily an internal function.</div></blockquote>
+<p><cite>setExtents(minx, miny, maxx, maxy).</cite> This is used to set the map extents to a particular bounding box programmatically. drawMap():</p>
+<blockquote>
+<div>This is used to render a map image and load it in the browser. Normally, this is called automatically as required, but occasionally it may be required to be called programmatically when the state of the map has changed on the server without the knowledge of the Map widget.</div></blockquote>
+<p><cite>query(options):</cite></p>
+<blockquote>
+<div>This is described more completely in the Command API Reference, but the query method is used to query the Map in some way and create (or modify) a selection.</div></blockquote>
+<p><cite>getSessionId():</cite></p>
+<blockquote>
+<div>This returns the session id that is used with the server side support scripts for this map.</div></blockquote>
+<p>When a Map is defined in the ApplicationDefinition file, it can have a default MapDefinition that is automatically loaded when the application is loaded. But it is not mandatory to specify a default map. When no default map is specified, the Map widget is still initialized. Loading of a MapDefinition is then done in response to a widget (such as the MapMenu? widget) or some application-specific code. Regardless of how it happens, when a MapDefinition has been loaded, the Map widget will trigger a <cite>Fusion.Event.MAP_LOADED</cite> event. Most widgets are not useful if there is no map loaded, so they use the <cite>Fusion.Event.MAP_LOADED</cite> event to determine when they should be enabled. This means that most widgets will appear initially disabled until the map has been loaded. There are some notable exceptions, including the Map Menu widget which is used to provide a drop-down menu of MapDefinitions that the user can pick from.</p>
+<p>Once the Map is loaded, many events may be triggered, including:</p>
+<p><cite>Fusion.Event.MAP_SESSION_CREATED:</cite></p>
+<blockquote>
+<div>The Map widget is responsible for creating and maintaining a session with the server. When the session has been created, this event is triggered. Nothing can happen until this event has been triggered.</div></blockquote>
+<p><cite>Fusion.Event.MAP_LOADING:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when it is starting to load a new Map. This is primarily used by widgets to prepare themselves for the new map by discarding their current state and temporarily disabling themselves.</div></blockquote>
+<p><cite>Fusion.Event.MAP_LOADED:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when a map has been loaded and is ready.</div></blockquote>
+<p><cite>Fusion.Event.MAP_RELOADED:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when the current map has been reloaded and is ready.</div></blockquote>
+<p><cite>Fusion.Event.MAP_EXTENTS_CHANGED:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event for any navigation that changes the current extents.</div></blockquote>
+<p><cite>Fusion.Event.MAP_BUSY_CHANGED:</cite></p>
+<blockquote>
+<div>The Map widget maintains a reference count of asynchronous events as they start and finish. An application can use this event to display a processing image so that the user is aware that some asynchronous activitity is happening.</div></blockquote>
+<p><cite>Fusion.Event.MAP_RESIZED:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when the size of the map is changed.</div></blockquote>
+<p><cite>Fusion.Event.MAP_SELECTION_ON:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when a new selection has been created.</div></blockquote>
+<p><cite>Fusion.Event.MAP_SELECTION_OFF:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when the current selection has been cleared.</div></blockquote>
+<p><cite>Fusion.Event.MAP_ACTIVE_LAYER_CHANGED:</cite></p>
+<blockquote>
+<div>The Map widget allows for a single layer to be marked as active by the application. This event is triggered when the active layer is changed.</div></blockquote>
+<p><cite>Fusion.Event.MAP_GENERIC_EVENT:</cite></p>
+<blockquote>
+<div>Most widgets rely directly on their Map widget for everything. In some cases, though, widgets need to be informed of changes in other widgets. In these cases, the Map widget can act as a broker for events through the <cite>MAP_GENERIC_EVENT</cite>. Widgets that employ the <cite>Fusion.Event.MAP_GENERIC_EVENT</cite> normally do so for a specific internal purpose, and the application should not normally register for this event.</div></blockquote>
+<p>Working with Selections</p>
+<p>There are several widgets in Fusion that allow the user to interactively select features on the Map. Fusion takes care of updating the Map image with the current selection, if necessary, but does not display attributes of the selected features to the user. That is up to the application.</p>
+<p>Regardless of how the features are selected, the Map widget provides the API for an application to retrieve and work with the user&#8217;s selection. There are two events that can be used by an application to know when the user selection has changed:</p>
+<p><cite>Fusion.Event.MAP_SELECTION_ON:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when a new selection has been created.</div></blockquote>
+<p><cite>Fusion.Event.MAP_SELECTION_OFF:</cite></p>
+<blockquote>
+<div>The Map widget triggers this event when the current selection has been cleared.</div></blockquote>
+<p>When the application receives a <cite>Fusion.Event.MAP_SELECTION_ON</cite> event from the Map widget, it can use the following functions to work with the selection:</p>
+<p><cite>hasSelection():</cite></p>
+<blockquote>
+<div>This method returns a boolean value which indicates if there is currently a selection or not</div></blockquote>
+<p><cite>getSelection(callback):</cite></p>
+<blockquote>
+<div>This method retrieves the current selection. Retrieving the selection is potentially an asynchronous operation and so the callee provides a callback function that is called when the selection is ready. The callback function is passed a single argument, a Selection object, described below.</div></blockquote>
+<p><cite>clearSelection():</cite></p>
+<blockquote>
+<div>This method is used to clear the current selection. This removes the selection from the map and invalidates the current selection object.</div></blockquote>
+<p>An application will typically call <cite>getSelection()</cite> in response to the <cite>MAP_SELECTION_ON</cite> event. Typical code for this might look like:</p>
+<p><strong>JavaScript</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span><span class="o">=</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Fusion</span><span class="p">.</span><span class="nx">registerForEvent</span><span class="p">(</span><span class="nx">Fusion</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FUSION_INITIALIZED</span><span class="p">,</span> <span class="nx">onInitialized</span><span class="p">);</span>
+    <span class="nx">Fusion</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">theMap</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">onInitialized</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">theMap</span> <span class="o">=</span> <span class="nx">Fusion</span><span class="p">.</span><span class="nx">getWidgetById</span><span class="p">(</span><span class="s1">&#39;Map&#39;</span><span class="p">);</span>
+    <span class="nx">theMap</span><span class="p">.</span><span class="nx">registerForEvent</span><span class="p">(</span><span class="nx">Fusion</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">MAP_SELECTION_ON</span><span class="p">,</span> <span class="nx">selectionOn</span><span class="p">);</span>
+    <span class="nx">theMap</span><span class="p">.</span><span class="nx">registerForEvent</span><span class="p">(</span><span class="nx">Fusion</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">MAP_SELECTION_OFF</span><span class="p">,</span> <span class="nx">selectionOff</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">selectionOn</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//a new selection has been made, request it</span>
+    <span class="nx">theMap</span><span class="p">.</span><span class="nx">getSelection</span><span class="p">(</span><span class="nx">displaySelection</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">displaySelection</span><span class="p">(</span><span class="nx">selection</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//display the selection to the user in some way ...</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">selectionOff</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//clear the selection results</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A Selection object is used to access the selection results. It provides the following API:</p>
+<p><cite>getNumLayers():</cite></p>
+<blockquote>
+<div>returns the number of layers that have features selected</div></blockquote>
+<p><cite>getNumElements():</cite></p>
+<blockquote>
+<div>returns the total number of features that are selected</div></blockquote>
+<p><cite>getLowerLeftCoord():</cite></p>
+<blockquote>
+<div>returns the lower, left coordinate of the bounding box of all selected features</div></blockquote>
+<p><cite>getUpperRightCoord():</cite></p>
+<blockquote>
+<div>returns the upper, right coordinate of the bounding box of all selected features</div></blockquote>
+<p><cite>getLayerByName(name):</cite></p>
+<blockquote>
+<div>gets the layer selection object for a layer from the name of the layer. This returns null if there is no layer with the requested name in the selection results</div></blockquote>
+<p><cite>getLayer(index):</cite></p>
+<blockquote>
+<div>gets the layer selection object for the requested layer where index is between 0 and one less that the value returned by <cite>getNumLayers()</cite>.</div></blockquote>
+<p>An application will typically loop over the layers in a selection and retrieve individual results using the Layer Selection object returned by <cite>getLayer()</cite> or <cite>getLayerByName()</cite>. Layer selection objects have the following API</p>
+<p><cite>getName():</cite></p>
+<blockquote>
+<div>returns the name of the layer that the selected features are in</div></blockquote>
+<p><cite>getNumElements():</cite></p>
+<blockquote>
+<div>returns the number of features selected in this layer</div></blockquote>
+<p><cite>getNumProperties():</cite></p>
+<blockquote>
+<div>returns the number of data properties, or attributes, of the features in this layer</div></blockquote>
+<p><cite>getPropertyNames():</cite></p>
+<blockquote>
+<div>returns an array of the names of each of the properties</div></blockquote>
+<p><cite>getPropertyTypes():</cite></p>
+<blockquote>
+<div>returns an array of the types of the properties</div></blockquote>
+<p><cite>getElementValue(elementIndex, propertyIndex):</cite></p>
+<blockquote>
+<div>returns the actual value of a given property for a given element</div></blockquote>
+<p>The following code is an example of how to use the Selection and Layer Selection objects to create a tabular display of selected features.</p>
+<p><strong>JavaScript</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">displaySelection</span><span class="p">(</span><span class="nx">selection</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//display the selection to the user in some way ...</span>
+    <span class="c1">//make sure something got selected ...</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">selection</span> <span class="o">&amp;&amp;</span> <span class="nx">selection</span><span class="p">.</span><span class="nx">getNumElements</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">//obtain a reference to the HTML Element that the results</span>
+       <span class="c1">//will be placed in</span>
+       <span class="kd">var</span> <span class="nx">resultElm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;selectionResultDiv&#39;</span><span class="p">);</span>
+       <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">selection</span><span class="p">.</span><span class="nx">getNumLayers</span><span class="p">();</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">selectionLayer</span> <span class="o">=</span> <span class="nx">selection</span><span class="p">.</span><span class="nx">getLayer</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+          <span class="kd">var</span> <span class="nx">propNames</span> <span class="o">=</span> <span class="nx">selectionLayer</span><span class="p">.</span><span class="nx">getPropertyNames</span><span class="p">();</span>
+          <span class="kd">var</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">);</span>
+          <span class="nx">span</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;selectionResultsTitle&#39;</span><span class="p">;</span>
+          <span class="nx">span</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Layer &#39;</span> <span class="o">+</span> <span class="nx">selectionLayer</span><span class="p">.</span><span class="nx">getName</span><span class="p">();</span>
+          <span class="nx">resultElm</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
+          <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
+          <span class="nx">table</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;selectionResultsTable&#39;</span><span class="p">;</span>
+          <span class="nx">resultElm</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
+          <span class="c1">//set up the table header to be the property names</span>
+          <span class="kd">var</span> <span class="nx">thead</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;thead&#39;</span><span class="p">);</span>
+          <span class="nx">table</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">thead</span><span class="p">);</span>
+          <span class="kd">var</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">);</span>
+          <span class="nx">thead</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">propNames</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+             <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+             <span class="nx">td</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">propNames</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+             <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="c1">//output the selection values</span>
+          <span class="kd">var</span> <span class="nx">tbody</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">);</span>
+          <span class="nx">table</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tbody</span><span class="p">);</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">selectionLayer</span><span class="p">.</span><span class="nx">getNumElements</span><span class="p">();</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+             <span class="kd">var</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+             <span class="nx">tbody</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+             <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">k</span><span class="o">&lt;</span><span class="nx">propNames</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">td</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+                <span class="nx">td</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">selectionLayer</span><span class="p">.</span><span class="nx">getElementValue</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="nx">k</span><span class="p">);</span>
+                <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td</span><span class="p">);</span>
+             <span class="p">}</span>
+          <span class="p">}</span>
+           <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="c1">//could display a message of some sort saying nothing was selected?</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mapagent.html" title="The Map Agent"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="custom_output.html" title="Custom Output"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

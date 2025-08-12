@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$d9/d47/class_mg_curve_segment.htm" title="MgCurveSegment is an abstract base class." alt="" coords="25,229,149,256"/>
+<area shape="rect" id="node3" href="$de/d77/class_mg_geometry_component.htm" title="MgGeometryComponent is the base class for all of the geometry component types, namely, MgArcSegment, MgCurveRing, MgLinearRing, and MgLinearSegment." alt="" coords="5,155,168,181"/>
+<area shape="rect" id="node4" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="19,80,154,107"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="33,5,140,32"/>
+</map>

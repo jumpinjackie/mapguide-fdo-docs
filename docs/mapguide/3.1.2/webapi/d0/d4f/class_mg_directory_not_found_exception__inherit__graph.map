@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$db/d79/class_mg_file_io_exception.htm" title="Thrown when a file I/O error occurs." alt="" coords="44,304,173,331"/>
+<area shape="rect" id="node3" href="$d0/d5a/class_mg_io_exception.htm" title="Thrown when an I/O error occurs." alt="" coords="55,229,163,256"/>
+<area shape="rect" id="node4" href="$d5/da0/class_mg_system_exception.htm" title="Base class for all exceptions representing a system error." alt="" coords="37,155,180,181"/>
+<area shape="rect" id="node5" href="$db/d05/class_mg_exception.htm" title="Base class for exceptions." alt="" coords="59,80,158,107"/>
+<area shape="rect" id="node6" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="55,5,162,32"/>
+</map>

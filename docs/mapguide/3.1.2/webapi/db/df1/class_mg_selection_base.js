@@ -1,0 +1,28 @@
+var class_mg_selection_base =
+[
+    [ "MgSelectionBase", "db/df1/class_mg_selection_base_aed6f720bff280e1c12f5d921d0fad372.htm#aed6f720bff280e1c12f5d921d0fad372", null ],
+    [ "MgSelectionBase", "db/df1/class_mg_selection_base_ab442fc58e9ee250290887e9a4a6bd7b8.htm#ab442fc58e9ee250290887e9a4a6bd7b8", null ],
+    [ "Add", "db/df1/class_mg_selection_base_a7e54f4a3bd915d757447a4053e64515d.htm#a7e54f4a3bd915d757447a4053e64515d", null ],
+    [ "AddFeatureIdDouble", "db/df1/class_mg_selection_base_a3470143f55646e0a2c916b548b474b36.htm#a3470143f55646e0a2c916b548b474b36", null ],
+    [ "AddFeatureIdInt16", "db/df1/class_mg_selection_base_a6fc18ee55dcef75421f91716a6aa0158.htm#a6fc18ee55dcef75421f91716a6aa0158", null ],
+    [ "AddFeatureIdInt32", "db/df1/class_mg_selection_base_ae0faa39d90bc1d1796e32be97d42e831.htm#ae0faa39d90bc1d1796e32be97d42e831", null ],
+    [ "AddFeatureIdInt64", "db/df1/class_mg_selection_base_a8b57d6b1524968a273c69a18a45ad74a.htm#a8b57d6b1524968a273c69a18a45ad74a", null ],
+    [ "AddFeatureIds", "db/df1/class_mg_selection_base_a10fc2c2a46b4a025806999cd79e920da.htm#a10fc2c2a46b4a025806999cd79e920da", null ],
+    [ "AddFeatureIdString", "db/df1/class_mg_selection_base_a79e2ca8bd34e1f248fb2f7f79526cf2d.htm#a79e2ca8bd34e1f248fb2f7f79526cf2d", null ],
+    [ "AddFeatures", "db/df1/class_mg_selection_base_a5409e102e05ee576ad9e76a469d730bf.htm#a5409e102e05ee576ad9e76a469d730bf", null ],
+    [ "Contains", "db/df1/class_mg_selection_base_ad0e20580e40c38708813d3df32c9fbde.htm#ad0e20580e40c38708813d3df32c9fbde", null ],
+    [ "FromXml", "db/df1/class_mg_selection_base_a2fa023559932fbb252777ef92837ac76.htm#a2fa023559932fbb252777ef92837ac76", null ],
+    [ "GenerateFilter", "db/df1/class_mg_selection_base_acd011226e7837ecb09aaca3d48fbc22e.htm#acd011226e7837ecb09aaca3d48fbc22e", null ],
+    [ "GenerateFilters", "db/df1/class_mg_selection_base_ac0761bfbaaa12c15521a635831fdb8a7.htm#ac0761bfbaaa12c15521a635831fdb8a7", null ],
+    [ "GetClass", "db/df1/class_mg_selection_base_ac9a472b17428d1dff995a2c9a10db897.htm#ac9a472b17428d1dff995a2c9a10db897", null ],
+    [ "GetClasses", "db/df1/class_mg_selection_base_a6592b52cab563bdc39711c4e34ffb335.htm#a6592b52cab563bdc39711c4e34ffb335", null ],
+    [ "GetExtents", "db/df1/class_mg_selection_base_a55620183e2cb6442c25646735e50f98f.htm#a55620183e2cb6442c25646735e50f98f", null ],
+    [ "GetLayers", "db/df1/class_mg_selection_base_a98399e36792dd98822de3ed1876edb53.htm#a98399e36792dd98822de3ed1876edb53", null ],
+    [ "GetResourceName", "db/df1/class_mg_selection_base_afb827b33539af39dda6c416872af8556.htm#afb827b33539af39dda6c416872af8556", null ],
+    [ "GetSelectedFeatures", "db/df1/class_mg_selection_base_a46805b203bddf0340f00c25297301805.htm#a46805b203bddf0340f00c25297301805", null ],
+    [ "GetSelectedFeatures", "db/df1/class_mg_selection_base_a893a4d51e9004539b8fbb46d43e8d5fd.htm#a893a4d51e9004539b8fbb46d43e8d5fd", null ],
+    [ "GetSelectedFeaturesCount", "db/df1/class_mg_selection_base_a99d9fdfdeb10d612a433c73fe8b81778.htm#a99d9fdfdeb10d612a433c73fe8b81778", null ],
+    [ "Open", "db/df1/class_mg_selection_base_a2657b8406d4358c3b6cf59a7185d450d.htm#a2657b8406d4358c3b6cf59a7185d450d", null ],
+    [ "Save", "db/df1/class_mg_selection_base_a39a0eb96fb95962972264e10be143354.htm#a39a0eb96fb95962972264e10be143354", null ],
+    [ "ToXml", "db/df1/class_mg_selection_base_a0da0b32756a2e070778111d373d808e8.htm#a0da0b32756a2e070778111d373d808e8", null ]
+];

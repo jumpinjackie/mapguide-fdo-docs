@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node4" href="$d2/d12/class_mg_coordinate_system_category_dictionary.htm" title="Basic functionality for the coordinate system category dictionary." alt="" coords="665,5,922,32"/>
+<area shape="rect" id="node5" href="$d4/dff/class_mg_coordinate_system_datum_dictionary.htm" title="Basic functionality for the datum dictionary." alt="" coords="672,56,915,83"/>
+<area shape="rect" id="node6" href="$d0/d56/class_mg_coordinate_system_dictionary.htm" title="Basic functionality for the coordinate system dictionary." alt="" coords="691,107,896,133"/>
+<area shape="rect" id="node7" href="$d8/d40/class_mg_coordinate_system_ellipsoid_dictionary.htm" title="Basic functionality for the ellipsoid dictionary." alt="" coords="666,157,921,184"/>
+<area shape="rect" id="node8" href="$d7/d8b/class_mg_coordinate_system_geodetic_path_dictionary.htm" title="The MgCoordinateSystemGeodeticPathDictionary provides access to all geodetic transformation path defi..." alt="" coords="651,208,935,235"/>
+<area shape="rect" id="node9" href="$da/d0c/class_mg_coordinate_system_geodetic_transform_def_dictionary.htm" title="The MgCoordinateSystemGeodeticTransformDefDictionary provides access to all geodetic transformation d..." alt="" coords="627,259,960,285"/>
+<area shape="rect" id="node2" href="$de/de2/class_mg_guard_disposable.htm" title="MgGuardDisposable" alt="" coords="157,132,296,159"/>
+<area shape="rect" id="node3" href="$d1/df5/class_mg_disposable.htm" title="MgDisposable" alt="" coords="5,132,109,159"/>
+</map>

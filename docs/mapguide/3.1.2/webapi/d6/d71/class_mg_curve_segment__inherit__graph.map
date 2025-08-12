@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$dc/d6f/class_mg_arc_segment.htm" title="MgArcSegment is a curve segment defined in terms of a start point, end point, and a control point..." alt="" coords="5,304,117,331"/>
+<area shape="rect" id="node6" href="$d6/d6b/class_mg_linear_segment.htm" title="MgLinearSegment is a geometry component used in the construction of MgCurveString geometries and MgCu..." alt="" coords="142,304,269,331"/>
+<area shape="rect" id="node2" href="$de/d77/class_mg_geometry_component.htm" title="MgGeometryComponent is the base class for all of the geometry component types, namely, MgArcSegment, MgCurveRing, MgLinearRing, and MgLinearSegment." alt="" coords="52,155,215,181"/>
+<area shape="rect" id="node3" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="66,80,201,107"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="80,5,187,32"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$d1/da0/class_mg_blob_property.htm" title="Stores BLOB (Binary Large Object) data with an associated key name." alt="" coords="692,5,807,32"/>
+<area shape="rect" id="node6" href="$d0/d12/class_mg_boolean_property.htm" title="Stores boolean data with an associated key name." alt="" coords="681,56,817,83"/>
+<area shape="rect" id="node7" href="$d1/d70/class_mg_byte_property.htm" title="Stores a single BYTE of data with an associated key name." alt="" coords="691,107,807,133"/>
+<area shape="rect" id="node8" href="$db/da9/class_mg_clob_property.htm" title="Stores CLOB (Character Large Object) data with an associated key name." alt="" coords="692,157,807,184"/>
+<area shape="rect" id="node9" href="$d0/d77/class_mg_date_time_property.htm" title="Stores MgDateTime data with an associated key name." alt="" coords="677,208,821,235"/>
+<area shape="rect" id="node10" href="$d5/dde/class_mg_double_property.htm" title="Stores double precision floating point data with an associated key name. An instance of this class ca..." alt="" coords="685,259,814,285"/>
+<area shape="rect" id="node11" href="$db/dce/class_mg_feature_property.htm" title="Stores MgFeatureReader data with an associated key name." alt="" coords="683,309,816,336"/>
+<area shape="rect" id="node12" href="$da/d8a/class_mg_geometry_property.htm" title="Stores MgByteReader data with an associated key name." alt="" coords="676,360,823,387"/>
+<area shape="rect" id="node13" href="$d9/d43/class_mg_int16_property.htm" title="Stores Int16 data with an associated key name." alt="" coords="691,411,808,437"/>
+<area shape="rect" id="node14" href="$da/d61/class_mg_int32_property.htm" title="Stores Int32 data with an associated key name." alt="" coords="691,461,808,488"/>
+<area shape="rect" id="node15" href="$d3/d9f/class_mg_int64_property.htm" title="Stores Int64 data with an associated key name." alt="" coords="691,512,808,539"/>
+<area shape="rect" id="node16" href="$d6/d88/class_mg_raster_property.htm" title="Stores MgRaster data with an associated key name." alt="" coords="686,563,813,589"/>
+<area shape="rect" id="node17" href="$d1/dd2/class_mg_single_property.htm" title="Stores single precision floating point data with an associated key name." alt="" coords="687,613,812,640"/>
+<area shape="rect" id="node18" href="$db/d9f/class_mg_string_property.htm" title="Stores string data with an associated key name." alt="" coords="688,664,811,691"/>
+<area shape="rect" id="node2" href="$dc/dc6/class_mg_property.htm" title="A base class for MgNullableProperty, which is the base class for all of the concrete property classes..." alt="" coords="356,335,445,361"/>
+<area shape="rect" id="node3" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="160,335,308,361"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,335,112,361"/>
+</map>

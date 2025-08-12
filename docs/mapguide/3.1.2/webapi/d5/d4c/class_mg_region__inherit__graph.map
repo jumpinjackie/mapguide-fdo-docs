@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$d6/dca/class_mg_curve_polygon.htm" title="An MgCurvePolygon is a region, defined by 1 exterior boundary and 0 or more interior boundaries..." alt="" coords="5,304,124,331"/>
+<area shape="rect" id="node6" href="$d7/ddb/class_mg_polygon.htm" title="An MgPolygon is a region, defined by 1 exterior boundary and 0 or more interior boundaries." alt="" coords="148,304,235,331"/>
+<area shape="rect" id="node2" href="$d1/d85/class_mg_geometry.htm" title="MgGeometry is an abstract base class for all of the geometry types." alt="" coords="79,155,176,181"/>
+<area shape="rect" id="node3" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="60,80,195,107"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="74,5,181,32"/>
+</map>

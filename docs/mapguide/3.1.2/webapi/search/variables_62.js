@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['back',['Back',['../d6/d05/class_mg_web_task_button_type_a1df9c6e5da49bcc257fbc50d81056f76.htm#a1df9c6e5da49bcc257fbc50d81056f76',1,'MgWebTaskButtonType']]],
+  ['basemap',['BaseMap',['../dd/dff/class_mg_layer_group_type_a4935abafe3d6b9e323e38ab515f12905.htm#a4935abafe3d6b9e323e38ab515f12905',1,'MgLayerGroupType::BaseMap()'],['../dc/d4b/class_mg_layer_type_ace8c5a91a5a311502df823e6a91532cd.htm#ace8c5a91a5a311502df823e6a91532cd',1,'MgLayerType::BaseMap()']]],
+  ['basemapfromtileset',['BaseMapFromTileSet',['../dd/dff/class_mg_layer_group_type_a0378fba647f4c04834da23e76d0275f9.htm#a0378fba647f4c04834da23e76d0275f9',1,'MgLayerGroupType']]],
+  ['benoitchain',['BenoitChain',['../d7/df1/class_mg_coordinate_system_unit_code_a99fe1d1284d8acbf070bb37ecd3fbb11.htm#a99fe1d1284d8acbf070bb37ecd3fbb11',1,'MgCoordinateSystemUnitCode']]],
+  ['benoitlink',['BenoitLink',['../d7/df1/class_mg_coordinate_system_unit_code_a35625fa29896903226a144f9cfdeb597.htm#a35625fa29896903226a144f9cfdeb597',1,'MgCoordinateSystemUnitCode']]],
+  ['binary',['Binary',['../d4/d92/class_mg_mime_type_a30ee595ff6d8ecba5df456c2b80683dd.htm#a30ee595ff6d8ecba5df456c2b80683dd',1,'MgMimeType']]],
+  ['bipolar',['Bipolar',['../d7/d44/class_mg_coordinate_system_projection_code_afa96d2b642a0094245baa5825de69382.htm#afa96d2b642a0094245baa5825de69382',1,'MgCoordinateSystemProjectionCode']]],
+  ['bitonal',['Bitonal',['../da/d66/class_mg_raster_data_model_type_ae66103c376dc17518411786cc7f15838.htm#ae66103c376dc17518411786cc7f15838',1,'MgRasterDataModelType']]],
+  ['blob',['Blob',['../d1/d70/class_mg_property_type_a4d084449065fcf99c4e06a4124722044.htm#a4d084449065fcf99c4e06a4124722044',1,'MgPropertyType']]],
+  ['bonne',['Bonne',['../d7/d44/class_mg_coordinate_system_projection_code_a7ca863acf966c087f94232de57392aae.htm#a7ca863acf966c087f94232de57392aae',1,'MgCoordinateSystemProjectionCode']]],
+  ['boolean',['Boolean',['../d1/d70/class_mg_property_type_af094946b855cb1edb3e51f6f2547b718.htm#af094946b855cb1edb3e51f6f2547b718',1,'MgPropertyType']]],
+  ['both',['Both',['../de/d61/class_mg_resource_unmanaged_data_type_a8f4ee7a8604bd49e4e67294c590b779f.htm#a8f4ee7a8604bd49e4e67294c590b779f',1,'MgResourceUnmanagedDataType']]],
+  ['brchaintrunc',['BrChainTrunc',['../d7/df1/class_mg_coordinate_system_unit_code_ac4e582c3b154b88c2abe9921c3eb00d0.htm#ac4e582c3b154b88c2abe9921c3eb00d0',1,'MgCoordinateSystemUnitCode']]],
+  ['brealey',['Brealey',['../d7/df1/class_mg_coordinate_system_unit_code_ad2d27020688b7d488f31cf5cf8618520.htm#ad2d27020688b7d488f31cf5cf8618520',1,'MgCoordinateSystemUnitCode']]],
+  ['brfoottrunc',['BrFootTrunc',['../d7/df1/class_mg_coordinate_system_unit_code_ac3de2e5633ea180c0792b155a8e9499e.htm#ac3de2e5633ea180c0792b155a8e9499e',1,'MgCoordinateSystemUnitCode']]],
+  ['brlinktrunc',['BrLinkTrunc',['../d7/df1/class_mg_coordinate_system_unit_code_ae8b7d55dd86e8dc0668137416977459c.htm#ae8b7d55dd86e8dc0668137416977459c',1,'MgCoordinateSystemUnitCode']]],
+  ['buffer',['Buffer',['../df/dd1/class_mg_web_actions_a9479c35ae1b8d69686532942f2cdfc0b.htm#a9479c35ae1b8d69686532942f2cdfc0b',1,'MgWebActions']]],
+  ['bursa',['Bursa',['../d6/d1c/class_mg_coordinate_system_geodetic_analytical_transformation_method_ab379db0227a03e935d2a86db683fa435.htm#ab379db0227a03e935d2a86db683fa435',1,'MgCoordinateSystemGeodeticAnalyticalTransformationMethod::Bursa()'],['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_ae1ac35f544af15d4d3c0dbd73519710f.htm#ae1ac35f544af15d4d3c0dbd73519710f',1,'MgCoordinateSystemGeodeticTransformationMethod::Bursa()']]],
+  ['byte',['Byte',['../d1/d70/class_mg_property_type_a119062dfef7651615e25a54f634e9e15.htm#a119062dfef7651615e25a54f634e9e15',1,'MgPropertyType']]]
+];

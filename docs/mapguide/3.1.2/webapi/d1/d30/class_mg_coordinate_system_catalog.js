@@ -1,0 +1,25 @@
+var class_mg_coordinate_system_catalog =
+[
+    [ "AreDictionaryFilesWritable", "d1/d30/class_mg_coordinate_system_catalog_ac5c601c10923cee8e6ce8ffd1d39f172.htm#ac5c601c10923cee8e6ce8ffd1d39f172", null ],
+    [ "GetCategoryDictionary", "d1/d30/class_mg_coordinate_system_catalog_ab51836fbdd22b881d2827f1d36a21e18.htm#ab51836fbdd22b881d2827f1d36a21e18", null ],
+    [ "GetCoordinateSystemDictionary", "d1/d30/class_mg_coordinate_system_catalog_ad5ad98665898dc5bbec0c711d845a926.htm#ad5ad98665898dc5bbec0c711d845a926", null ],
+    [ "GetDatumDictionary", "d1/d30/class_mg_coordinate_system_catalog_a9145a3adaf4c94031ab1e846ae9f74a2.htm#a9145a3adaf4c94031ab1e846ae9f74a2", null ],
+    [ "GetDefaultDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_a0e307fbfdefc9aab3616b6f5dc48cfe1.htm#a0e307fbfdefc9aab3616b6f5dc48cfe1", null ],
+    [ "GetDefaultUserDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_a8e69603d218851ec61a57de7eeaebf4e.htm#a8e69603d218851ec61a57de7eeaebf4e", null ],
+    [ "GetDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_a6c643f95df792777256f411d1fbf601c.htm#a6c643f95df792777256f411d1fbf601c", null ],
+    [ "GetDictionaryUtility", "d1/d30/class_mg_coordinate_system_catalog_ae9bdc1559b9eb56c8c37f1a22d2e4740.htm#ae9bdc1559b9eb56c8c37f1a22d2e4740", null ],
+    [ "GetEllipsoidDictionary", "d1/d30/class_mg_coordinate_system_catalog_a9dca1a31a94f8dceba1b754e4ed955c2.htm#a9dca1a31a94f8dceba1b754e4ed955c2", null ],
+    [ "GetFormatConverter", "d1/d30/class_mg_coordinate_system_catalog_ad991f7290fb8afeb66189c8bb8fabb09.htm#ad991f7290fb8afeb66189c8bb8fabb09", null ],
+    [ "GetGeodeticPathDictionary", "d1/d30/class_mg_coordinate_system_catalog_a6e6d635c130668de18d9b16c43fd43f2.htm#a6e6d635c130668de18d9b16c43fd43f2", null ],
+    [ "GetGeodeticTransformations", "d1/d30/class_mg_coordinate_system_catalog_afada14fba96449d26446e7c6ad1f6082.htm#afada14fba96449d26446e7c6ad1f6082", null ],
+    [ "GetGeodeticTransformDefDictionary", "d1/d30/class_mg_coordinate_system_catalog_a31265b6a13e6c64e330b5d5be2cfc4fd.htm#a31265b6a13e6c64e330b5d5be2cfc4fd", null ],
+    [ "GetMathComparator", "d1/d30/class_mg_coordinate_system_catalog_a3aef9523637606ed7a86501f6afa69a8.htm#a3aef9523637606ed7a86501f6afa69a8", null ],
+    [ "GetProjectionInformation", "d1/d30/class_mg_coordinate_system_catalog_a5717b980ec395334c71e5b0d4fb03ecd.htm#a5717b980ec395334c71e5b0d4fb03ecd", null ],
+    [ "GetProtectionMode", "d1/d30/class_mg_coordinate_system_catalog_a376a173c5b6d24cb39de3eb4928aef34.htm#a376a173c5b6d24cb39de3eb4928aef34", null ],
+    [ "GetUnitInformation", "d1/d30/class_mg_coordinate_system_catalog_abbf7a631177cf9509bc4d892b4519ed8.htm#abbf7a631177cf9509bc4d892b4519ed8", null ],
+    [ "GetUserDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_af6e988aa50b091fe910855ebe768e15e.htm#af6e988aa50b091fe910855ebe768e15e", null ],
+    [ "SetDefaultDictionaryDirAndFileNames", "d1/d30/class_mg_coordinate_system_catalog_a10052f92fe652870d4380627c525f5cd.htm#a10052f92fe652870d4380627c525f5cd", null ],
+    [ "SetDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_aec6348b92e00315ee342a72b4a263bdf.htm#aec6348b92e00315ee342a72b4a263bdf", null ],
+    [ "SetProtectionMode", "d1/d30/class_mg_coordinate_system_catalog_a891c757535c7e0573927787c797b486a.htm#a891c757535c7e0573927787c797b486a", null ],
+    [ "SetUserDictionaryDir", "d1/d30/class_mg_coordinate_system_catalog_a154b32e2b439005b9fef2139ce72332e.htm#a154b32e2b439005b9fef2139ce72332e", null ]
+];

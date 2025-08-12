@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MapGuide Cookbook &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="prev" title="Supplemental Development Options" href="supplemental_development.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="supplemental_development.html" title="Supplemental Development Options"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MapGuide Cookbook</a><ul>
+<li><a class="reference internal" href="#javascript-hooking-to-events-in-the-ajax-viewer">JavaScript: Hooking to events in the AJAX viewer</a><ul>
+<li><a class="reference internal" href="#checking-when-the-map-has-been-loaded">Checking when the map has been loaded</a></li>
+<li><a class="reference internal" href="#handling-viewer-selection">Handling viewer selection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#javascript-invoke-viewer-command-on-startup">JavaScript: Invoke Viewer Command on startup</a></li>
+<li><a class="reference internal" href="#php-dynamically-setting-initial-map-view-and-scale">PHP: Dynamically setting initial map view and scale</a><ul>
+<li><a class="reference internal" href="#things-to-note">Things to note</a></li>
+<li><a class="reference internal" href="#the-code">The code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="supplemental_development.html"
+                        title="previous chapter">Supplemental Development Options</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mapguide_cookbook.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mapguide-cookbook">
+<h1>MapGuide Cookbook<a class="headerlink" href="#mapguide-cookbook" title="Permalink to this headline">¶</a></h1>
+<p>This section is a select list of MapGuide code samples. See <a class="reference external" href="http://trac.osgeo.org/mapguide/wiki/CodeSamples">Trac</a> for more samples.</p>
+<div class="section" id="javascript-hooking-to-events-in-the-ajax-viewer">
+<span id="event-hooking-example"></span><h2>JavaScript: Hooking to events in the AJAX viewer<a class="headerlink" href="#javascript-hooking-to-events-in-the-ajax-viewer" title="Permalink to this headline">¶</a></h2>
+<p>This sample will show how to do the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Checking when the map has been loaded.</li>
+<li>Handling viewer selection.</li>
+</ul>
+</div></blockquote>
+<p>It is assumed you know what javascript anonymous functions are and how they work.</p>
+<div class="section" id="checking-when-the-map-has-been-loaded">
+<h3>Checking when the map has been loaded<a class="headerlink" href="#checking-when-the-map-has-been-loaded" title="Permalink to this headline">¶</a></h3>
+<p>Before we can hook on to events in the ajax viewer, we need to check that the DOM for the ajax viewer has been loaded. This sample shows how to do it.</p>
+<p>Assume your viewer page looks something as follows:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Viewer Sample Application<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;frameset</span> <span class="na">rows=</span><span class="s">&quot;30,*&quot;</span> <span class="na">frameborder=</span><span class="s">&quot;no&quot;</span> <span class="na">framespacing=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;frame</span> <span class="na">id=</span><span class="s">&quot;titleFrame&quot;</span> <span class="na">frameborder=</span><span class="s">&quot;no&quot;</span> <span class="na">marginwidth=</span><span class="s">&quot;0&quot;</span> <span class="na">marginheight=</span><span class="s">&quot;0&quot;</span> <span class="na">scrolling=</span><span class="s">&quot;no&quot;</span> <span class="na">src=</span><span class="s">&quot;title.html&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;frame</span> <span class="na">id=</span><span class="s">&quot;viewerFrame&quot;</span> <span class="na">frameborder=</span><span class="s">&quot;no&quot;</span> <span class="na">marginwidth=</span><span class="s">&quot;0&quot;</span> <span class="na">marginheight=</span><span class="s">&quot;0&quot;</span> <span class="na">scrolling=</span><span class="s">&quot;no&quot;</span> <span class="na">src=</span><span class="s">&quot;[URL TO AJAX VIEWER]&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/frameset&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>Insert the following script block in the head of the page:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+
+<span class="c1">// Map loaded handler</span>
+<span class="kd">function</span> <span class="nx">OnMapInitialized</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Map has been initialized now we&#39;re off to the races.</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Map has been initialized&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//Timer variable</span>
+    <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+
+    <span class="c1">// This is our &quot;watch&quot; function. What we are doing here is</span>
+    <span class="c1">// repeatedly checking the mapInit value of the Map Frame. When</span>
+    <span class="c1">// mapInit is true, then the map has been loaded.</span>
+    <span class="kd">var</span> <span class="nx">watch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// What we are doing here is attempting to access the mapInit</span>
+        <span class="c1">// variable of the Map frame. The reason the code is in a try-catch</span>
+        <span class="c1">// is because chances are that this code access the DOM</span>
+        <span class="c1">// of the map frame before its DOM has been initialized.</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">mapFrame</span> <span class="o">=</span> <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">mapInit</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c1">// Remove the timer so this watch function stops executing</span>
+                <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+
+                <span class="c1">// Call our custom handler</span>
+                <span class="nx">OnMapInitialized</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Start the &quot;watching&quot; process. We basically invoke the watch function</span>
+    <span class="c1">// every 200ms until the map has been loaded.</span>
+    <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">watch</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-viewer-selection">
+<h3>Handling viewer selection<a class="headerlink" href="#handling-viewer-selection" title="Permalink to this headline">¶</a></h3>
+<p>This sample will show how to handle the selection in the ajax viewer. This assumes the html is the same as the previous example.</p>
+<p>The code &#8220;overrides&#8221; the <cite>OnSelectionChanged</cite> function of the map frame (this is called by the map frame when selection changes) and replaces it with our own.</p>
+<p>Insert the following script block in the head of the page:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+
+<span class="c1">//Function variable to store the original OnSelectionChanged</span>
+<span class="kd">var</span> <span class="nx">origOnSelectionChanged</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">//Our custom selection handler</span>
+<span class="kd">function</span> <span class="nx">MySelectionHandler</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//This is important. We don&#39;t want to replace the original function, rather</span>
+    <span class="c1">//we want to attach our code into the execution sequence. So we call the original</span>
+    <span class="c1">//function first.</span>
+    <span class="nx">origOnSelectionChanged</span><span class="p">();</span>
+
+    <span class="c1">//Now our code goes here. For our example, we&#39;ll just show the number of objects selected.</span>
+    <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">GetMapFrame</span><span class="p">().</span><span class="nx">GetSelectedCount</span><span class="p">();</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="s2">&quot; features selected&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//Timer variable</span>
+    <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+
+    <span class="c1">// This is our &quot;watch&quot; function. What we are doing here is</span>
+    <span class="c1">// repeatedly checking the mapInit value of the Map Frame. When</span>
+    <span class="c1">// mapInit is true, then the map has been loaded.</span>
+    <span class="kd">var</span> <span class="nx">watch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// What we are doing here is attempting to access the mapInit</span>
+        <span class="c1">// variable of the Map frame. The reason the code is in a try-catch</span>
+        <span class="c1">// is because chances are that this code access the DOM</span>
+        <span class="c1">// of the map frame before its DOM has been initialized.</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">mapFrame</span> <span class="o">=</span> <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">mapInit</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c1">// Remove the timer so this watch function stops executing</span>
+                <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+
+                <span class="c1">// Replace the OnSelectionChanged function with our own function.</span>
+                <span class="c1">// It is safe to do this now because the DOM for the map frame is fully initialized.</span>
+
+                <span class="c1">// Store old function</span>
+                <span class="nx">origOnSelectionChanged</span> <span class="o">=</span> <span class="nx">mapFrame</span><span class="p">.</span><span class="nx">OnSelectionChanged</span><span class="p">;</span>
+                <span class="c1">// Now replace with our own.</span>
+                <span class="nx">mapFrame</span><span class="p">.</span><span class="nx">OnSelectionChanged</span> <span class="o">=</span> <span class="nx">MySelectionHandler</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Start the &quot;watching&quot; process. We basically invoke the watch function</span>
+    <span class="c1">// every 200ms until the map has been loaded.</span>
+    <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">watch</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>when you make a selection on the map, the code will display a dialog showing how many features were selected.</p>
+<p>Note: Our custom handler executes when a selection has changed. So clearing the selection, for example will also call the handler even though we haven&#8217;t actually made a selection.</p>
+</div>
+</div>
+<div class="section" id="javascript-invoke-viewer-command-on-startup">
+<h2>JavaScript: Invoke Viewer Command on startup<a class="headerlink" href="#javascript-invoke-viewer-command-on-startup" title="Permalink to this headline">¶</a></h2>
+<p>This html page can automatically invoke a named viewer command on viewer startup based on the value of a Cmd query string property. This uses the InitialTask property of the Web
+Layout and requires that the Task Pane is set to be visible</p>
+<p>For example setting this initial task pane url in the Web Layout:</p>
+<p><a class="reference external" href="http://path/to/autostart.html?Cmd=Measure">http://path/to/autostart.html?Cmd=Measure</a></p>
+<p>Will launch the Measure command on viewer startup.</p>
+<p>As you can see from the code below, we need to employ initialization checks  just like in the example (<a class="reference internal" href="#event-hooking-example"><span class="std std-ref">JavaScript: Hooking to events in the AJAX viewer</span></a>), to make sure we can start using the Viewer API when the frames have been fully initialized.</p>
+<p>autostart.html</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Auto-start command in task pane<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+
+            <span class="kd">var</span> <span class="nx">viewerFrame</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">;</span>
+
+            <span class="kd">function</span> <span class="nx">GetQueryStringValue</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="nx">key</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\[]/</span><span class="p">,</span><span class="s2">&quot;\\\[&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\]]/</span><span class="p">,</span><span class="s2">&quot;\\\]&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;[\\?&amp;]&quot;</span><span class="o">+</span><span class="nx">key</span><span class="o">+</span><span class="s2">&quot;=([^&amp;#]*)&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">qs</span> <span class="o">=</span> <span class="nx">regex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">qs</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+                <span class="k">else</span>
+                    <span class="k">return</span> <span class="nx">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+
+            <span class="kd">function</span> <span class="nx">GetCommandIndex</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">cmds</span> <span class="o">=</span> <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">GetCommands</span><span class="p">();</span>
+                <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cmds</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="c1">//This command array is not sequential, there may be holes</span>
+                    <span class="c1">//so we have to test element existence before testing name equality</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">cmds</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">cmds</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span> <span class="o">==</span> <span class="nx">name</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="kd">function</span> <span class="nx">OnMapInitialized</span><span class="p">()</span>
+            <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">cmdName</span> <span class="o">=</span> <span class="nx">GetQueryStringValue</span><span class="p">(</span><span class="s2">&quot;Cmd&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">GetCommandIndex</span><span class="p">(</span><span class="nx">cmdName</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Command not found: &quot;</span> <span class="o">+</span> <span class="nx">cmdName</span><span class="p">);</span>
+                <span class="k">else</span>
+                    <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">ExecuteCommand</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="c1">//Timer variable</span>
+                <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+
+                <span class="c1">// This is our &quot;watch&quot; function. What we are doing here is</span>
+                <span class="c1">// repeatedly checking the mapInit value of the Map Frame. When</span>
+                <span class="c1">// mapInit is true, then the map has been loaded.</span>
+                <span class="kd">var</span> <span class="nx">watch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+                    <span class="c1">// What we are doing here is attempting to access the mapInit</span>
+                    <span class="c1">// variable of the Map frame. The reason the code is in a try-catch</span>
+                    <span class="c1">// is because chances are that this code access the DOM</span>
+                    <span class="c1">// of the map frame before its DOM has been initialized.</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="kd">var</span> <span class="nx">mapFrame</span> <span class="o">=</span> <span class="nx">viewerFrame</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">;</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">mapInit</span><span class="p">)</span> <span class="p">{</span>
+
+                            <span class="c1">// Remove the timer so this watch function stops executing</span>
+                            <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+
+                            <span class="c1">// Call our custom handler</span>
+                            <span class="nx">OnMapInitialized</span><span class="p">();</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="p">}</span>
+                <span class="p">};</span>
+
+                <span class="c1">// Start the &quot;watching&quot; process. We basically invoke the watch function</span>
+                <span class="c1">// every 200ms until the map has been loaded.</span>
+                <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">watch</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+
+            <span class="p">};</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="php-dynamically-setting-initial-map-view-and-scale">
+<h2>PHP: Dynamically setting initial map view and scale<a class="headerlink" href="#php-dynamically-setting-initial-map-view-and-scale" title="Permalink to this headline">¶</a></h2>
+<p>The following script allows us to set the initial x, y and scale attributes of a map using the MapGuide Ajax Viewer. It expects the values to be passed to the script as querystring parameters, e.g.</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost/mapguide/set_intial_view.php?x=507700&amp;y=186000&amp;scale=400000">http://localhost/mapguide/set_intial_view.php?x=507700&amp;y=186000&amp;scale=400000</a></div></blockquote>
+<p>It works by taking a copy of the WebLayout? stored in the Library repository and changing the &lt;CenterX/&gt;, &lt;CenterY/&gt; and &lt;Scale/&gt; elements. The updated XML is written into the Session and is used as the target when the page is ultimately redirected.</p>
+<p>This code could easily be converted to C# (or whatever).</p>
+<div class="section" id="things-to-note">
+<h3>Things to note<a class="headerlink" href="#things-to-note" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>A side-effect of the code is that it facilitates anonymous connections</li>
+<li>The parameter-checking could be made a little more robust</li>
+<li>The $wl variable should be changed to reflect the relevant WebLayout identifier</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-code">
+<h3>The code<a class="headerlink" href="#the-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="c1">//</span>
+<span class="c1">// Vital includes.</span>
+<span class="c1">//</span>
+<span class="nv">$viewerDir</span> <span class="o">=</span> <span class="s2">&quot;mapviewerphp</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="nv">$viewerDir</span> <span class="o">.</span> <span class="s2">&quot;constants.php&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="nv">$viewerDir</span> <span class="o">.</span> <span class="s2">&quot;common.php&quot;</span><span class="p">;</span>
+
+<span class="c1">//</span>
+<span class="c1">// Check and get the required parameters.</span>
+<span class="c1">//</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span> <span class="o">||</span> <span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span> <span class="o">||</span> <span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;&lt;Error&gt;One or more of the required arguments is missing.&lt;/Error&gt;&quot;</span><span class="p">;</span>
+        <span class="k">exit</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$x</span> <span class="o">=</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">];</span>
+<span class="nv">$y</span> <span class="o">=</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">];</span>
+<span class="nv">$scale</span> <span class="o">=</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">];</span>
+
+<span class="c1">//</span>
+<span class="c1">// Usual initialisation step.</span>
+<span class="c1">//</span>
+<span class="nx">InitializeWebTier</span><span class="p">();</span>
+
+<span class="c1">//</span>
+<span class="c1">// Obtain a new session ID for this anonymous user, use it to set up</span>
+<span class="c1">// a new site connection and use that to create a resource service.</span>
+<span class="c1">//</span>
+<span class="nv">$site</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgSite</span><span class="p">();</span>
+<span class="nv">$site</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgUserInformation</span><span class="p">(</span><span class="s2">&quot;Anonymous&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">));</span>
+
+<span class="nv">$sessionId</span> <span class="o">=</span> <span class="nv">$site</span><span class="o">-&gt;</span><span class="na">CreateSession</span><span class="p">();</span>
+
+<span class="nv">$siteConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgSiteConnection</span><span class="p">();</span>
+<span class="nv">$siteConnection</span><span class="o">-&gt;</span><span class="na">Open</span><span class="p">(</span><span class="k">new</span> <span class="nx">MgUserInformation</span><span class="p">(</span><span class="nv">$sessionId</span><span class="p">));</span>
+
+<span class="nv">$resourceService</span> <span class="o">=</span> <span class="nv">$siteConnection</span><span class="o">-&gt;</span><span class="na">CreateService</span><span class="p">(</span><span class="nx">MgServiceType</span><span class="o">::</span><span class="na">ResourceService</span><span class="p">);</span>
+
+<span class="c1">//</span>
+<span class="c1">// Read the web layout into an XML DOM document object.</span>
+<span class="c1">//</span>
+<span class="nv">$wl</span> <span class="o">=</span> <span class="s2">&quot;Library://WebPID/WebPID_SDF_Static.WebLayout&quot;</span><span class="p">;</span> <span class="c1">// TODO Constant!</span>
+<span class="nv">$wlResourceId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="nv">$wl</span><span class="p">);</span>
+<span class="nv">$wlReader</span> <span class="o">=</span> <span class="nv">$resourceService</span><span class="o">-&gt;</span><span class="na">GetResourceContent</span><span class="p">(</span><span class="nv">$wlResourceId</span><span class="p">);</span>
+<span class="nv">$wlXml</span> <span class="o">=</span> <span class="nv">$wlReader</span><span class="o">-&gt;</span><span class="na">ToString</span><span class="p">();</span>
+<span class="nv">$wlDomDoc</span> <span class="o">=</span> <span class="nx">DOMDocument</span><span class="o">::</span><span class="na">loadXML</span><span class="p">(</span><span class="nv">$wlXml</span><span class="p">);</span>
+
+<span class="c1">//</span>
+<span class="c1">// Now, update the initial x, y and scale values with the desired values.</span>
+<span class="c1">//</span>
+<span class="nv">$nodeCenterX</span> <span class="o">=</span> <span class="nv">$wlDomDoc</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;CenterX&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nv">$nodeCenterX</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$x</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="nv">$nodeCenterY</span> <span class="o">=</span> <span class="nv">$wlDomDoc</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;CenterY&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nv">$nodeCenterY</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$y</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="nv">$nodeScale</span> <span class="o">=</span> <span class="nv">$wlDomDoc</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;Scale&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nv">$nodeScale</span><span class="o">-&gt;</span><span class="na">nodeValue</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$scale</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="c1">//</span>
+<span class="c1">// Prepare the updated XML to be written out to the session.</span>
+<span class="c1">//</span>
+<span class="nv">$updatedXml</span> <span class="o">=</span> <span class="nv">$wlDomDoc</span><span class="o">-&gt;</span><span class="na">saveXML</span><span class="p">();</span>
+<span class="nv">$byteSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgByteSource</span><span class="p">(</span><span class="nv">$updatedXml</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$updatedXml</span><span class="p">));</span>
+
+<span class="c1">//</span>
+<span class="c1">// Create a web layout in the session to hold the updated version</span>
+<span class="c1">// from the library.</span>
+<span class="c1">//</span>
+<span class="nv">$sessionMapName</span> <span class="o">=</span> <span class="nv">$wlResourceId</span><span class="o">-&gt;</span><span class="na">GetName</span><span class="p">();</span>
+<span class="nv">$sessionWebLayout</span> <span class="o">=</span> <span class="s2">&quot;Session:</span><span class="si">$sessionId</span><span class="s2">//</span><span class="si">$sessionMapName</span><span class="s2">.WebLayout&quot;</span><span class="p">;</span>
+<span class="nv">$sessionResourceId</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgResourceIdentifier</span><span class="p">(</span><span class="nv">$sessionWebLayout</span><span class="p">);</span>
+
+<span class="c1">//</span>
+<span class="c1">// Write the updated web layout to the session.</span>
+<span class="c1">//</span>
+<span class="nv">$resourceService</span><span class="o">-&gt;</span><span class="na">SetResource</span><span class="p">(</span><span class="nv">$sessionResourceId</span><span class="p">,</span> <span class="nv">$byteSource</span><span class="o">-&gt;</span><span class="na">GetReader</span><span class="p">(),</span> <span class="k">null</span><span class="p">);</span>
+
+<span class="c1">//</span>
+<span class="c1">// Redirect to the Ajax viewer pointing at the map at the desired coordinates.</span>
+<span class="c1">//</span>
+<span class="nv">$redirectTo</span> <span class="o">=</span> <span class="s2">&quot;mapguide/mapviewerajax/?SESSION=</span><span class="si">$sessionId</span><span class="s2">&amp;WEBLAYOUT=</span><span class="si">$sessionWebLayout</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="nv">$host</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;HTTP_HOST&quot;</span><span class="p">];</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://</span><span class="si">$host</span><span class="s2">/</span><span class="si">$redirectTo</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="c1">//</span>
+<span class="c1">// Redirect!</span>
+<span class="c1">//</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">&quot;Location: </span><span class="si">$url</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="k">exit</span><span class="p">;</span>
+
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="supplemental_development.html" title="Supplemental Development Options"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

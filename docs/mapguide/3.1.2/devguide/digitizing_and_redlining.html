@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Digitizing and Redlining &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="Custom Output" href="custom_output.html" />
+    <link rel="prev" title="Analyzing Features" href="analyzing_features.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="custom_output.html" title="Custom Output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="analyzing_features.html" title="Analyzing Features"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digitizing and Redlining</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#digitizing">Digitizing</a></li>
+<li><a class="reference internal" href="#redlining">Redlining</a><ul>
+<li><a class="reference internal" href="#passing-coordinates">Passing Coordinates</a></li>
+<li><a class="reference internal" href="#creating-a-feature-source">Creating a Feature Source</a></li>
+<li><a class="reference internal" href="#create-a-layer">Create a Layer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="analyzing_features.html"
+                        title="previous chapter">Analyzing Features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="custom_output.html"
+                        title="next chapter">Custom Output</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/digitizing_and_redlining.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digitizing-and-redlining">
+<h1>Digitizing and Redlining<a class="headerlink" href="#digitizing-and-redlining" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The Digitizing and Redlining sample, in the Developer&#8217;s Guide samples,
+demonstrates concepts from this chapter.</p>
+</div>
+<p>This chapter describes <em>digitizing</em> (capturing the user&#8217;s clicks on the map and
+converting the locations to map coordinates) and <em>redlining</em> (drawing items such
+as lines or rectangles on the map in response to the user&#8217;s clicks).</p>
+</div>
+<div class="section" id="digitizing">
+<span id="index-1"></span><h2>Digitizing<a class="headerlink" href="#digitizing" title="Permalink to this headline">¶</a></h2>
+<p>The Viewer API has a number of functions for digitizing user input. For an
+example of how these can be used, see task_pane_digitizing.php in the
+<code class="docutils literal"><span class="pre">digitizing_features</span></code> directory in the Developer Guide samples.</p>
+<p>In this example, if the user clicks the button to digitize a point</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">value=</span><span class="s">&quot; Point &quot;</span> <span class="na">onclick=</span><span class="s">&quot;DigitizePoint();&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>the script calls the JavaScript function</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">DigitizePoint</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">mapFrame</span><span class="p">.</span><span class="nx">DigitizePoint</span><span class="p">(</span><span class="nx">OnPointDigitized</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>which in turn calls the <code class="docutils literal"><span class="pre">DigitzePoint()</span></code> method of the Viewer API in the map
+frame. It also passes the name of a callback function, <code class="docutils literal"><span class="pre">OnPointDigitized</span></code>, which
+is defined in the current script. <code class="docutils literal"><span class="pre">DigizitzePoint()</span></code> calls this function after it
+has digitized the point and passes it the digitized coordinates of the point.</p>
+<p>You can use this callback function to process the digitized coordinates as you
+wish. In this example, the script simply displays them in the task pane.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">OnPointDigitized</span><span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ShowResults</span><span class="p">(</span><span class="s2">&quot;X: &quot;</span> <span class="o">+</span> <span class="nx">point</span><span class="p">.</span><span class="nx">X</span> <span class="o">+</span> <span class="s2">&quot;, Y: &quot;</span> <span class="o">+</span> <span class="nx">point</span><span class="p">.</span><span class="nx">Y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redlining">
+<span id="index-2"></span><h2>Redlining<a class="headerlink" href="#redlining" title="Permalink to this headline">¶</a></h2>
+<p>There are three main steps involved in redlining:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Pass the digitized coordinates from the client to the server.</li>
+<li>Create a temporary feature source. This will be used to draw the lines on.</li>
+<li>Create a layer to display that temporary feature source.</li>
+</ol>
+</div></blockquote>
+<p>For example, see <code class="docutils literal"><span class="pre">task_pane_redlining.php</span></code> in the <code class="docutils literal"><span class="pre">digitizing_features</span></code>
+directory in the Developer Guide samples.</p>
+<div class="section" id="passing-coordinates">
+<span id="index-3"></span><h3>Passing Coordinates<a class="headerlink" href="#passing-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>The digitizing functions in the Viewer API provide us with the digitized
+coordinates on the client, but we usually need to pass them to a server side
+script. This can be done with the Viewer API, using the Submit() method of
+the formFrame.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">OnLineDigitized</span><span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Send the Javascript variables to &#39;draw_line.php&#39;,</span>
+    <span class="c1">// via the form frame</span>
+    <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span>
+        <span class="s2">&quot;x0&quot;</span><span class="p">,</span> <span class="nx">line</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">X</span><span class="p">,</span>
+        <span class="s2">&quot;y0&quot;</span><span class="p">,</span> <span class="nx">line</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">Y</span><span class="p">,</span>
+        <span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="nx">line</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">X</span><span class="p">,</span>
+        <span class="s2">&quot;y1&quot;</span><span class="p">,</span> <span class="nx">line</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">Y</span><span class="p">,</span>
+        <span class="s2">&quot;SESSION&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;?= $sessionId ?&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;MAPNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;?= $mapName ?&gt;&quot;</span><span class="p">);</span>
+    <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">formFrame</span><span class="p">.</span><span class="nx">Submit</span><span class="p">(</span><span class="s2">&quot;/mapguide/samplesphp/digitizing_features/draw_line.php&quot;</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="s2">&quot;scriptFrame&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This submits the coordinates to the server-side function to draw the line. It
+uses the hidden <code class="docutils literal"><span class="pre">scriptFrame</span></code> so the page output is not visible.</p>
+</div>
+<div class="section" id="creating-a-feature-source">
+<span id="create-feature-source"></span><span id="index-4"></span><h3>Creating a Feature Source<a class="headerlink" href="#creating-a-feature-source" title="Permalink to this headline">¶</a></h3>
+<p>The next step is create a feature source
+See <code class="docutils literal"><span class="pre">draw_line.php</span></code> in the <code class="docutils literal"><span class="pre">digitizing_features</span></code> directory in the Developer
+Guide samples.</p>
+<p><strong>PHP</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Create a temporary feature source to draw the lines on</span>
+
+<span class="c1">// Create a feature class definition for the new feature</span>
+<span class="c1">// source</span>
+<span class="nv">$classDefinition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgClassDefinition</span><span class="p">();</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">SetName</span><span class="p">(</span><span class="s2">&quot;Lines&quot;</span><span class="p">);</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">SetDescription</span><span class="p">(</span><span class="s2">&quot;Lines to display.&quot;</span><span class="p">);</span>
+<span class="nv">$geometryPropertyName</span> <span class="o">=</span> <span class="s2">&quot;SHPGEOM&quot;</span><span class="p">;</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">SetDefaultGeometryPropertyName</span><span class="p">(</span> <span class="nv">$geometryPropertyName</span><span class="p">);</span>
+
+<span class="c1">// Create an identify property</span>
+<span class="nv">$identityProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDataPropertyDefinition</span><span class="p">(</span><span class="s2">&quot;KEY&quot;</span><span class="p">);</span>
+<span class="nv">$identityProperty</span><span class="o">-&gt;</span><span class="na">SetDataType</span><span class="p">(</span><span class="nx">MgPropertyType</span><span class="o">::</span><span class="na">Int32</span><span class="p">);</span>
+<span class="nv">$identityProperty</span><span class="o">-&gt;</span><span class="na">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="nv">$identityProperty</span><span class="o">-&gt;</span><span class="na">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="c1">// Add the identity property to the class definition</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">GetIdentityProperties</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$identityProperty</span><span class="p">);</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">GetProperties</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$identityProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a name property</span>
+<span class="nv">$nameProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgDataPropertyDefinition</span><span class="p">(</span><span class="s2">&quot;NAME&quot;</span><span class="p">);</span>
+<span class="nv">$nameProperty</span><span class="o">-&gt;</span><span class="na">SetDataType</span><span class="p">(</span><span class="nx">MgPropertyType</span><span class="o">::</span><span class="na">String</span><span class="p">);</span>
+<span class="c1">// Add the name property to the class definition</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">GetProperties</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$nameProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a geometry property</span>
+<span class="nv">$geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="nv">$geometryPropertyName</span><span class="p">);</span>
+<span class="nv">$geometryProperty</span><span class="o">-&gt;</span><span class="na">SetGeometryTypes</span><span class="p">(</span><span class="nx">MgFeatureGeometricType</span><span class="o">::</span><span class="na">Surface</span><span class="p">);</span>
+<span class="c1">// Add the geometry property to the class definition</span>
+<span class="nv">$classDefinition</span><span class="o">-&gt;</span><span class="na">GetProperties</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$geometryProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a feature schema</span>
+<span class="nv">$featureSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFeatureSchema</span><span class="p">(</span><span class="s2">&quot;SHP_Schema&quot;</span><span class="p">,</span> <span class="s2">&quot;Line schema&quot;</span><span class="p">);</span>
+<span class="c1">// Add the feature schema to the class definition</span>
+<span class="nv">$featureSchema</span><span class="o">-&gt;</span><span class="na">GetClasses</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">Add</span><span class="p">(</span><span class="nv">$classDefinition</span><span class="p">);</span>
+
+<span class="c1">// Create the feature source</span>
+<span class="nv">$wkt</span> <span class="o">=</span> <span class="nv">$map</span><span class="o">-&gt;</span><span class="na">GetMapSRS</span><span class="p">();</span>
+<span class="nv">$sdfParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s2">&quot;OSGeo.SDF&quot;</span><span class="p">,</span> <span class="s2">&quot;spatial context&quot;</span><span class="p">,</span> <span class="nv">$wkt</span><span class="p">,</span> <span class="nv">$featureSchema</span><span class="p">);</span>
+<span class="nv">$featureService</span><span class="o">-&gt;</span><span class="na">CreateFeatureSource</span><span class="p">(</span><span class="nv">$resourceIdentifier</span><span class="p">,</span> <span class="nv">$sdfParams</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>.net (C#)</strong></p>
+<div class="highlight-csharp"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the OSGeo.MapGuide namespace</span>
+
+<span class="c1">// Create a temporary feature source to draw the lines on</span>
+
+<span class="c1">// Create a feature class definition for the new feature</span>
+<span class="c1">// source</span>
+<span class="n">MgClassDefinition</span> <span class="n">classDefinition</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgClassDefinition</span><span class="p">();</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;Lines&quot;</span><span class="p">);</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">SetDescription</span><span class="p">(</span><span class="s">&quot;Lines to display.&quot;</span><span class="p">);</span>
+<span class="n">String</span> <span class="n">geometryPropertyName</span><span class="p">=</span><span class="s">&quot;SHPGEOM&quot;</span><span class="p">;</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">SetDefaultGeometryPropertyName</span><span class="p">(</span> <span class="n">geometryPropertyName</span><span class="p">);</span>
+
+<span class="c1">// Create an identify property</span>
+<span class="n">MgDataPropertyDefinition</span> <span class="n">identityProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="p">(</span><span class="s">&quot;KEY&quot;</span><span class="p">);</span>
+<span class="n">identityProperty</span><span class="p">.</span><span class="n">SetDataType</span><span class="p">(</span><span class="n">MgPropertyType</span><span class="p">.</span><span class="n">Int32</span><span class="p">);</span>
+<span class="n">identityProperty</span><span class="p">.</span><span class="n">SetAutoGeneration</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="n">identityProperty</span><span class="p">.</span><span class="n">SetReadOnly</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="c1">// Add the identity property to the class definition</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">GetIdentityProperties</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">identityProperty</span><span class="p">);</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">identityProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a name property</span>
+<span class="n">MgDataPropertyDefinition</span> <span class="n">nameProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">);</span>
+<span class="n">nameProperty</span><span class="p">.</span><span class="n">SetDataType</span><span class="p">(</span><span class="n">MgPropertyType</span><span class="p">.</span><span class="n">String</span><span class="p">);</span>
+<span class="c1">// Add the name property to the class definition</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">nameProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a geometry property</span>
+<span class="n">MgGeometricPropertyDefinition</span> <span class="n">geometryProperty</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgGeometricPropertyDefinition</span><span class="p">(</span><span class="n">geometryPropertyName</span><span class="p">);</span>
+<span class="n">geometryProperty</span><span class="p">.</span><span class="n">SetGeometryTypes</span><span class="p">(</span><span class="n">MgFeatureGeometricType</span><span class="p">.</span><span class="n">Surface</span><span class="p">);</span>
+<span class="c1">// Add the geometry property to the class definition</span>
+<span class="n">classDefinition</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">geometryProperty</span><span class="p">);</span>
+
+<span class="c1">// Create a feature schema</span>
+<span class="n">MgFeatureSchema</span> <span class="n">featureSchema</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFeatureSchema</span><span class="p">(</span><span class="s">&quot;SHP_Schema&quot;</span><span class="p">,</span> <span class="s">&quot;Line schema&quot;</span><span class="p">);</span>
+<span class="c1">// Add the feature schema to the class definition</span>
+<span class="n">featureSchema</span><span class="p">.</span><span class="n">GetClasses</span><span class="p">().</span><span class="n">Add</span><span class="p">(</span><span class="n">classDefinition</span><span class="p">);</span>
+
+<span class="c1">// Create the feature source</span>
+<span class="n">String</span> <span class="n">wkt</span> <span class="p">=</span> <span class="n">map</span><span class="p">.</span><span class="n">GetMapSRS</span><span class="p">();</span>
+<span class="n">MgFileFeatureSourceParams</span> <span class="n">sdfParams</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MgFileFeatureSourceParams</span><span class="p">(</span><span class="s">&quot;OSGeo.SDF&quot;</span><span class="p">,</span> <span class="s">&quot;spatial context&quot;</span><span class="p">,</span> <span class="n">wkt</span><span class="p">,</span> <span class="n">featureSchema</span><span class="p">);</span>
+<span class="n">featureService</span><span class="p">.</span><span class="n">CreateFeatureSource</span><span class="p">(</span><span class="n">resourceIdentifier</span><span class="p">,</span> <span class="n">sdfParams</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">//This code fragment assumes you have imported the org.osgeo.mapguide namespace</span>
+
+<span class="c1">// Create a temporary feature source to draw the lines on</span>
+
+<span class="c1">// Create a feature class definition for the new feature</span>
+<span class="c1">// source</span>
+<span class="n">MgClassDefinition</span> <span class="n">classDefinition</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgClassDefinition</span><span class="o">();</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">SetName</span><span class="o">(</span><span class="s">&quot;Lines&quot;</span><span class="o">);</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">SetDescription</span><span class="o">(</span><span class="s">&quot;Lines to display.&quot;</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">geometryPropertyName</span><span class="o">=</span><span class="s">&quot;SHPGEOM&quot;</span><span class="o">;</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">SetDefaultGeometryPropertyName</span><span class="o">(</span> <span class="n">geometryPropertyName</span><span class="o">);</span>
+
+<span class="c1">// Create an identify property</span>
+<span class="n">MgDataPropertyDefinition</span> <span class="n">identityProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="o">(</span><span class="s">&quot;KEY&quot;</span><span class="o">);</span>
+<span class="n">identityProperty</span><span class="o">.</span><span class="na">SetDataType</span><span class="o">(</span><span class="n">MgPropertyType</span><span class="o">.</span><span class="na">Int32</span><span class="o">);</span>
+<span class="n">identityProperty</span><span class="o">.</span><span class="na">SetAutoGeneration</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">identityProperty</span><span class="o">.</span><span class="na">SetReadOnly</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="c1">// Add the identity property to the class definition</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">GetIdentityProperties</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">identityProperty</span><span class="o">);</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">GetProperties</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">identityProperty</span><span class="o">);</span>
+
+<span class="c1">// Create a name property</span>
+<span class="n">MgDataPropertyDefinition</span> <span class="n">nameProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgDataPropertyDefinition</span><span class="o">(</span><span class="s">&quot;NAME&quot;</span><span class="o">);</span>
+<span class="n">nameProperty</span><span class="o">.</span><span class="na">SetDataType</span><span class="o">(</span><span class="n">MgPropertyType</span><span class="o">.</span><span class="na">String</span><span class="o">);</span>
+<span class="c1">// Add the name property to the class definition</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">GetProperties</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">nameProperty</span><span class="o">);</span>
+
+<span class="c1">// Create a geometry property</span>
+<span class="n">MgGeometricPropertyDefinition</span> <span class="n">geometryProperty</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgGeometricPropertyDefinition</span><span class="o">(</span><span class="n">geometryPropertyName</span><span class="o">);</span>
+<span class="n">geometryProperty</span><span class="o">.</span><span class="na">SetGeometryTypes</span><span class="o">(</span><span class="n">MgFeatureGeometricType</span><span class="o">.</span><span class="na">Surface</span><span class="o">);</span>
+<span class="c1">// Add the geometry property to the class definition</span>
+<span class="n">classDefinition</span><span class="o">.</span><span class="na">GetProperties</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">geometryProperty</span><span class="o">);</span>
+
+<span class="c1">// Create a feature schema</span>
+<span class="n">MgFeatureSchema</span> <span class="n">featureSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFeatureSchema</span><span class="o">(</span><span class="s">&quot;SHP_Schema&quot;</span><span class="o">,</span> <span class="s">&quot;Line schema&quot;</span><span class="o">);</span>
+<span class="c1">// Add the feature schema to the class definition</span>
+<span class="n">featureSchema</span><span class="o">.</span><span class="na">GetClasses</span><span class="o">().</span><span class="na">Add</span><span class="o">(</span><span class="n">classDefinition</span><span class="o">);</span>
+
+<span class="c1">// Create the feature source</span>
+<span class="n">String</span> <span class="n">wkt</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">GetMapSRS</span><span class="o">();</span>
+<span class="n">MgFileFeatureSourceParams</span> <span class="n">sdfParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MgFileFeatureSourceParams</span><span class="o">(</span><span class="s">&quot;OSGeo.SDF&quot;</span><span class="o">,</span> <span class="s">&quot;spatial context&quot;</span><span class="o">,</span> <span class="n">wkt</span><span class="o">,</span> <span class="n">featureSchema</span><span class="o">);</span>
+<span class="n">featureService</span><span class="o">.</span><span class="na">CreateFeatureSource</span><span class="o">(</span><span class="n">resourceIdentifier</span><span class="o">,</span> <span class="n">sdfParams</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-layer">
+<span id="index-5"></span><h3>Create a Layer<a class="headerlink" href="#create-a-layer" title="Permalink to this headline">¶</a></h3>
+<p>The final step is to create a new layer to display the feature source, the same
+way it was done in <a class="reference internal" href="modifying_maps_and_layers.html#adding-layers-to-a-map"><span class="std std-ref">Adding Layers to a Map</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="custom_output.html" title="Custom Output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="analyzing_features.html" title="Analyzing Features"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

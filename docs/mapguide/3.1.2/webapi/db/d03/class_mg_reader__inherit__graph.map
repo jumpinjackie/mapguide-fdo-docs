@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d3/d3e/class_mg_data_reader.htm" title="Provides a forward&#45;only, read&#45;only iterator for reading computed data retrieved from a datastore..." alt="" coords="5,155,113,181"/>
+<area shape="rect" id="node4" href="$d6/ddc/class_mg_feature_reader.htm" title="Provides a forward&#45;only, read&#45;only iterator for reading features selected from the FDO Provider by th..." alt="" coords="138,155,263,181"/>
+<area shape="rect" id="node5" href="$da/dd7/class_mg_sql_data_reader.htm" title="Provides a forward&#45;only, read&#45;only iterator for reading data returned by a call to MgFeatureService::..." alt="" coords="288,155,415,181"/>
+<area shape="rect" id="node2" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="147,5,254,32"/>
+</map>

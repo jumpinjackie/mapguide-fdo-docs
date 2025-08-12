@@ -1,0 +1,25 @@
+var class_mg_map_base =
+[
+    [ "MgMapBase", "d5/d39/class_mg_map_base_a91652644a11a2a935f5e69a0bc1c2fd3.htm#a91652644a11a2a935f5e69a0bc1c2fd3", null ],
+    [ "Create", "d5/d39/class_mg_map_base_a1fa8d51a881a45d4e8b202fbb1aae35a.htm#a1fa8d51a881a45d4e8b202fbb1aae35a", null ],
+    [ "Create", "d5/d39/class_mg_map_base_a2e91e58d72ee33932088239f58e64589.htm#a2e91e58d72ee33932088239f58e64589", null ],
+    [ "GetBackgroundColor", "d5/d39/class_mg_map_base_a74f595373b9c56cb75c9a3d97a6c0e67.htm#a74f595373b9c56cb75c9a3d97a6c0e67", null ],
+    [ "GetDataExtent", "d5/d39/class_mg_map_base_a0efa88655593f9c8f501b37ffc07a17b.htm#a0efa88655593f9c8f501b37ffc07a17b", null ],
+    [ "GetDisplayDpi", "d5/d39/class_mg_map_base_a078e90ead8bc3e055f154b35053a0850.htm#a078e90ead8bc3e055f154b35053a0850", null ],
+    [ "GetDisplayHeight", "d5/d39/class_mg_map_base_a3a9d1b4ddae3c8cca51a89fe3a0c9dda.htm#a3a9d1b4ddae3c8cca51a89fe3a0c9dda", null ],
+    [ "GetDisplayWidth", "d5/d39/class_mg_map_base_a90c00e42785766fe743184122bb99e27.htm#a90c00e42785766fe743184122bb99e27", null ],
+    [ "GetFiniteDisplayScaleAt", "d5/d39/class_mg_map_base_a49547c6c8e9ca7499f4a3af07803de3c.htm#a49547c6c8e9ca7499f4a3af07803de3c", null ],
+    [ "GetFiniteDisplayScaleCount", "d5/d39/class_mg_map_base_ad9ba8f8846391cb3d6dbd2d4436b823d.htm#ad9ba8f8846391cb3d6dbd2d4436b823d", null ],
+    [ "GetLayerGroups", "d5/d39/class_mg_map_base_a1e9e3a588b338dfb9495d7fca2e94039.htm#a1e9e3a588b338dfb9495d7fca2e94039", null ],
+    [ "GetLayers", "d5/d39/class_mg_map_base_a92e330dafdef76bd13d299d68270b761.htm#a92e330dafdef76bd13d299d68270b761", null ],
+    [ "GetMapDefinition", "d5/d39/class_mg_map_base_a2fb69b24d1fc0aeae99ea34a9dd0cadc.htm#a2fb69b24d1fc0aeae99ea34a9dd0cadc", null ],
+    [ "GetMapExtent", "d5/d39/class_mg_map_base_a0ebbb4c81a445d00f5bfcadd021b7be1.htm#a0ebbb4c81a445d00f5bfcadd021b7be1", null ],
+    [ "GetMapSRS", "d5/d39/class_mg_map_base_afc757f6fe15337457f853798faa9ac7c.htm#afc757f6fe15337457f853798faa9ac7c", null ],
+    [ "GetName", "d5/d39/class_mg_map_base_a1372e06f2f3457b937d8276a20a59688.htm#a1372e06f2f3457b937d8276a20a59688", null ],
+    [ "GetObjectId", "d5/d39/class_mg_map_base_a8ef8ba128c2b34176ec2119e1e1eb09e.htm#a8ef8ba128c2b34176ec2119e1e1eb09e", null ],
+    [ "GetSessionId", "d5/d39/class_mg_map_base_ad37de6401c903aa738c85d3cd671ee0a.htm#ad37de6401c903aa738c85d3cd671ee0a", null ],
+    [ "GetViewCenter", "d5/d39/class_mg_map_base_aeb4251eb925f4361e9f200d60958c185.htm#aeb4251eb925f4361e9f200d60958c185", null ],
+    [ "GetViewScale", "d5/d39/class_mg_map_base_aeb1da1ce53d5b51ba393c201784f49b2.htm#aeb1da1ce53d5b51ba393c201784f49b2", null ],
+    [ "Open", "d5/d39/class_mg_map_base_a24ac87399b40b45fb5bebbe1233552fa.htm#a24ac87399b40b45fb5bebbe1233552fa", null ],
+    [ "SetDisplayDpi", "d5/d39/class_mg_map_base_a553fa6f10f0553283646cb1cd015152a.htm#a553fa6f10f0553283646cb1cd015152a", null ]
+];

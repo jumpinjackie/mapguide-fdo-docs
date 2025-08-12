@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['east',['East',['../de/d14/class_mg_coordinate_system_mgrs_grid_square_position_a57708600c6865989402ff494504fb006.htm#a57708600c6865989402ff494504fb006',1,'MgCoordinateSystemMgrsGridSquarePosition']]],
+  ['eastll',['Eastll',['../d2/df8/class_mg_coordinate_system_projection_parameter_type_af160227aabbb3daf8c8c024218a19401.htm#af160227aabbb3daf8c8c024218a19401',1,'MgCoordinateSystemProjectionParameterType']]],
+  ['eastwest',['EastWest',['../de/dd4/class_mg_coordinate_system_grid_orientation_a7cb9d3b55ab931de124848b54a89dc9d.htm#a7cb9d3b55ab931de124848b54a89dc9d',1,'MgCoordinateSystemGridOrientation']]],
+  ['eckert4',['Eckert4',['../d7/d44/class_mg_coordinate_system_projection_code_ace8ec8b8ce33e70c0a0ee93f3b3b30a9.htm#ace8ec8b8ce33e70c0a0ee93f3b3b30a9',1,'MgCoordinateSystemProjectionCode']]],
+  ['eckert6',['Eckert6',['../d7/d44/class_mg_coordinate_system_projection_code_a2a5fc832a7c6b9bc0c0b8fb76c351387.htm#a2a5fc832a7c6b9bc0c0b8fb76c351387',1,'MgCoordinateSystemProjectionCode']]],
+  ['ed50',['ED50',['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_a07544e00770a9cc2c65c6552bd80a531.htm#a07544e00770a9cc2c65c6552bd80a531',1,'MgCoordinateSystemGeodeticTransformationMethod']]],
+  ['edcnc',['Edcnc',['../d7/d44/class_mg_coordinate_system_projection_code_a3a66a80efa6c602471d8e8d12eff6196.htm#a3a66a80efa6c602471d8e8d12eff6196',1,'MgCoordinateSystemProjectionCode']]],
+  ['edcyl',['Edcyl',['../d7/d44/class_mg_coordinate_system_projection_code_aff5ffef3af077c2d22382955c0dd878b.htm#aff5ffef3af077c2d22382955c0dd878b',1,'MgCoordinateSystemProjectionCode']]],
+  ['edcyle',['EdcylE',['../d7/d44/class_mg_coordinate_system_projection_code_a9d3d84ce80e74257f1a133d84231d106.htm#a9d3d84ce80e74257f1a133d84231d106',1,'MgCoordinateSystemProjectionCode']]],
+  ['elevation',['Elevation',['../d5/d64/class_mg_coordinate_system_projection_logical_type_a32c6d8a6c6ba96af012efc6469b11142.htm#a32c6d8a6c6ba96af012efc6469b11142',1,'MgCoordinateSystemProjectionLogicalType']]],
+  ['elevel',['ELEVEL',['../d0/d7c/class_mg_coordinate_system_error_code_a8fa201c8670ab7f919dc571f617d3e91.htm#a8fa201c8670ab7f919dc571f617d3e91',1,'MgCoordinateSystemErrorCode']]],
+  ['ellipsoidscale',['EllipsoidScale',['../d2/df8/class_mg_coordinate_system_projection_parameter_type_a52c9c7fcce74896a62eee8f4c67a5a84.htm#a52c9c7fcce74896a62eee8f4c67a5a84',1,'MgCoordinateSystemProjectionParameterType']]],
+  ['envelopeintersects',['EnvelopeIntersects',['../d7/d86/class_mg_feature_spatial_operations_a6c18abc1161b9438fc1533b58523e521.htm#a6c18abc1161b9438fc1533b58523e521',1,'MgFeatureSpatialOperations']]],
+  ['epsg',['Epsg',['../df/dfe/class_mg_coordinate_system_code_format_ac70d2825ccda810ee235056bf29fee89.htm#ac70d2825ccda810ee235056bf29fee89',1,'MgCoordinateSystemCodeFormat::Epsg()'],['../d0/dca/class_mg_coordinate_system_wkt_flavor_a6ab813497e6e8497bc2c1ed9c2b3336b.htm#a6ab813497e6e8497bc2c1ed9c2b3336b',1,'MgCoordinateSystemWktFlavor::Epsg()']]],
+  ['equals',['Equals',['../d7/d86/class_mg_feature_spatial_operations_ab29fcc0329f4e730e810f74cff6390bf.htm#ab29fcc0329f4e730e810f74cff6390bf',1,'MgFeatureSpatialOperations']]],
+  ['esri',['Esri',['../d0/dca/class_mg_coordinate_system_wkt_flavor_a1b1935caae09e10601a87c7b55681429.htm#a1b1935caae09e10601a87c7b55681429',1,'MgCoordinateSystemWktFlavor']]],
+  ['estdmer',['Estdmer',['../d2/df8/class_mg_coordinate_system_projection_parameter_type_a888689cacba800b6c0ab9ba432099e38.htm#a888689cacba800b6c0ab9ba432099e38',1,'MgCoordinateSystemProjectionParameterType']]],
+  ['etrf89',['ETRF89',['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_ab4c175ea590b95036e9ba666d336214b.htm#ab4c175ea590b95036e9ba666d336214b',1,'MgCoordinateSystemGeodeticTransformationMethod']]]
+];

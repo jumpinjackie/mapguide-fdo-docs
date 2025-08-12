@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['radian',['Radian',['../d7/df1/class_mg_coordinate_system_unit_code_a043ee0355556ad2054f26e2e713b15a6.htm#a043ee0355556ad2054f26e2e713b15a6',1,'MgCoordinateSystemUnitCode']]],
+  ['raster',['Raster',['../d1/d70/class_mg_property_type_a8c83a125b4247a9441618114cacf5863.htm#a8c83a125b4247a9441618114cacf5863',1,'MgPropertyType']]],
+  ['rasterproperty',['RasterProperty',['../dc/d87/class_mg_feature_property_type_aaa247c3598a4cec240502a864e330580.htm#aaa247c3598a4cec240502a864e330580',1,'MgFeaturePropertyType']]],
+  ['raw',['Raw',['../da/d63/class_mg_image_formats_acca5b14f0b2020b2b1c6f52fd2ea8909.htm#acca5b14f0b2020b2b1c6f52fd2ea8909',1,'MgImageFormats']]],
+  ['readonly',['ReadOnly',['../d4/d51/class_mg_resource_permission_a7e6889f4dbddf6cc291c5f843fdf6c6a.htm#a7e6889f4dbddf6cc291c5f843fdf6c6a',1,'MgResourcePermission']]],
+  ['readwrite',['ReadWrite',['../d4/d51/class_mg_resource_permission_a7fde7242fc689866fec3f4f17493aa95.htm#a7fde7242fc689866fec3f4f17493aa95',1,'MgResourcePermission']]],
+  ['refresh',['Refresh',['../df/dd1/class_mg_web_actions_a7d6e05c07714450d61845af56c3c0fdb.htm#a7d6e05c07714450d61845af56c3c0fdb',1,'MgWebActions']]],
+  ['region',['Region',['../d6/d65/class_mg_geometric_dimension_a95737c01e47b7810d083cf870618835e.htm#a95737c01e47b7810d083cf870618835e',1,'MgGeometricDimension']]],
+  ['renderingservice',['RenderingService',['../de/d80/class_mg_service_type_afc8bd451bbb59452bf9a1594e1aad754.htm#afc8bd451bbb59452bf9a1594e1aad754',1,'MgServiceType']]],
+  ['resourceservice',['ResourceService',['../de/d80/class_mg_service_type_a5434e8e2467611e91e89c923f151233e.htm#a5434e8e2467611e91e89c923f151233e',1,'MgServiceType']]],
+  ['ret',['Ret',['../d7/d4a/class_mg_parameter_direction_a8d8ad7824f3ef0094edd2b25ed867821.htm#a8d8ad7824f3ef0094edd2b25ed867821',1,'MgParameterDirection']]],
+  ['rgb',['RGB',['../da/d66/class_mg_raster_data_model_type_a89cb90c606a1682934a44f7220521b54.htm#a89cb90c606a1682934a44f7220521b54',1,'MgRasterDataModelType']]],
+  ['rgba',['RGBA',['../da/d66/class_mg_raster_data_model_type_a4c6d37fc3f5d6a5b44bfee7e21f52a59.htm#a4c6d37fc3f5d6a5b44bfee7e21f52a59',1,'MgRasterDataModelType']]],
+  ['rgf',['RGF',['../d5/d84/class_mg_coordinate_system_geodetic_transform_grid_file_format_ac40db552e18390ea3a2f8f3334490aa6.htm#ac40db552e18390ea3a2f8f3334490aa6',1,'MgCoordinateSystemGeodeticTransformGridFileFormat']]],
+  ['rgf93',['RGF93',['../db/d0b/class_mg_coordinate_system_geodetic_transformation_method_aa67e6c344bb575c789d959e4c362a6e5.htm#aa67e6c344bb575c789d959e4c362a6e5',1,'MgCoordinateSystemGeodeticTransformationMethod']]],
+  ['rngord',['RNGORD',['../d0/d7c/class_mg_coordinate_system_error_code_a022600e73c82f325b41b1d5d912e50c4.htm#a022600e73c82f325b41b1d5d912e50c4',1,'MgCoordinateSystemErrorCode']]],
+  ['robinson',['Robinson',['../d7/d44/class_mg_coordinate_system_projection_code_a0c74419074e74f6de6910edaff8332cd.htm#a0c74419074e74f6de6910edaff8332cd',1,'MgCoordinateSystemProjectionCode']]],
+  ['rod',['Rod',['../d7/df1/class_mg_coordinate_system_unit_code_a4673aa5cc8971a13df6996c182b57d07.htm#a4673aa5cc8971a13df6996c182b57d07',1,'MgCoordinateSystemUnitCode']]],
+  ['rood',['Rood',['../d7/df1/class_mg_coordinate_system_unit_code_aa181422f005717fc95ea512abaadfbf9.htm#aa181422f005717fc95ea512abaadfbf9',1,'MgCoordinateSystemUnitCode']]],
+  ['rot',['Rot',['../db/ddf/class_mg_coordinate_system_projection_format_type_a6cd3c99e3b0cf55f9620ca6b9375829b.htm#a6cd3c99e3b0cf55f9620ca6b9375829b',1,'MgCoordinateSystemProjectionFormatType']]],
+  ['rskew',['Rskew',['../d7/d44/class_mg_coordinate_system_projection_code_a34177a259f432ea74745500bddbf5fb0.htm#a34177a259f432ea74745500bddbf5fb0',1,'MgCoordinateSystemProjectionCode']]],
+  ['rskewc',['Rskewc',['../d7/d44/class_mg_coordinate_system_projection_code_a7456f4d2116c6207c47220a5f5e4075b.htm#a7456f4d2116c6207c47220a5f5e4075b',1,'MgCoordinateSystemProjectionCode']]],
+  ['rskewo',['Rskewo',['../d7/d44/class_mg_coordinate_system_projection_code_aa06617ed6a7cef3b3cefe2032438c4a1.htm#aa06617ed6a7cef3b3cefe2032438c4a1',1,'MgCoordinateSystemProjectionCode']]]
+];

@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$da/d8b/class_mg_multi_curve_polygon.htm" title="An MgMultiCurvePolygon is a two&#45;dimensional aggregate geometry whose elements are MgCurvePolygon geom..." alt="" coords="692,5,839,32"/>
+<area shape="rect" id="node6" href="$da/db4/class_mg_multi_curve_string.htm" title="An MgMultiCurveString is a one&#45;dimensional aggregate geometry whose elements are MgCurveString geomet..." alt="" coords="698,56,833,83"/>
+<area shape="rect" id="node7" href="$dc/d2c/class_mg_multi_geometry.htm" title="An MgMultiGeometry is a heterogeneous aggregate of one or more MgGeometry objects." alt="" coords="703,107,828,133"/>
+<area shape="rect" id="node8" href="$d0/d0c/class_mg_multi_line_string.htm" title="An MgMultiLineString is a one&#45;dimensional aggregate geometry whose elements are MgLineString geometri..." alt="" coords="702,157,829,184"/>
+<area shape="rect" id="node9" href="$dc/de2/class_mg_multi_point.htm" title="An MgMultiPoint is a 0 dimensional aggregate geometry whose elements are MgPoint geometries." alt="" coords="716,208,815,235"/>
+<area shape="rect" id="node10" href="$d3/dc6/class_mg_multi_polygon.htm" title="An MgMultiPolygon is a two&#45;dimensional aggregate geometry whose elements are MgPolygon geometries..." alt="" coords="708,259,823,285"/>
+<area shape="rect" id="node2" href="$d1/d85/class_mg_geometry.htm" title="MgGeometry is an abstract base class for all of the geometry types." alt="" coords="343,132,440,159"/>
+<area shape="rect" id="node3" href="$dc/d21/class_mg_geometric_entity.htm" title="MgGeometricEntity is an abstract base class that is the root of all geometry and geometry component c..." alt="" coords="160,132,295,159"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,132,112,159"/>
+</map>

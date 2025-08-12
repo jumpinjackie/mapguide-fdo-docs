@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d1/d85/class_mg_geometry.htm" title="MgGeometry is an abstract base class for all of the geometry types." alt="" coords="375,385,473,412"/>
+<area shape="rect" id="node18" href="$de/d77/class_mg_geometry_component.htm" title="MgGeometryComponent is the base class for all of the geometry component types, namely, MgArcSegment, MgCurveRing, MgLinearRing, and MgLinearSegment." alt="" coords="343,537,505,564"/>
+<area shape="rect" id="node2" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,487,112,513"/>
+<area shape="rect" id="node4" href="$de/de9/class_mg_aggregate_geometry.htm" title="MgAggregateGeometry is an abstract base class for all of the geometry types that are composed of a se..." alt="" coords="553,157,709,184"/>
+<area shape="rect" id="node11" href="$d5/dc5/class_mg_curve.htm" title="MgCurve is an abstract base class. MgCurveString and MgLineString are concrete classes derived from M..." alt="" coords="595,335,667,361"/>
+<area shape="rect" id="node14" href="$d1/d60/class_mg_point.htm" title="An MgPoint is a 0&#45;dimensional geometry and represents a single location in coordinate space..." alt="" coords="596,385,667,412"/>
+<area shape="rect" id="node15" href="$d5/d64/class_mg_region.htm" title="MgRegion is an abstract base class The concrete classes are MgPolygon and MgCurvePolygon." alt="" coords="591,436,671,463"/>
+<area shape="rect" id="node5" href="$da/d8b/class_mg_multi_curve_polygon.htm" title="An MgMultiCurvePolygon is a two&#45;dimensional aggregate geometry whose elements are MgCurvePolygon geom..." alt="" coords="757,5,904,32"/>
+<area shape="rect" id="node6" href="$da/db4/class_mg_multi_curve_string.htm" title="An MgMultiCurveString is a one&#45;dimensional aggregate geometry whose elements are MgCurveString geomet..." alt="" coords="763,56,898,83"/>
+<area shape="rect" id="node7" href="$dc/d2c/class_mg_multi_geometry.htm" title="An MgMultiGeometry is a heterogeneous aggregate of one or more MgGeometry objects." alt="" coords="768,107,893,133"/>
+<area shape="rect" id="node8" href="$d0/d0c/class_mg_multi_line_string.htm" title="An MgMultiLineString is a one&#45;dimensional aggregate geometry whose elements are MgLineString geometri..." alt="" coords="767,157,894,184"/>
+<area shape="rect" id="node9" href="$dc/de2/class_mg_multi_point.htm" title="An MgMultiPoint is a 0 dimensional aggregate geometry whose elements are MgPoint geometries." alt="" coords="781,208,880,235"/>
+<area shape="rect" id="node10" href="$d3/dc6/class_mg_multi_polygon.htm" title="An MgMultiPolygon is a two&#45;dimensional aggregate geometry whose elements are MgPolygon geometries..." alt="" coords="773,259,888,285"/>
+<area shape="rect" id="node12" href="$de/d04/class_mg_curve_string.htm" title="An MgCurveString is composed of one or more curve segments." alt="" coords="777,309,884,336"/>
+<area shape="rect" id="node13" href="$d2/d02/class_mg_line_string.htm" title="An MgLineString is a curve with linear interpolation between points." alt="" coords="781,360,880,387"/>
+<area shape="rect" id="node16" href="$d6/dca/class_mg_curve_polygon.htm" title="An MgCurvePolygon is a region, defined by 1 exterior boundary and 0 or more interior boundaries..." alt="" coords="771,411,890,437"/>
+<area shape="rect" id="node17" href="$d7/ddb/class_mg_polygon.htm" title="An MgPolygon is a region, defined by 1 exterior boundary and 0 or more interior boundaries." alt="" coords="787,461,874,488"/>
+<area shape="rect" id="node19" href="$d9/d47/class_mg_curve_segment.htm" title="MgCurveSegment is an abstract base class." alt="" coords="569,537,693,564"/>
+<area shape="rect" id="node22" href="$de/d4d/class_mg_ring.htm" title="MgRing" alt="" coords="598,613,665,640"/>
+<area shape="rect" id="node20" href="$dc/d6f/class_mg_arc_segment.htm" title="MgArcSegment is a curve segment defined in terms of a start point, end point, and a control point..." alt="" coords="775,512,887,539"/>
+<area shape="rect" id="node21" href="$d6/d6b/class_mg_linear_segment.htm" title="MgLinearSegment is a geometry component used in the construction of MgCurveString geometries and MgCu..." alt="" coords="767,563,894,589"/>
+<area shape="rect" id="node23" href="$d2/ddb/class_mg_curve_ring.htm" title="MgCurveRing is a geometry component used in the construction of MgCurvePolygon objects." alt="" coords="781,613,880,640"/>
+<area shape="rect" id="node24" href="$d8/db2/class_mg_linear_ring.htm" title="An MgLinearRing is a geometry component." alt="" coords="780,664,881,691"/>
+</map>

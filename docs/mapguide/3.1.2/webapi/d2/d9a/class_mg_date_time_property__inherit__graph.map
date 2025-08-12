@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$db/dd4/class_mg_nullable_property.htm" title="This is the base class for all properties which can have NULL values. If a property value is NULL..." alt="" coords="12,229,147,256"/>
+<area shape="rect" id="node3" href="$dc/dc6/class_mg_property.htm" title="A base class for MgNullableProperty, which is the base class for all of the concrete property classes..." alt="" coords="35,155,124,181"/>
+<area shape="rect" id="node4" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="5,80,153,107"/>
+<area shape="rect" id="node5" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="26,5,133,32"/>
+</map>

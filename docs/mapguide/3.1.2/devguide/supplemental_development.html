@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Supplemental Development Options &mdash; MapGuide Developer&#39;s Guide</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MapGuide Developer&#39;s Guide" href="index.html" />
+    <link rel="next" title="MapGuide Cookbook" href="mapguide_cookbook.html" />
+    <link rel="prev" title="Advanced MapGuide Topics" href="mapguide_advanced.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mapguide_cookbook.html" title="MapGuide Cookbook"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mapguide_advanced.html" title="Advanced MapGuide Topics"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mgos.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Supplemental Development Options</a><ul>
+<li><a class="reference internal" href="#openlayers">OpenLayers</a></li>
+<li><a class="reference internal" href="#maestro-api">Maestro API</a></li>
+<li><a class="reference internal" href="#mapguide-rest">mapguide-rest</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mapguide_advanced.html"
+                        title="previous chapter">Advanced MapGuide Topics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mapguide_cookbook.html"
+                        title="next chapter">MapGuide Cookbook</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/supplemental_development.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="supplemental-development-options">
+<h1>Supplemental Development Options<a class="headerlink" href="#supplemental-development-options" title="Permalink to this headline">¶</a></h1>
+<p>If the MapGuide Web Extensions and viewer APIs do not cover your development needs or you are looking for other available options for MapGuide application development, other options are available to you.</p>
+<div class="section" id="openlayers">
+<span id="id1"></span><h2>OpenLayers<a class="headerlink" href="#openlayers" title="Permalink to this headline">¶</a></h2>
+<p>OpenLayers is a free and open source javascript library that makes it easy to put a dynamic map in any web page. It can display map tiles, iamges and markers loaded from any source.</p>
+<p>OpenLayers includes a MapGuide layer type, allowing for your MapGuide maps to be integrated into the OpenLayers ecosystem with other Map Servers and other data sources.</p>
+<p>Visit <a class="reference external" href="http://www.openlayers.org">the OpenLayers homepage</a> for more information</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Fusion is also built on top of OpenLayers, so any OpenLayers knowledge you have is also applicable here.</p>
+</div>
+</div>
+<div class="section" id="maestro-api">
+<span id="maestroapi"></span><h2>Maestro API<a class="headerlink" href="#maestro-api" title="Permalink to this headline">¶</a></h2>
+<p>MapGuide Maestro is a free and open source authoring tool for MapGuide Open Source / Autodesk Infrastructure Map Server. It is an alternative to Autodesk MapGuide Studio.</p>
+<p>The Maestro API is a 100% fully managed .net class library that provides the following features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A strongly-typed service client interface to the http mapagent, that alleviates the need for boilerplate http request/response processing.</li>
+<li>An object model for working with resources in terms of classes and interfaces instead of raw XML content, with support for many different schema versions.</li>
+<li>A unified programming interface that can work with the mapagent or the MapGuide Server directly</li>
+<li>Easy integration with both web (ASP.net) and desktop (WinForms/WPF) enviroments</li>
+<li>Support for many different versions of MapGuide</li>
+</ul>
+</div></blockquote>
+<p>This library is used by the MapGuide Maestro application, and can be used in your own applications.</p>
+<p>Visit <a class="reference external" href="http://trac.osgeo.org/mapguide/wiki/maestro">the Maestro project homepage</a> for more information</p>
+</div>
+<div class="section" id="mapguide-rest">
+<span id="mapguiderest"></span><h2>mapguide-rest<a class="headerlink" href="#mapguide-rest" title="Permalink to this headline">¶</a></h2>
+<p>mapguide-rest provides a REST API for MapGuide and includes a framework for easy publishing of spatial data.</p>
+<p>The REST API allows for any library capable of making HTTP request to work with MapGuide.</p>
+<p>mapguide-rest can be deployed on both Windows and Linux instances of MapGuide.</p>
+<p>Visit <a class="reference external" href="https://github.com/jumpinjackie/mapguide-rest">the mapguide-rest homepage</a> for more information</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">mapguide-rest requires a version of MapGuide that bundles PHP 5.3 or newer.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mapguide_cookbook.html" title="MapGuide Cookbook"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mapguide_advanced.html" title="Advanced MapGuide Topics"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MapGuide Developer&#39;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Open Source Geospatial Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

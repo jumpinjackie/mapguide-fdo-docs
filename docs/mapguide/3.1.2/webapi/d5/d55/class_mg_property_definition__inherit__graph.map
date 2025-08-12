@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$d6/d5b/class_mg_data_property_definition.htm" title="Defines a data property belonging to a feature class." alt="" coords="701,5,870,32"/>
+<area shape="rect" id="node6" href="$d0/d7b/class_mg_geometric_property_definition.htm" title="Defines a geometric property belonging to a feature class." alt="" coords="684,56,887,83"/>
+<area shape="rect" id="node7" href="$d7/d31/class_mg_object_property_definition.htm" title="Defines a feature property which contains one or more objects whose type is a feature class..." alt="" coords="695,107,875,133"/>
+<area shape="rect" id="node8" href="$d3/d2a/class_mg_raster_property_definition.htm" title="Defines a feature property which contains a raster image." alt="" coords="695,157,875,184"/>
+<area shape="rect" id="node2" href="$dc/dc6/class_mg_property.htm" title="A base class for MgNullableProperty, which is the base class for all of the concrete property classes..." alt="" coords="356,81,445,108"/>
+<area shape="rect" id="node3" href="$d7/d80/class_mg_named_serializable.htm" title="MgNamedSerializable" alt="" coords="160,81,308,108"/>
+<area shape="rect" id="node4" href="$d8/dfa/class_mg_serializable.htm" title="MgSerializable" alt="" coords="5,81,112,108"/>
+</map>
